@@ -1,0 +1,496 @@
+/* Login.module.css */
+.root {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  align-items: flex-start;
+  background-color: #219ebc;
+  overflow: hidden;
+}
+
+.mainContainer {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  width: 1280px;
+  height: 720px;
+  align-items: center;
+  background-color: #219ebc;
+  overflow: hidden;
+}
+
+.studentClearance {
+  width: 493px;
+  height: min-content;
+  text-shadow: 6px 7px 10px #000;
+  flex-direction: column;
+}
+
+.textBlock {
+  color: #fff;
+  font-size: 96px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+}
+
+.textBlock2 {
+  margin-top: 0;
+  color: #fff;
+  font-size: 96px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+}
+
+.frame1 {
+  position: relative;
+  width: 504px;
+  height: 629px;
+  align-items: flex-start;
+  border-radius: 50px;
+  background-color: #023047;
+  overflow: hidden;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.buttonMSOA {
+  position: absolute;
+  left: 118px;
+  top: 505px;
+  width: 287px;
+  height: 54px;
+  place-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  outline: solid 1px #000;
+  outline-offset: -1px;
+  border-radius: 20px;
+  background-color: #c43e1c;
+  box-shadow: 0px 4px 2.1px 0px #00000080;
+}
+
+.image3 {
+  z-index: 0;
+  width: 30.0143px;
+  height: 35px;
+  background-image: /* webpackIgnore: true */ url('/assets/image3.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.office365Login {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  z-index: 0;
+  width: 197px;
+  height: min-content;
+  text-shadow: 3px 3px 4.599999904632568px #000;
+  flex-direction: column;
+}
+
+.or {
+  color: #fff;
+  font-size: 31px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  position: absolute;
+  left: 241px;
+  top: 455px;
+  width: 39px;
+  height: min-content;
+  text-shadow: 0px 4px 2.0999999046325684px #00000080;
+  flex-direction: column;
+}
+
+.rectangle3 {
+  position: absolute;
+  left: 119.9905px;
+  top: 387px;
+  width: 287.0095px;
+  height: 54.5867px;
+  outline: solid 1px #000;
+  outline-offset: -1px;
+  border-radius: 20px;
+  background-color: #46b1e1;
+}
+
+.lOGIN {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  position: absolute;
+  left: calc(50% - -21.2885px);
+  top: 401px;
+  width: 88.5771px;
+  height: 26px;
+  text-align: center;
+  align-items: center;
+  text-shadow: 3px 3px 4.599999904632568px #000;
+  flex-direction: column;
+  transform: translateX(-50%);
+}
+
+.rememberMeCheckBox {
+  position: absolute;
+  left: 135px;
+  top: 327px;
+  width: 273px;
+  height: 46px;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 0;
+}
+
+.checkbox {
+  width: 23px;
+  height: 21px;
+  overflow: visible;
+  filter: drop-shadow(0px 3px 5px #2e2e4214);
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}
+
+.rememberMe {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  width: min-content;
+  height: min-content;
+  white-space: nowrap;
+  flex-direction: column;
+}
+
+.input {
+  position: absolute;
+  left: 118px;
+  top: 133px;
+  width: 290px;
+  height: 180px;
+  align-items: flex-start;
+}
+
+.passwordInput {
+  position: absolute;
+  left: 0;
+  top: 97px;
+  width: 289px;
+  height: 83px;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.password {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  height: min-content;
+  align-self: stretch;
+  text-shadow: 5px 5px 5px #00000080;
+  flex-direction: column;
+}
+
+.textField {
+  height: min-content;
+  align-self: stretch;
+  padding: 12px 16px;
+  outline: solid 2px #d9d9d9;
+  outline-offset: -2px;
+  border-radius: 8px;
+  background-color: #156082;
+  overflow: hidden;
+  box-shadow: 5px 5px 5px 0px #00000080;
+}
+
+.enter6CharactersOrMore {
+  opacity: 0.5;
+  height: min-content;
+  flex: 1;
+  flex-direction: column;
+}
+
+.textBlock3 {
+  color: #fff;
+  font-size: 16px;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+}
+
+.textBlock4 {
+  margin-top: 0;
+  color: #fff;
+  font-size: 16px;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+}
+
+.emailInput {
+  position: absolute;
+  left: 1px;
+  top: 0;
+  width: 289px;
+  height: 83px;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.email {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  height: min-content;
+  align-self: stretch;
+  text-shadow: 5px 5px 5px #00000080;
+  flex-direction: column;
+}
+
+.textField2 {
+  height: min-content;
+  align-self: stretch;
+  padding: 12px 16px;
+  outline: solid 2px #d9d9d9;
+  outline-offset: -2px;
+  border-radius: 8px;
+  background-color: #156082;
+  overflow: hidden;
+  box-shadow: 5px 5px 5px 0px #00000080;
+}
+
+.youSjdelmonteStiEduPh {
+  opacity: 0.5;
+  color: #fff;
+  font-size: 16px;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  height: min-content;
+  flex: 1;
+  flex-direction: column;
+}
+
+.loginWithOffice365 {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  width: 344px;
+  height: 99px;
+  text-align: center;
+  align-items: center;
+  text-shadow: 5px 5px 5px #00000080;
+  flex-direction: column;
+  transform: translateX(-50%);
+}
+
+.textBlock5 {
+  color: #fff;
+  font-size: 39px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+}
+
+.textBlock6 {
+  margin-top: 0;
+}
+
+.labelWrapper {
+  font-size: 39px;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  flex-shrink: 1;
+}
+
+.label {
+  color: #fff;
+  font-size: 39px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+}
+
+.label2 {
+  color: #c43e1c;
+  font-size: 39px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+}
+
+.stiLogo {
+  position: absolute;
+  left: 59px;
+  top: 50px;
+  width: 128px;
+  height: 101px;
+  background-image: /* webpackIgnore: true */ url('/assets/stiLogo.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 5px 5px 10px 0px #00000080;
+}
+
+.credits {
+  position: absolute;
+  left: 81px;
+  top: 564px;
+  width: 84px;
+  height: 84px;
+  background-image: /* webpackIgnore: true */ url('/assets/credits.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 5px 5px 7px 0px #00000080;
+}
