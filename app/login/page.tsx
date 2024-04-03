@@ -34,26 +34,28 @@ export default async function Page() {
             <div className={classes.rememberMe}>Remember me</div>
           </div>
           <div className={classes.input}>
-            <div className={classes.passwordInput}>
-              <div className={classes.password}>Password</div>
-              <div className={classes.textField}>
-                <div className={classes.enter6CharactersOrMore}>
-                  <div className={classes.textBlock3}>
-                    Enter 6 characters or more
-                  </div>
-                  <div className={classes.textBlock4}>
-                    <p></p>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div className={classes.emailInput}>
-              <div className={classes.email}>Email</div>
-              <div className={classes.textField2}>
-                <div className={classes.youSjdelmonteStiEduPh}>
-                  you@sjdelmonte.sti.edu.ph
-                </div>
-              </div>
+              <label htmlFor="email" className={classes.email}>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="you@sjdelmonte.sti.edu.ph"
+                className={classes.inputField}
+              />
+            </div>
+
+            <div className={classes.passwordInput}>
+              <label htmlFor="password" className={classes.password}>
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter 6 characters or more"
+                className={classes.inputField}
+              />
             </div>
           </div>
           <div className={classes.loginWithOffice365}>
