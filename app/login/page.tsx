@@ -14,12 +14,19 @@ export default async function Page() {
         </div>
         <div className={classes.frame1}>
           <button className={classes.buttonMSOA}>
-            <div className={classes.image3}></div>
-            <div className={classes.office365Login}>Office 365 Login</div>
+            <div className={classes.buttonContent}>
+              <div className={classes.image3} />
+              <div className={classes.office365Login}>Office 365 Login</div>
+            </div>
           </button>
+
           <div className={classes.or}>or</div>
-          <div className={classes.rectangle3}></div>
-          <div className={classes.lOGIN}>LOGIN</div>
+          <button className={classes.rectangle3}>
+            <div className={classes.loginWrapper}>
+              <div className={classes.lOGIN}>LOGIN</div>
+            </div>
+          </button>
+
           <div className={classes.rememberMeCheckBox}>
             <div className={classes.checkbox}>
               <CheckboxIcon className={classes.icon} />

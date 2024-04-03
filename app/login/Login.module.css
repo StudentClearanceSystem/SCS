@@ -1,4 +1,3 @@
-/* Login.module.css */
 .root {
   position: relative;
   width: 1280px;
@@ -17,13 +16,38 @@
   align-items: center;
   background-color: #219ebc;
   overflow: hidden;
-}
 
-.studentClearance {
-  width: 493px;
-  height: min-content;
-  text-shadow: 6px 7px 10px #000;
-  flex-direction: column;
+  .studentClearance {
+    width: 493px;
+    height: min-content;
+    text-shadow: 6px 7px 10px #000;
+    flex-direction: column;
+  }
+
+  .rememberMeCheckBox {
+    display: flex; /* Change to display flex */
+    position: absolute;
+    left: 135px;
+    top: 327px;
+    width: 273px;
+    height: 46px;
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center items horizontally */
+    gap: 6px;
+    padding: 10px 0;
+
+    .checkbox {
+      width: 23px;
+      height: 21px;
+      overflow: visible;
+      filter: drop-shadow(0px 3px 5px #2e2e4214);
+
+      .icon {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }
 
 .textBlock {
@@ -78,19 +102,23 @@
   top: 505px;
   width: 287px;
   height: 54px;
-  place-content: center;
-  align-items: center;
-  gap: 8px;
   padding: 12px 28px;
-  outline: solid 1px #000;
-  outline-offset: -1px;
+  border: none;
   border-radius: 20px;
   background-color: #c43e1c;
   box-shadow: 0px 4px 2.1px 0px #00000080;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .image3 {
-  z-index: 0;
   width: 30.0143px;
   height: 35px;
   background-image: /* webpackIgnore: true */ url('/assets/image3.jpg');
@@ -101,7 +129,7 @@
 
 .office365Login {
   color: #fff;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: bold;
   font-family:
     Arimo,
@@ -114,16 +142,12 @@
     'Noto Sans',
     'Liberation Sans',
     sans-serif;
-  z-index: 0;
-  width: 197px;
-  height: min-content;
   text-shadow: 3px 3px 4.599999904632568px #000;
-  flex-direction: column;
 }
 
 .or {
   color: #fff;
-  font-size: 31px;
+  font-size: 25px;
   font-weight: bold;
   font-family:
     Arimo,
@@ -155,6 +179,14 @@
   outline-offset: -1px;
   border-radius: 20px;
   background-color: #46b1e1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center vertically */
+}
+
+.loginWrapper {
+  display: flex;
+  align-items: center; /* Center horizontally and vertically */
 }
 
 .lOGIN {
@@ -172,39 +204,8 @@
     'Noto Sans',
     'Liberation Sans',
     sans-serif;
-  position: absolute;
-  left: calc(50% - -21.2885px);
-  top: 401px;
-  width: 88.5771px;
-  height: 26px;
   text-align: center;
-  align-items: center;
   text-shadow: 3px 3px 4.599999904632568px #000;
-  flex-direction: column;
-  transform: translateX(-50%);
-}
-
-.rememberMeCheckBox {
-  position: absolute;
-  left: 135px;
-  top: 327px;
-  width: 273px;
-  height: 46px;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 0;
-}
-
-.checkbox {
-  width: 23px;
-  height: 21px;
-  overflow: visible;
-  filter: drop-shadow(0px 3px 5px #2e2e4214);
-}
-
-.icon {
-  width: 100%;
-  height: 100%;
 }
 
 .rememberMe {
@@ -222,8 +223,6 @@
     'Noto Sans',
     'Liberation Sans',
     sans-serif;
-  width: min-content;
-  height: min-content;
   white-space: nowrap;
   flex-direction: column;
 }
@@ -357,8 +356,6 @@
   height: min-content;
   align-self: stretch;
   padding: 12px 16px;
-  outline: solid 2px #d9d9d9;
-  outline-offset: -2px;
   border-radius: 8px;
   background-color: #156082;
   overflow: hidden;
