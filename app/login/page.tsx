@@ -20,7 +20,7 @@ export default async function Page() {
 
           <div className={classes.or}>or</div>
 
-          <button className={classes.rectangle3}>
+          <button className={classes.buttonLogin}>
             <div className={classes.loginWrapper}>
               <div className={classes.lOGIN}>LOGIN</div>
             </div>
