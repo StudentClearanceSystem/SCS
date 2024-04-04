@@ -10,7 +10,7 @@ export default async function Page() {
           <div className={classes.textBlock}>Student</div>
           <div className={classes.textBlock2}>Clearance</div>
         </div>
-        <div className={classes.frame1}>
+        <div className={classes.loginFrame}>
           <button className={classes.buttonMSOA}>
             <div className={classes.buttonContent}>
               <div className={classes.image3} />

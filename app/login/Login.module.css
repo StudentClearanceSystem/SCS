@@ -1,7 +1,7 @@
 .root {
   position: relative;
-  width: 1280px;
-  height: 720px;
+  width: 100%;
+  height: 100%;
   align-items: flex-start;
   background-color: #219ebc;
   overflow: hidden;
@@ -105,7 +105,8 @@
     sans-serif;
 }
 
-.frame1 {
+.loginFrame {
+  display: flex;
   position: relative;
   width: 504px;
   height: 629px;
