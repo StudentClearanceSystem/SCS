@@ -25,34 +25,9 @@
     flex-direction: column;
   }
 
-  .rememberMeCheckBox {
-    margin-top: 16px;
-    display: flex;
-    position: absolute;
-    left: 135px;
-    top: 327px;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 0;
-  }
-
-  .checkboxInput {
-    appearance: none;
-    width: 23px;
-    height: 21px;
-    border: 2px solid #156082;
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-  }
-
-  .checkboxInput:checked {
-    background-color: #156082;
-  }
-
-  .rememberMe {
+  .textBlock {
     color: #fff;
-    font-size: 25px;
+    font-size: 96px;
     font-weight: bold;
     font-family:
       Arimo,
@@ -65,64 +40,82 @@
       'Noto Sans',
       'Liberation Sans',
       sans-serif;
-    white-space: nowrap;
-    text-shadow: 5px 5px 5px #00000080;
   }
-}
 
-.textBlock {
-  color: #fff;
-  font-size: 96px;
-  font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
-}
-
-.textBlock2 {
-  margin-top: 0;
-  color: #fff;
-  font-size: 96px;
-  font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
+  .textBlock2 {
+    margin-top: 0;
+    color: #fff;
+    font-size: 96px;
+    font-weight: bold;
+    font-family:
+      Arimo,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      'Noto Sans',
+      'Liberation Sans',
+      sans-serif;
+  }
 }
 
 .loginFrame {
   display: flex;
-  position: relative;
+  flex-direction: column;
+  align-items: center; /* Center vertically */
   width: 504px;
   height: 629px;
-  align-items: flex-start;
   border-radius: 50px;
   background-color: #023047;
   overflow: hidden;
   filter: drop-shadow(5px 5px 5px #00000080);
 }
 
+.rememberMeCheckBox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.checkboxInput {
+  appearance: none;
+  width: 23px;
+  height: 21px;
+  border: 2px solid #156082;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.checkboxInput:checked {
+  background-color: #156082;
+}
+
+.rememberMe {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  white-space: nowrap;
+  text-shadow: 5px 5px 5px #00000080;
+}
+
 .buttonMSOA {
-  position: absolute;
-  left: 118px;
-  top: 505px;
-  width: 287px;
-  height: 54px;
+  width: 300px;
+  height: 55px;
+  margin-top: 16px;
   padding: 12px 28px;
   border: none;
   border-radius: 50px;
@@ -130,7 +123,6 @@
   filter: drop-shadow(5px 5px 5px #00000080);
   display: flex;
   justify-content: center;
-  align-items: center;
   cursor: pointer; /* Add cursor styling */
 }
 
@@ -194,9 +186,6 @@
     'Noto Sans',
     'Liberation Sans',
     sans-serif;
-  position: absolute;
-  left: 241px;
-  top: 455px;
   width: 39px;
   height: min-content;
   text-shadow: 5px 5px 5px #00000080;
@@ -204,11 +193,8 @@
 }
 
 .buttonLogin {
-  position: absolute;
-  left: 119.9905px;
-  top: 400px;
-  width: 287.0095px;
-  height: 54.5867px;
+  width: 300px;
+  height: 55px;
   border-radius: 50px;
   background-color: #3f9dc9;
   display: flex;
@@ -254,15 +240,13 @@
 }
 
 .input {
-  position: absolute;
-  left: 118px;
-  top: 133px;
+  display: flex;
+  flex-direction: column;
   width: 290px;
 }
 
 .passwordInput,
 .emailInput {
-  position: relative;
   width: 100%;
 }
 
@@ -297,7 +281,6 @@
 }
 
 .passwordInput {
-  top: 0;
   margin-bottom: 8px;
 }
 
@@ -310,16 +293,13 @@
 }
 
 .loginWithOffice365 {
-  position: absolute;
-  left: 50%;
-  top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  text-align: center;
   width: 344px;
   height: 99px;
-  text-align: center;
-  align-items: center;
   text-shadow: 5px 5px 5px #00000080;
-  flex-direction: column;
-  transform: translateX(-50%);
 }
 
 .textBlock5 {
@@ -339,10 +319,6 @@
     sans-serif;
 }
 
-.textBlock6 {
-  margin-top: 0;
-}
-
 .labelWrapper {
   font-size: 2.5rem;
   font-family:
@@ -356,40 +332,31 @@
     'Noto Sans',
     'Liberation Sans',
     sans-serif;
+}
 
-  .label {
-    color: #fff;
-    font-size: 2rem;
-    font-weight: bold;
-    font-family:
-      Arimo,
-      system-ui,
-      -apple-system,
-      'Segoe UI',
-      Roboto,
-      'Helvetica Neue',
-      Arial,
-      'Noto Sans',
-      'Liberation Sans',
-      sans-serif;
-  }
+.label,
+.label2 {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+}
 
-  .label2 {
-    color: #c43e1c;
-    font-size: 2rem;
-    font-weight: bold;
-    font-family:
-      Arimo,
-      system-ui,
-      -apple-system,
-      'Segoe UI',
-      Roboto,
-      'Helvetica Neue',
-      Arial,
-      'Noto Sans',
-      'Liberation Sans',
-      sans-serif;
-  }
+.label {
+  color: #fff;
+}
+
+.label2 {
+  color: #c43e1c;
 }
 
 .stiLogo {
