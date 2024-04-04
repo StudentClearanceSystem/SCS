@@ -1,6 +1,4 @@
-import { CheckboxIcon } from './CheckboxIcon';
 import React from 'react';
-import Image from 'next/image';
 
 import classes from './Login.module.css';
 
@@ -21,6 +19,7 @@ export default async function Page() {
           </button>
 
           <div className={classes.or}>or</div>
+
           <button className={classes.rectangle3}>
             <div className={classes.loginWrapper}>
               <div className={classes.lOGIN}>LOGIN</div>
@@ -28,11 +27,16 @@ export default async function Page() {
           </button>
 
           <div className={classes.rememberMeCheckBox}>
-            <div className={classes.checkbox}>
-              <CheckboxIcon className={classes.icon} />
-            </div>
-            <div className={classes.rememberMe}>Remember me</div>
+            <input
+              type="checkbox"
+              id="rememberMeCheckbox"
+              className={classes.checkboxInput}
+            />
+            <label htmlFor="rememberMeCheckbox" className={classes.rememberMe}>
+              Remember me
+            </label>
           </div>
+
           <div className={classes.input}>
             <div className={classes.emailInput}>
               <label htmlFor="email" className={classes.email}>
