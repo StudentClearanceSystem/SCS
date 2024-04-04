@@ -5,6 +5,7 @@
   align-items: flex-start;
   background-color: #219ebc;
   overflow: hidden;
+  user-select: none;
 }
 
 .mainContainer {
