@@ -1,84 +1,22 @@
-import React from 'react';
+import AcmeLogo from '@/app/ui/acme-logo';
+import LoginForm from '@/app/ui/login-form';
+import { Metadata } from 'next';
 
-import classes from './Login.module.css';
+export const metadata: Metadata = {
+  title: 'Login',
+};
 
-export default async function Page() {
+export default function LoginPage() {
   return (
-    <div className={classes.root}>
-      <div className={classes.mainContainer}>
-        <div className={classes.studentClearance}>
-          <div className={classes.textBlock}>Student</div>
-          <div className={classes.textBlock2}>Clearance</div>
-        </div>
-        <div className={classes.loginFrame}>
-          <div className={classes.loginWithOffice365}>
-            <div className={classes.textBlock5}>Login</div>
-            <div className={classes.textBlock6}>
-              <p className={classes.labelWrapper}>
-                <span className={classes.label}>with </span>
-                <span className={classes.label2}>Office 365</span>
-              </p>
-            </div>
+    <main className="flex items-center justify-center md:h-screen">
+      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
+        <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
+          <div className="w-32 text-white md:w-36">
+            <AcmeLogo />
           </div>
-
-          <div className={classes.input}>
-            <div className={classes.emailInput}>
-              <label htmlFor="email" className={classes.email}>
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                placeholder="you@sjdelmonte.sti.edu.ph"
-                className={classes.inputField}
-              />
-            </div>
-
-            <div className={classes.passwordInput}>
-              <label htmlFor="password" className={classes.password}>
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter 6 characters or more"
-                className={classes.inputField}
-              />
-            </div>
-
-            <div className={classes.rememberMeCheckBox}>
-              <input
-                type="checkbox"
-                id="rememberMeCheckbox"
-                className={classes.checkboxInput}
-              />
-              <label
-                htmlFor="rememberMeCheckbox"
-                className={classes.rememberMe}
-              >
-                Remember me
-              </label>
-            </div>
-          </div>
-
-          <button className={classes.buttonMSOA}>
-            <div className={classes.buttonContent}>
-              <div className={classes.image3} />
-              <div className={classes.office365Login}>Office 365 Login</div>
-            </div>
-          </button>
-
-          <div className={classes.or}>or</div>
-
-          <button className={classes.buttonLogin}>
-            <div className={classes.loginWrapper}>
-              <div className={classes.lOGIN}>LOGIN</div>
-            </div>
-          </button>
         </div>
+        <LoginForm />
       </div>
-      <div className={classes.stiLogo}></div>
-      <div className={classes.credits}></div>
-    </div>
+    </main>
   );
 }
