@@ -1,59 +1,94 @@
-import AcmeLogo from '@/app/ui/acme-logo';
+'use client';
 
-import styles from '@/app/ui/home.module.css';
-
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-
-import { lusitana } from './ui/fonts';
-
-import Image from 'next/image';
+import React from 'react';
+import classes from './Login.module.css';
+import { useFormState } from 'react-dom';
+import { authenticate } from './lib/actions';
 
 export default function Page() {
+  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+
   return (
-    // These are Tailwind classes:
-    <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
-        <AcmeLogo />
-      </div>
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-          <div className={styles.shape} />
-          <p
-            className={`${lusitana.className}
-            text-xl text-gray-800 md:text-3xl md:leading-normal`}
-          >
-            <strong>Welcome to Acme.</strong> This is the example for the{' '}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js Learn Course
-            </a>
-            , brought to you by Vercel.
-          </p>
-          <Link
-            href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
+    <div className={classes.root}>
+      <div className={classes.mainContainer}>
+        <div className={classes.studentClearance}>
+          <div className={classes.textBlock}>Student</div>
+          <div className={classes.textBlock2}>Clearance</div>
         </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
-          <Image
-            src="/hero-desktop.png"
-            width={1000}
-            height={760}
-            className="hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <Image
-            src="/hero-mobile.png"
-            width={560}
-            height={620}
-            className="block md:hidden"
-            alt="Screenshots of the dashboard project showing mobile version"
-          />
-        </div>
+        <form action={dispatch} className={classes.loginFrame}>
+          <div className={classes.loginWithOffice365}>
+            <div className={classes.textBlock5}>Login</div>
+            <div className={classes.textBlock6}>
+              <p className={classes.labelWrapper}>
+                <span className={classes.label}>with </span>
+                <span className={classes.label2}>Office 365</span>
+              </p>
+            </div>
+          </div>
+
+          <div className={classes.input}>
+            <div className={classes.emailInput}>
+              <label htmlFor="email" className={classes.email}>
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="you@sjdelmonte.sti.edu.ph"
+                className={classes.inputField}
+                required
+              />
+            </div>
+
+            <div className={classes.passwordInput}>
+              <label htmlFor="password" className={classes.password}>
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Enter 6 characters or more"
+                required
+                minLength={6}
+                className={classes.inputField}
+              />
+            </div>
+
+            <div className={classes.rememberMeCheckBox}>
+              <input
+                type="checkbox"
+                id="rememberMeCheckbox"
+                className={classes.checkboxInput}
+              />
+              <label
+                htmlFor="rememberMeCheckbox"
+                className={classes.rememberMe}
+              >
+                Remember me
+              </label>
+            </div>
+          </div>
+
+          <button className={classes.buttonMSOA}>
+            <div className={classes.buttonContent}>
+              <div className={classes.image3} />
+              <div className={classes.office365Login}>Office 365 Login</div>
+            </div>
+          </button>
+
+          <div className={classes.or}>or</div>
+
+          <button className={classes.buttonLogin}>
+            <div className={classes.loginWrapper}>
+              <div className={classes.lOGIN}>LOGIN</div>
+            </div>
+          </button>
+        </form>
       </div>
-    </main>
+      <div className={classes.stiLogo}></div>
+      <div className={classes.credits}></div>
+    </div>
   );
 }
