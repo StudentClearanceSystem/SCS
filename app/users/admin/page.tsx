@@ -4,6 +4,6 @@ export const metadata: Metadata = {
   title: 'Admin',
 };
 
-export default function LoginPage() {
+export default function Page() {
   return <h1>Admin</h1>;
 }
