@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="flex h-screen bg-blue-300">
-      <SideNav />
+      <SideNav title={'Admin'} assignTaskBtn="Role Setter" />
       <div className="flex-grow p-8">
         <header>
-          <h1 className="font-arimo text-6xl font-bold">Role Setter</h1>
+          <h1 className="font-arimo ml-16 text-4xl font-bold">Role Setter</h1>
         </header>
       </div>
     </div>
