@@ -6,7 +6,7 @@ interface SideNavProps {
   title: string; // Specify the type of the title prop as string
   assignTaskBtn: string; // Add buttonText prop
 }
-
+// try
 export default function SideNav({ title, assignTaskBtn }: SideNavProps) {
   const [isOpen, setIsOpen] = useState(false);
 
