@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'MIS',
+  title: 'Purchasing Office',
 };
 
 import SideNav from '@/app/components/SideNav';
@@ -15,12 +15,14 @@ interface Button {
 
 export default function Page() {
   return (
-    <div className="flex h-screen" style={{ backgroundColor: '#A2BCD3' }}>
-      <SideNav title={'M.I.S.'} assignTaskBtns={[]} />
+    <div className="flex h-screen" style={{ backgroundColor: '#BFAB9B' }}>
+      <SideNav title={'PURCHASING'} assignTaskBtns={[]} />
       <div className="flex-grow p-8">
         <header>
           <h3 className="font-arimo ml-16 text-2xl">Student Progress</h3>
-          <h1 className="font-arimo ml-16 text-4xl font-bold">MIS Dashboard</h1>
+          <h1 className="font-arimo ml-16 text-4xl font-bold">
+            Purchasing Office Dashboard
+          </h1>
         </header>
       </div>
     </div>

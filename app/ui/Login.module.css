@@ -372,7 +372,7 @@
 .credits {
   position: absolute;
   left: 59px;
-  top: 450px;
+  top: 480px;
   width: 84px;
   height: 84px;
   background-image: /* webpackIgnore: true */ url('/assets/credits.jpg');
