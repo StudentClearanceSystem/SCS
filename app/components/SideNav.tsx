@@ -2,12 +2,17 @@
 import { useState } from 'react';
 import { Bars3Icon, PowerIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-interface SideNavProps {
-  title: string; // Specify the type of the title prop as string
-  assignTaskBtn: string; // Add buttonText prop
+interface Button {
+  label: string;
+  onClick: () => void;
 }
 
-export default function SideNav({ title, assignTaskBtn }: SideNavProps) {
+interface SideNavProps {
+  title: string;
+  assignTaskBtns: Button[]; // Modified to accept an array of button objects
+}
+
+export default function SideNav({ title, assignTaskBtns }: SideNavProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -54,14 +59,19 @@ export default function SideNav({ title, assignTaskBtn }: SideNavProps) {
                   {title}
                 </h4>
               </div>
-
-              <button className="hover:bg-sky-150 mt-10 flex h-[40px] w-[70%] items-center justify-center gap-2 rounded-full bg-white p-3 text-sm font-bold hover:bg-opacity-75 hover:text-blue-500 md:flex-none md:justify-center md:p-2 md:px-3">
-                <div className="flex items-center md:block">
-                  {assignTaskBtn}
-                </div>
-              </button>
+              {/* Render buttons dynamically */}
+              {assignTaskBtns.map((button, index) => (
+                <button
+                  key={index}
+                  onClick={button.onClick}
+                  className="hover:bg-sky-150 mt-3 flex h-[40px] w-[70%] items-center justify-center gap-2 rounded-full bg-white p-3 text-sm font-bold hover:bg-opacity-75 hover:text-blue-500 md:flex-none md:justify-center md:p-2 md:px-3"
+                >
+                  <div className="flex items-center md:block">
+                    {button.label}
+                  </div>
+                </button>
+              ))}
             </div>
-
             <div className="absolute bottom-10 left-0 flex w-full items-center justify-center">
               <button className="hover:bg-sky-150 flex h-[40px] w-[60%] items-center justify-center gap-2 rounded-md p-3 text-sm font-bold hover:text-blue-600 md:flex-none md:justify-center md:p-2 md:px-3 ">
                 <PowerIcon className="w-6 flex-shrink-0" />
