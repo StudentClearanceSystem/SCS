@@ -1,7 +1,7 @@
 'use client';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
-import classes from '@/app/Login.module.css';
+import classes from '@/app/ui/Login.module.css';
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -69,14 +69,14 @@ export default function LoginForm() {
             </div>
           </div>
 
-          <button className={classes.buttonMSOA}>
+          {/* <button className={classes.buttonMSOA}>
             <div className={classes.buttonContent}>
               <div className={classes.image3} />
               <div className={classes.office365Login}>Office 365 Login</div>
             </div>
           </button>
 
-          <div className={classes.or}>or</div>
+          <div className={classes.or}>or</div> */}
 
           <button className={classes.buttonLogin}>
             <div className={classes.loginWrapper}>
