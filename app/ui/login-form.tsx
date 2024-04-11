@@ -54,7 +54,7 @@ export default function LoginForm() {
               />
             </div>
 
-            <div className={classes.rememberMeCheckBox}>
+            {/* <div className={classes.rememberMeCheckBox}>
               <input
                 type="checkbox"
                 id="rememberMeCheckbox"
@@ -66,7 +66,7 @@ export default function LoginForm() {
               >
                 Remember me
               </label>
-            </div>
+            </div> */}
           </div>
 
           {/* <button className={classes.buttonMSOA}>
