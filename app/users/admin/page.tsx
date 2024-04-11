@@ -1,31 +1,28 @@
-'use client';
-// import { Metadata } from 'next';
-import SideNav from '@/app/components/SideNav';
-import { useRouter } from 'next/navigation'; // Import useRouter from next/navigation
+import { Metadata } from 'next';
+import SideNav from '@/app/components/SideNav'; // adjust the import path as per your project structure
 
-// export const metadata: Metadata = {
-//   title: 'Admin',
-// };
+export const metadata: Metadata = {
+  title: 'Admin',
+};
 
 interface Button {
   label: string;
-  onClick: () => void;
+  href: string; // Adjust the type to accept a string for href
 }
 
+const assignTaskBtns: Button[] = [
+  {
+    label: 'Role Setter',
+    href: '/users/admin', // Provide the href for the Link component
+  },
+  //   // If want to add another button
+  //   {
+  //     label: 'Assign Task 2',
+  //     href: '/users', // Provide the href for the Link component
+  //   },
+];
+
 export default function Page() {
-  const router = useRouter();
-
-  function redirectToAdminPage() {
-    router.push('/users/admin');
-  }
-
-  const assignTaskBtns: Button[] = [
-    {
-      label: 'Role Setter',
-      onClick: redirectToAdminPage,
-    },
-  ];
-
   return (
     <div className="flex h-screen bg-blue-300">
       <SideNav title={'Admin'} assignTaskBtns={assignTaskBtns} />

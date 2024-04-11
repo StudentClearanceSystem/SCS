@@ -1,10 +1,11 @@
 'use client';
 import { useState } from 'react';
 import { Bars3Icon, PowerIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link'; // Import Link component
 
 interface Button {
   label: string;
-  onClick: () => void;
+  href: string; // Adjust the type to accept a string for href
 }
 
 interface SideNavProps {
@@ -61,15 +62,15 @@ export default function SideNav({ title, assignTaskBtns }: SideNavProps) {
               </div>
               {/* Render buttons dynamically */}
               {assignTaskBtns.map((button, index) => (
-                <button
+                <Link
+                  href={button.href}
                   key={index}
-                  onClick={button.onClick}
                   className="hover:bg-sky-150 mt-3 flex h-[40px] w-[70%] items-center justify-center gap-2 rounded-full bg-white p-3 text-sm font-bold hover:bg-opacity-75 hover:text-blue-500 md:flex-none md:justify-center md:p-2 md:px-3"
                 >
                   <div className="flex items-center md:block">
                     {button.label}
                   </div>
-                </button>
+                </Link>
               ))}
             </div>
             <div className="absolute bottom-10 left-0 flex w-full items-center justify-center">
