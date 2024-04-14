@@ -28,7 +28,7 @@ export default function Page() {
       <SideNav title={'Admin'} assignTaskBtns={assignTaskBtns} />
       <div className="flex-grow p-8">
         <header>
-          <h1 className="ml-16 font-arimo text-4xl font-bold">Role Setter</h1>
+          <h1 className="font-arimo ml-16 text-4xl font-bold">Role Setter</h1>
         </header>
       </div>
     </div>

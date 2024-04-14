@@ -19,8 +19,8 @@ export default function Page() {
       <SideNav title={'Program head'} assignTaskBtns={[]} />
       <div className="flex-grow p-8">
         <header>
-          <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>
-          <h1 className="ml-16 font-arimo text-4xl font-bold">Program head</h1>
+          <h3 className="font-arimo ml-16 text-2xl">Student Progress</h3>
+          <h1 className="font-arimo ml-16 text-4xl font-bold">Program head</h1>
         </header>
       </div>
     </div>
