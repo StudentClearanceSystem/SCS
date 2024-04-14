@@ -240,6 +240,7 @@
 .input {
   display: flex;
   flex-direction: column;
+  align-self: center;
   width: 290px;
 }
 
