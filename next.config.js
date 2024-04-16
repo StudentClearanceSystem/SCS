@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
+  experimental: {},
   webpack: (config) => {
     config.externals = [...config.externals, 'bcrypt'];
     return config;
