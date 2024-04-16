@@ -5,5 +5,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <h1>users</h1>;
+  return <h1>users contact admin to set your role then refresh this page</h1>;
 }
