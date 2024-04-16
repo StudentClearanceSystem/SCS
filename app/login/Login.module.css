@@ -50,7 +50,7 @@
   flex-direction: column;
   align-items: center; /* Center vertically */
   justify-content: center; /* Center horizontally */
-  width: 40%;
+  width: 35%;
   height: 95%;
   border-radius: 50px;
   background-color: #023047;
@@ -218,7 +218,7 @@
 
   .textBlock,
   .textBlock2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
   .textBlock5 {
     font-size: 2rem;
