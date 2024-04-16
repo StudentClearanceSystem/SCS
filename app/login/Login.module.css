@@ -213,7 +213,7 @@
   .studentClearance {
     display: flex;
     flex-direction: column; /* Arrange text blocks in a row */
-    align-items: flex-start; /* Align items vertically */
+    align-items: center; /* Align items vertically */
   }
 
   .textBlock,
