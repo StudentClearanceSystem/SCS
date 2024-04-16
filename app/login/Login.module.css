@@ -210,6 +210,12 @@
     width: 95%;
     height: 60%;
   }
+  .studentClearance {
+    display: flex;
+    flex-direction: column; /* Arrange text blocks in a row */
+    align-items: flex-start; /* Align items vertically */
+  }
+
   .textBlock,
   .textBlock2 {
     font-size: 2.5rem;
@@ -224,9 +230,10 @@
     width: 64px; /* Adjust width */
     height: 51px; /* Adjust height */
   }
-  .studentClearance {
-    display: flex;
-    flex-direction: column; /* Arrange text blocks in a row */
-    align-items: flex-start; /* Align items vertically */
+  .credits {
+    top: 20px;
+    left: calc(100% - 80px); /* Adjust left position */
+    width: 65px;
+    height: 65px;
   }
 }
