@@ -1,3 +1,4 @@
+/* Define the base styles */
 .root {
   width: 100%;
   height: 100%;
@@ -5,6 +6,15 @@
   background-color: #219ebc;
   user-select: none;
   overflow: hidden;
+  font-family:
+    Arimo,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
 }
 
 .mainContainer {
@@ -24,39 +34,15 @@
   flex-direction: column;
 }
 
-.textBlock {
+.textBlock,
+.textBlock2 {
   color: #fff;
   font-size: 96px;
   font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
 }
 
 .textBlock2 {
   margin-top: 0;
-  color: #fff;
-  font-size: 96px;
-  font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
 }
 
 .loginFrame {
@@ -72,125 +58,8 @@
   filter: drop-shadow(5px 5px 5px #00000080);
 }
 
-.rememberMeCheckBox {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.checkboxInput {
-  appearance: none;
-  width: 23px;
-  height: 21px;
-  border: 2px solid #156082;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-}
-
-.checkboxInput:checked {
-  background-color: #156082;
-}
-
-.rememberMe {
-  color: #fff;
-  font-size: 25px;
-  font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
-  white-space: nowrap;
-  text-shadow: 5px 5px 5px #00000080;
-}
-
-.buttonMSOA {
-  width: 300px;
-  height: 55px;
-  margin-top: 14px;
-  padding: 12px 12px;
-  border-radius: 50px;
-  background-color: #c43e1c;
-  filter: drop-shadow(5px 5px 5px #00000080);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer; /* Add cursor styling */
-}
-
-/* Hover state */
-.buttonMSOA:hover {
-  background-color: #7d2410;
-}
-
-/* Active state */
-.buttonMSOA:active {
-  background-color: #691f0d;
-  filter: none;
-}
-
-.buttonMSOA .buttonContent {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.buttonMSOA .image3 {
-  width: 35px;
-  height: 35px;
-  background-image: /* webpackIgnore: true */ url('/assets/image3.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: drop-shadow(5px 5px 5px #00000080);
-}
-
-.buttonMSOA .office365Login {
-  color: #fff;
-  font-size: 24px;
-  font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
-  text-shadow: 5px 5px 5px #00000080;
-}
-
-.or {
-  color: #fff;
-  font-size: 25px;
-  font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
-  text-shadow: 5px 5px 5px #00000080;
-  flex-direction: column;
-}
-
 .buttonLogin {
-  width: 300px;
+  width: 100%;
   height: 55px;
   border-radius: 50px;
   background-color: #3f9dc9;
@@ -199,7 +68,7 @@
   align-items: center; /* Center vertically */
   box-shadow: 5px 5px 5px #00000080;
   cursor: pointer; /* Add cursor styling */
-  margin: 20px;
+  margin: 20px 0px 20px 0px;
 }
 
 /* Hover state */
@@ -213,7 +82,7 @@
   box-shadow: none;
 }
 
-.buttonLogin .loginWrapper {
+.buttonLogin {
   display: flex;
   align-items: center; /* Center horizontally and vertically */
 }
@@ -222,17 +91,6 @@
   color: #fff;
   font-size: 25px;
   font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
   text-align: center;
   text-shadow: 5px 5px 5px #00000080;
 }
@@ -241,7 +99,6 @@
   display: flex;
   flex-direction: column;
   align-self: center;
-  width: 290px;
 }
 
 .passwordInput,
@@ -264,13 +121,12 @@
   color: #fff;
   font-size: 1.5rem;
   font-weight: bold;
-  font-family: Arimo, sans-serif;
   text-shadow: 5px 5px 5px #00000080;
 }
 
 .inputField {
   width: 100%;
-  padding: 12px 16px;
+  padding: 8px 30px;
   border-radius: 8px;
   background-color: #156082;
   color: #fff;
@@ -279,12 +135,9 @@
   box-shadow: 5px 5px 5px 0px #00000080;
 }
 
-.passwordInput {
-  margin-bottom: 8px;
-}
-
+.passwordInput,
 .emailInput {
-  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .placeholder {
@@ -304,63 +157,22 @@
   color: #fff;
   font-size: 3rem;
   font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
 }
 
-.labelWrapper {
-  font-size: 2.5rem;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
-}
-
-.label,
-.label2 {
-  font-size: 2rem;
-  font-weight: bold;
-  font-family:
-    Arimo,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
-}
-
-.label {
+.textBlock6 {
   color: #fff;
+  font-size: 2rem;
+  font-weight: normal;
 }
 
-.label2 {
+.office365 {
   color: #c43e1c;
 }
 
 .stiLogo {
   position: absolute;
-  left: 59px;
-  top: 50px;
+  left: 20px;
+  top: 20px;
   width: 128px;
   height: 101px;
   background-image: /* webpackIgnore: true */ url('/assets/stiLogo.jpg');
@@ -372,7 +184,7 @@
 
 .credits {
   position: absolute;
-  left: 59px;
+  left: 20px;
   top: 480px;
   width: 84px;
   height: 84px;
@@ -381,4 +193,41 @@
   background-repeat: no-repeat;
   background-size: cover;
   filter: drop-shadow(6px 6px 6px #080808);
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 900px) {
+  .loginFrame {
+    width: 70%;
+  }
+  .mainContainer {
+    display: flex;
+    flex-direction: column; /* Change to column layout */
+    overflow-y: auto; /* Make it scrollable vertically */
+    padding: 10px;
+    justify-content: space-around;
+  }
+  .loginFrame {
+    width: 55%;
+    height: 65%;
+  }
+  .textBlock,
+  .textBlock2 {
+    font-size: 3rem;
+  }
+  .textBlock5 {
+    font-size: 2.5rem;
+  }
+  .textBlock6 {
+    font-size: 1.5rem;
+  }
+  .stiLogo {
+    width: 64px; /* Adjust width */
+    height: 51px; /* Adjust height */
+  }
+  .studentClearance {
+    display: flex;
+    flex-direction: column; /* Arrange text blocks in a row */
+    align-items: flex-start; /* Align items vertically */
+  }
 }
