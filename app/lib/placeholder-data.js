@@ -2,18 +2,21 @@
 // https://nextjs.org/learn/dashboard-app/fetching-data
 const users = [
   {
+    id: 200000,
     name: 'Admin',
     email: 'admin@sjdelmonte.sti.edu.ph',
     password: 'sjDelmonte.ADMIN',
     role: 'admin',
   },
   {
+    id: 200001,
     name: 'Cashier',
     email: 'cashier@sjdelmonte.sti.edu.ph',
     password: 'sjDelmonte.CASHIER',
     role: 'cashier',
   },
   {
+    id: 200002,
     name: 'Registrar',
     email: 'registrar@sjdelmonte.sti.edu.ph',
     password: 'sjDelmonte.REGISTRAR',
