@@ -10,6 +10,12 @@ export type User = {
   role: string;
 };
 
+export type SessionPayload = {
+  userId: User['id']; // Unique identifier for the user
+  role: User['role']; // User's role, e.g., 'admin', 'user', etc.
+  expiresAt: Date; // Date indicating when the session expires
+};
+
 export type Customer = {
   id: string;
   name: string;
