@@ -54,9 +54,9 @@ export default async function Page({
         </header>
       </div>
       {/* Content area with scrolling */}
-      <div className="flex-grow overflow-y-auto px-4 sm:px-6 lg:px-8">
-        {/* Flex item with horizontal padding and vertical scrolling */}
-        <div className="h-full w-full">
+      <div className="flex-grow overflow-hidden px-4 sm:px-6 lg:px-8">
+        {/* Flex item with horizontal padding */}
+        <div className="h-full w-full overflow-y-auto">
           {/* Container covering the entire space */}
           <div className="mt-4 flex items-center justify-between gap-2 md:mt-1">
             <Search placeholder="Search..." />
