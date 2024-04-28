@@ -42,10 +42,11 @@ export default async function Page({
 
   const totalPages = await fetchInvoicesPages(query);
   return (
-    <div className="flex h-screen flex-col bg-blue-300">
+    <div className="flex flex-col bg-blue-300">
       {/* Flex container covering the entire screen */}
       {/* Side navigation */}
       <SideNav title={'Admin'} assignTaskBtns={assignTaskBtns} />
+
       {/* Main content area */}
       <div className="flex-grow p-8">
         {/* Flex item growing to fill remaining space */}
@@ -54,7 +55,7 @@ export default async function Page({
         </header>
       </div>
       {/* Content area with scrolling */}
-      <div className="flex-grow overflow-hidden px-4 sm:px-6 lg:px-8">
+      <div className="flex-grow px-4 sm:px-6 lg:px-8">
         {/* Flex item with horizontal padding */}
         <div className="h-full w-full overflow-y-auto">
           {/* Container covering the entire space */}
@@ -65,7 +66,7 @@ export default async function Page({
             key={query + currentPage}
             fallback={<InvoicesTableSkeleton />}
           >
-            <div className="min-h-80">
+            <div className="min-h-40 overflow-hidden">
               {/* Ensure table fills the container */}
               <Table query={query} currentPage={currentPage} />
             </div>
