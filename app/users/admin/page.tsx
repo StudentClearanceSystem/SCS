@@ -41,7 +41,7 @@ export default async function Page({
 
   const totalPages = await fetchInvoicesPages(query);
   return (
-    <div className="flex flex-col bg-blue-300">
+    <div className="flex min-h-screen flex-col bg-blue-300">
       {/* Flex container covering the entire screen */}
       {/* Side navigation */}
       <SideNav title={'Admin'} assignTaskBtns={assignTaskBtns} />
