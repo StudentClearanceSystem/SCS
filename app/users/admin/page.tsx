@@ -54,14 +54,16 @@ export default async function Page({
           <h1 className="ml-16 font-arimo text-4xl font-bold">Role Setter</h1>
         </header>
       </div>
+      <div className=" sticky top-0 flex-grow px-20 sm:px-10 lg:px-20 lg:pt-4">
+        <div className="mt-4 flex items-center justify-between gap-2 md:mt-1">
+          <Search placeholder="Search..." />
+        </div>
+      </div>
       {/* Content area with scrolling */}
       <div className="flex-grow px-4 sm:px-6 lg:px-8">
         {/* Flex item with horizontal padding */}
         <div className="h-full w-full overflow-y-auto">
           {/* Container covering the entire space */}
-          <div className="mt-4 flex items-center justify-between gap-2 md:mt-1">
-            <Search placeholder="Search..." />
-          </div>
           <Suspense
             key={query + currentPage}
             fallback={<InvoicesTableSkeleton />}
@@ -71,7 +73,7 @@ export default async function Page({
               <Table query={query} currentPage={currentPage} />
             </div>
           </Suspense>
-          <div className="mt-3 flex w-full justify-center">
+          <div className="mb-3 mt-3 flex w-full justify-center">
             <Pagination totalPages={totalPages} />
           </div>
         </div>
