@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import SideNav from '@/app/components/SideNav'; // adjust the import path as per your project structure
 import Search from '@/app/ui/search';
-import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import Table from '@/app/ui/invoices/table';
