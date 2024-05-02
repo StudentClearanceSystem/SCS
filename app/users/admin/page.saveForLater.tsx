@@ -7,9 +7,6 @@ import Table from '@/app/ui/invoices/table';
 import Pagination from '@/app/ui/invoices/pagination';
 import { fetchInvoicesPages } from '@/app/lib/data';
 
-import UserTable from '@/app/components/UserTable';
-import { User } from '../columns';
-
 export const metadata: Metadata = {
   title: 'Admin',
 };
@@ -31,16 +28,18 @@ const assignTaskBtns: Button[] = [
   //   },
 ];
 
-async function getUsers(): Promise<User[]> {
-  const res = await fetch(
-    'https://64a6f5fc096b3f0fcc80e3fa.mockapi.io/api/users',
-  );
-  const data = await res.json();
-  return data;
-}
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
 
-export default async function Page() {
-  const users = await getUsers();
+  const totalPages = await fetchInvoicesPages(query);
   return (
     <div className="flex min-h-screen flex-col bg-blue-300">
       {/* Flex container covering the entire screen */}
@@ -54,12 +53,28 @@ export default async function Page() {
           <h1 className="ml-16 font-arimo text-4xl font-bold">Role Setter</h1>
         </header>
       </div>
+      <div className=" sticky top-0 flex-grow px-20 sm:px-10 lg:px-20 lg:pt-4">
+        <div className="mt-4 flex items-center justify-between gap-2 md:mt-1">
+          <Search placeholder="Search..." />
+        </div>
+      </div>
       {/* Content area with scrolling */}
       <div className="flex-grow px-4 sm:px-6 lg:px-8">
         {/* Flex item with horizontal padding */}
-        <div className="h-full w-full">
+        <div className="h-full w-full overflow-y-auto">
           {/* Container covering the entire space */}
-          <UserTable />
+          <Suspense
+            key={query + currentPage}
+            fallback={<InvoicesTableSkeleton />}
+          >
+            <div className="min-h-40 overflow-hidden">
+              {/* Ensure table fills the container */}
+              <Table query={query} currentPage={currentPage} />
+            </div>
+          </Suspense>
+          <div className="mb-3 mt-3 flex w-full justify-center">
+            <Pagination totalPages={totalPages} />
+          </div>
         </div>
       </div>
     </div>

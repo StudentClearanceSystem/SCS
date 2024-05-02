@@ -1,4 +1,9 @@
 import { Revenue } from './definitions';
+import React from 'react';
+
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
