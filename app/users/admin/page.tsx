@@ -59,7 +59,10 @@ export default async function Page() {
         {/* Flex item with horizontal padding */}
         <div className="h-full w-full">
           {/* Container covering the entire space */}
-          <UserTable />
+
+          <div className="bg-teal-200 p-4">
+            <UserTable />
+          </div>
         </div>
       </div>
     </div>
