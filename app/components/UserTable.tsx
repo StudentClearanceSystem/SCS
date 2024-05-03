@@ -1,5 +1,8 @@
 'use client';
+import { PlusIcon } from '@heroicons/react/24/outline';
+
 import React from 'react';
+
 import {
   Table,
   TableHeader,
@@ -20,7 +23,6 @@ import {
   ChipProps,
   SortDescriptor,
 } from '@nextui-org/react';
-import { PlusIcon } from './PlusIcon';
 import { VerticalDotsIcon } from './VerticalDotsIcon';
 import { ChevronDownIcon } from './ChevronDownIcon';
 import { SearchIcon } from './SearchIcon';
@@ -251,11 +253,7 @@ export default function App() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button
-              className="bg-foreground text-background"
-              endContent={<PlusIcon />}
-              size="sm"
-            >
+            <Button className="bg-foreground text-background" size="sm">
               Add New
             </Button>
           </div>
