@@ -60,7 +60,7 @@ export default async function Page() {
         <div className="h-full w-full">
           {/* Container covering the entire space */}
 
-          <div className="bg-teal-200 p-4">
+          <div className="bg-blue-900 p-4">
             <UserTable />
           </div>
         </div>
