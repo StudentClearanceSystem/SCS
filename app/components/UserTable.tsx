@@ -123,7 +123,7 @@ export default function App() {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny text-default-500 capitalize">
+            <p className="text-bold text-tiny capitalize text-default-500">
               {user.team}
             </p>
           </div>
@@ -131,7 +131,7 @@ export default function App() {
       case 'status':
         return (
           <Chip
-            className="text-default-600 gap-1 border-none capitalize"
+            className="gap-1 border-none capitalize text-default-600"
             color={statusColorMap[user.status]}
             size="sm"
             variant="dot"
@@ -142,7 +142,7 @@ export default function App() {
       case 'actions':
         return (
           <div className="relative flex items-center justify-end gap-2">
-            <Dropdown className="bg-background border-1 border-default-200">
+            <Dropdown className="border-1 border-default-200 bg-background">
               <DropdownTrigger>
                 <Button isIconOnly radius="full" size="sm" variant="light">
                   <VerticalDotsIcon
@@ -253,7 +253,7 @@ export default function App() {
             </Dropdown>
             <Button
               className="bg-foreground text-background"
-              endContent={<PlusIcon width={50} height={50} />}
+              endContent={<PlusIcon />}
               size="sm"
             >
               Add New
@@ -261,13 +261,13 @@ export default function App() {
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-default-400 text-small">
+          <span className="text-small text-default-400">
             Total {users.length} users
           </span>
-          <label className="text-default-400 text-small flex items-center">
+          <label className="flex items-center text-small text-default-400">
             Rows per page:
             <select
-              className="text-default-400 text-small bg-transparent outline-none"
+              className="bg-transparent text-small text-default-400 outline-none"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
