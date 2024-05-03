@@ -1,6 +1,4 @@
 'use client';
-import { PlusIcon } from '@heroicons/react/24/outline';
-
 import React from 'react';
 
 import {
@@ -23,6 +21,7 @@ import {
   ChipProps,
   SortDescriptor,
 } from '@nextui-org/react';
+import { PlusIcon } from './PlusIcon';
 import { VerticalDotsIcon } from './VerticalDotsIcon';
 import { ChevronDownIcon } from './ChevronDownIcon';
 import { SearchIcon } from './SearchIcon';
@@ -39,7 +38,7 @@ const INITIAL_VISIBLE_COLUMNS = ['name', 'role', 'email', 'actions'];
 
 type User = (typeof users)[0];
 
-export default function App() {
+export default function Page() {
   const [filterValue, setFilterValue] = React.useState('');
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([]),
@@ -147,11 +146,7 @@ export default function App() {
             <Dropdown className="border-1 border-default-200 bg-background">
               <DropdownTrigger>
                 <Button isIconOnly radius="full" size="sm" variant="light">
-                  <VerticalDotsIcon
-                    className="text-default-400"
-                    width={50}
-                    height={50}
-                  />
+                  <VerticalDotsIcon className="text-default-400" />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
@@ -253,7 +248,11 @@ export default function App() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-foreground text-background" size="sm">
+            <Button
+              className="bg-foreground text-background"
+              endContent={<PlusIcon />}
+              size="sm"
+            >
               Add New
             </Button>
           </div>
