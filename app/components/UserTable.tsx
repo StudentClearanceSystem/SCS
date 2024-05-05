@@ -340,14 +340,28 @@ export default function Page() {
       bgcolor={selectedColor}
       isStriped
       aria-label="Example table with custom cells, pagination and sorting"
-      bottomContent={bottomContent}
-      bottomContentPlacement="outside"
+      bottomContent={
+        <div className="flex w-full justify-center">
+          <Pagination
+            isCompact
+            showControls
+            showShadow
+            color="secondary"
+            page={page}
+            total={pages}
+            onChange={(page) => setPage(page)}
+          />
+        </div>
+      }
+      bottomContentPlacement="inside"
       checkboxesProps={{
         classNames: {
           wrapper: 'after:bg-foreground after:text-background text-background',
         },
       }}
-      classNames={classNames}
+      classNames={{
+        wrapper: 'min-h-[222px]',
+      }}
       selectedKeys={selectedKeys}
       selectionMode="multiple"
       sortDescriptor={sortDescriptor}
