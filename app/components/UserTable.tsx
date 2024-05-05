@@ -363,7 +363,6 @@ export default function Page() {
         wrapper: 'min-h-[222px]',
       }}
       selectedKeys={selectedKeys}
-      selectionMode="multiple"
       sortDescriptor={sortDescriptor}
       topContent={topContent}
       topContentPlacement="inside"
