@@ -325,11 +325,20 @@ export default function Page() {
     }),
     [],
   );
+  const colors = [
+    'default',
+    'primary',
+    'secondary',
+    'success',
+    'warning',
+    'danger',
+  ];
+  const [selectedColor, setSelectedColor] = React.useState('default');
 
   return (
     <Table
-      isCompact
-      removeWrapper
+      bgcolor={selectedColor}
+      isStriped
       aria-label="Example table with custom cells, pagination and sorting"
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
@@ -343,7 +352,7 @@ export default function Page() {
       selectionMode="multiple"
       sortDescriptor={sortDescriptor}
       topContent={topContent}
-      topContentPlacement="outside"
+      topContentPlacement="inside"
       onSelectionChange={setSelectedKeys}
       onSortChange={setSortDescriptor}
     >
