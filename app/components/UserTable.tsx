@@ -25,14 +25,8 @@ import { PlusIcon } from './PlusIcon';
 import { VerticalDotsIcon } from './VerticalDotsIcon';
 import { ChevronDownIcon } from './ChevronDownIcon';
 import { SearchIcon } from './SearchIcon';
-import { columns, users, statusOptions } from './data';
+import { columns, users } from './data';
 import { capitalize } from '../lib/utils';
-
-const statusColorMap: Record<string, ChipProps['color']> = {
-  active: 'success',
-  paused: 'danger',
-  vacation: 'warning',
-};
 
 const INITIAL_VISIBLE_COLUMNS = ['name', 'role', 'email', 'actions'];
 
@@ -46,7 +40,6 @@ export default function Page() {
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
     new Set(INITIAL_VISIBLE_COLUMNS),
   );
-  const [statusFilter, setStatusFilter] = React.useState<Selection>('all');
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: 'age',
@@ -74,17 +67,9 @@ export default function Page() {
         user.name.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
-    if (
-      statusFilter !== 'all' &&
-      Array.from(statusFilter).length !== statusOptions.length
-    ) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.status),
-      );
-    }
 
     return filteredUsers;
-  }, [hasSearchFilter, statusFilter, filterValue]);
+  }, [hasSearchFilter, filterValue]);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
@@ -110,7 +95,6 @@ export default function Page() {
       case 'name':
         return (
           <User
-            avatarProps={{ radius: 'full', size: 'sm', src: user.avatar }}
             classNames={{
               description: 'text-default-500',
             }}
@@ -128,17 +112,6 @@ export default function Page() {
               {user.team}
             </p>
           </div>
-        );
-      case 'status':
-        return (
-          <Chip
-            className="gap-1 border-none capitalize text-default-600"
-            color={statusColorMap[user.status]}
-            size="sm"
-            variant="dot"
-          >
-            {cellValue}
-          </Chip>
         );
       case 'actions':
         return (
@@ -198,56 +171,6 @@ export default function Page() {
             onValueChange={onSearchChange}
           />
           <div className="flex gap-3">
-            <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
-                <Button
-                  endContent={<ChevronDownIcon className="text-small" />}
-                  size="sm"
-                  variant="flat"
-                >
-                  Status
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Columns"
-                closeOnSelect={false}
-                selectedKeys={statusFilter}
-                selectionMode="multiple"
-                onSelectionChange={setStatusFilter}
-              >
-                {statusOptions.map((status) => (
-                  <DropdownItem key={status.uid} className="capitalize">
-                    {capitalize(status.name)}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-            <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
-                <Button
-                  endContent={<ChevronDownIcon className="text-small" />}
-                  size="sm"
-                  variant="flat"
-                >
-                  Columns
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Columns"
-                closeOnSelect={false}
-                selectedKeys={visibleColumns}
-                selectionMode="multiple"
-                onSelectionChange={setVisibleColumns}
-              >
-                {columns.map((column) => (
-                  <DropdownItem key={column.uid} className="capitalize">
-                    {capitalize(column.name)}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
             <Button
               className="bg-foreground text-background"
               endContent={<PlusIcon />}
@@ -275,13 +198,7 @@ export default function Page() {
         </div>
       </div>
     );
-  }, [
-    filterValue,
-    statusFilter,
-    visibleColumns,
-    onSearchChange,
-    onRowsPerPageChange,
-  ]);
+  }, [filterValue, onSearchChange, onRowsPerPageChange]);
 
   const bottomContent = React.useMemo(() => {
     return (
@@ -307,24 +224,6 @@ export default function Page() {
     );
   }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
-  const classNames = React.useMemo(
-    () => ({
-      wrapper: ['max-h-[382px]', 'max-w-3xl'],
-      th: ['bg-transparent', 'text-default-500', 'border-b', 'border-divider'],
-      td: [
-        // changing the rows border radius
-        // first
-        'group-data-[first=true]:first:before:rounded-none',
-        'group-data-[first=true]:last:before:rounded-none',
-        // middle
-        'group-data-[middle=true]:before:rounded-none',
-        // last
-        'group-data-[last=true]:first:before:rounded-none',
-        'group-data-[last=true]:last:before:rounded-none',
-      ],
-    }),
-    [],
-  );
   const colors = [
     'default',
     'primary',
@@ -337,9 +236,10 @@ export default function Page() {
 
   return (
     <Table
+      className="pb-8"
       bgcolor={selectedColor}
       isStriped
-      aria-label="Example table with custom cells, pagination and sorting"
+      aria-label="Users table"
       bottomContent={
         <div className="flex w-full justify-center">
           <Pagination
