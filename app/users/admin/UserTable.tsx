@@ -14,19 +14,15 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Chip,
   User,
   Pagination,
   Selection,
-  ChipProps,
   SortDescriptor,
 } from '@nextui-org/react';
-import { PlusIcon } from './PlusIcon';
-import { VerticalDotsIcon } from './VerticalDotsIcon';
-import { ChevronDownIcon } from './ChevronDownIcon';
-import { SearchIcon } from './SearchIcon';
-import { columns, users } from './data';
-import { capitalize } from '../lib/utils';
+import { PlusIcon } from '../../components/PlusIcon';
+import { VerticalDotsIcon } from '../../components/VerticalDotsIcon';
+import { SearchIcon } from '../../components/SearchIcon';
+import { columns, users } from '../../components/data';
 
 const INITIAL_VISIBLE_COLUMNS = ['name', 'role', 'email', 'actions'];
 
@@ -160,13 +156,11 @@ export default function Page() {
             isClearable
             classNames={{
               base: 'w-full sm:max-w-[44%]',
-              inputWrapper: 'border-1',
             }}
             placeholder="Search by name..."
             size="sm"
             startContent={<SearchIcon className="text-default-300" />}
             value={filterValue}
-            variant="bordered"
             onClear={() => setFilterValue('')}
             onValueChange={onSearchChange}
           />
@@ -200,30 +194,6 @@ export default function Page() {
     );
   }, [filterValue, onSearchChange, onRowsPerPageChange]);
 
-  const bottomContent = React.useMemo(() => {
-    return (
-      <div className="flex items-center justify-between px-2 py-2">
-        <Pagination
-          showControls
-          classNames={{
-            cursor: 'bg-foreground text-background',
-          }}
-          color="default"
-          isDisabled={hasSearchFilter}
-          page={page}
-          total={pages}
-          variant="light"
-          onChange={setPage}
-        />
-        <span className="text-small text-default-400">
-          {selectedKeys === 'all'
-            ? 'All items selected'
-            : `${selectedKeys.size} of ${items.length} selected`}
-        </span>
-      </div>
-    );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
-
   const colors = [
     'default',
     'primary',
@@ -232,7 +202,7 @@ export default function Page() {
     'warning',
     'danger',
   ];
-  const [selectedColor, setSelectedColor] = React.useState('default');
+  const [selectedColor] = React.useState('default');
 
   return (
     <Table
