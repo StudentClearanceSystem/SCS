@@ -7,7 +7,7 @@ import Table from '@/app/ui/invoices/table';
 import Pagination from '@/app/ui/invoices/pagination';
 import { fetchInvoicesPages } from '@/app/lib/data';
 
-import UserTable from '@/app/users/admin/UserTable';
+import UserTable from '@/app/users/admin/SetUserRoleTable';
 import { User } from '../columns';
 
 export const metadata: Metadata = {
