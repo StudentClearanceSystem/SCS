@@ -123,7 +123,7 @@ export default function Page() {
             isClearable
             classNames={{
               input: 'border-none',
-              base: 'w-full sm:max-w-[44%]',
+              base: 'w-full sm:max-w-[56%]',
             }}
             placeholder="Search by name..."
             size="sm"
