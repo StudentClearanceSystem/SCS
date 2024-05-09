@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import DropdownComponent from '@/app/components/Dropdown';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 import {
   Table,
@@ -11,32 +12,18 @@ import {
   TableCell,
   Input,
   Button,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
   User,
   Pagination,
-  Selection,
   SortDescriptor,
+  Tooltip,
 } from '@nextui-org/react';
-import { PlusIcon } from '../../components/PlusIcon';
-import { VerticalDotsIcon } from '../../components/VerticalDotsIcon';
-import { SearchIcon } from '../../components/SearchIcon';
+import { PlusIcon } from '@heroicons/react/24/outline';
 import { columns, users } from '../../components/data';
-
-const INITIAL_VISIBLE_COLUMNS = ['name', 'role', 'email', 'actions'];
-
+import { TrashIcon } from '@heroicons/react/16/solid';
 type User = (typeof users)[0];
 
 export default function Page() {
   const [filterValue, setFilterValue] = React.useState('');
-  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
-    new Set([]),
-  );
-  const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
-    new Set(INITIAL_VISIBLE_COLUMNS),
-  );
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: 'age',
@@ -47,14 +34,6 @@ export default function Page() {
   const pages = Math.ceil(users.length / rowsPerPage);
 
   const hasSearchFilter = Boolean(filterValue);
-
-  const headerColumns = React.useMemo(() => {
-    if (visibleColumns === 'all') return columns;
-
-    return columns.filter((column) =>
-      Array.from(visibleColumns).includes(column.uid),
-    );
-  }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...users];
@@ -91,40 +70,27 @@ export default function Page() {
     switch (columnKey) {
       case 'name':
         return (
-          <User
-            classNames={{
-              description: 'text-default-500',
-            }}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{cellValue}</p>
+          </div>
         );
       case 'role':
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-500">
-              {user.team}
-            </p>
           </div>
         );
-      case 'actions':
+      case 'set role':
         return (
-          <div className="relative flex items-center justify-end gap-2">
-            <Dropdown className="border-1 border-default-200 bg-background">
-              <DropdownTrigger>
-                <Button isIconOnly radius="full" size="sm" variant="light">
-                  <VerticalDotsIcon className="text-default-400" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+          <div className="relative flex items-center">
+            <DropdownComponent
+              onSelect={(value) => console.log(value)}
+            ></DropdownComponent>
+            <Tooltip color="danger" content="Delete user">
+              <span className="cursor-pointer text-sm text-danger active:opacity-50">
+                <TrashIcon className=" h-5 w-5" />
+              </span>
+            </Tooltip>
           </div>
         );
       default:
@@ -156,11 +122,14 @@ export default function Page() {
           <Input
             isClearable
             classNames={{
+              input: 'border-none',
               base: 'w-full sm:max-w-[44%]',
             }}
             placeholder="Search by name..."
             size="sm"
-            startContent={<SearchIcon className="text-default-300" />}
+            startContent={
+              <MagnifyingGlassIcon className=" h-5 w-5 text-default-400" />
+            }
             value={filterValue}
             onClear={() => setFilterValue('')}
             onValueChange={onSearchChange}
@@ -168,7 +137,7 @@ export default function Page() {
           <div className="flex gap-3">
             <Button
               className="bg-foreground text-background"
-              endContent={<PlusIcon />}
+              endContent={<PlusIcon className="h-5 w-5 text-white" />}
               size="sm"
             >
               Add New
@@ -193,22 +162,14 @@ export default function Page() {
         </div>
       </div>
     );
-  }, [filterValue, onSearchChange, onRowsPerPageChange]);
-
-  const colors = [
-    'default',
-    'primary',
-    'secondary',
-    'success',
-    'warning',
-    'danger',
-  ];
-  const [selectedColor] = React.useState('default');
+  }, [filterValue, onRowsPerPageChange, onSearchChange]);
 
   return (
     <Table
+      onSortChange={setSortDescriptor}
+      sortDescriptor={sortDescriptor}
+      isHeaderSticky
       className="pb-8"
-      bgcolor={selectedColor}
       isStriped
       aria-label="Users table"
       bottomContent={
@@ -217,36 +178,20 @@ export default function Page() {
             isCompact
             showControls
             showShadow
-            color="secondary"
+            color="primary"
             page={page}
             total={pages}
             onChange={(page) => setPage(page)}
           />
         </div>
       }
-      bottomContentPlacement="inside"
-      checkboxesProps={{
-        classNames: {
-          wrapper: 'after:bg-foreground after:text-background text-background',
-        },
-      }}
-      classNames={{
-        wrapper: 'min-h-[222px]',
-      }}
-      selectedKeys={selectedKeys}
-      sortDescriptor={sortDescriptor}
+      bottomContentPlacement="outside"
       topContent={topContent}
       topContentPlacement="inside"
-      onSelectionChange={setSelectedKeys}
-      onSortChange={setSortDescriptor}
     >
-      <TableHeader columns={headerColumns}>
+      <TableHeader columns={columns}>
         {(column) => (
-          <TableColumn
-            key={column.uid}
-            align={column.uid === 'actions' ? 'center' : 'start'}
-            allowsSorting={column.sortable}
-          >
+          <TableColumn allowsSorting={column.sortable} key={column.uid}>
             {column.name}
           </TableColumn>
         )}
