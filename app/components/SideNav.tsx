@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Bars3Icon, PowerIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link'; // Import Link component
 import LogOutBtn from './LogOutBtn';
 
