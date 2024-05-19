@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import SideNav from '@/app/components/SideNav'; // adjust the import path as per your project structure
 
-import UserTable from '@/app/users/admin/SetUserRoleTable';
+import SetUserRoleTable from '@/app/users/admin/SetUserRoleTable';
 import { User } from '../columns';
 
 export const metadata: Metadata = {
@@ -53,7 +53,7 @@ export default async function Page() {
         {/* Flex item with horizontal padding */}
         <div className="h-full w-full">
           {/* Container covering the entire space */}
-          <UserTable />
+          <SetUserRoleTable />
         </div>
       </div>
     </div>

@@ -17,9 +17,9 @@ import {
   SortDescriptor,
   Tooltip,
 } from '@nextui-org/react';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { columns, users } from '../../components/data';
-import { TrashIcon } from '@heroicons/react/16/solid';
+
 type User = (typeof users)[0];
 
 export default function Page() {
@@ -40,7 +40,9 @@ export default function Page() {
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
-        user.name.toLowerCase().includes(filterValue.toLowerCase()),
+        Object.values(user).some((value) =>
+          String(value).toLowerCase().includes(filterValue.toLowerCase()),
+        ),
       );
     }
 
@@ -125,7 +127,7 @@ export default function Page() {
               input: 'border-none',
               base: 'w-full sm:max-w-[56%]',
             }}
-            placeholder="Search by name..."
+            placeholder="Search..."
             size="sm"
             startContent={
               <MagnifyingGlassIcon className=" h-5 w-5 text-default-400" />
