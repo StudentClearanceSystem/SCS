@@ -1,10 +1,8 @@
 import { Metadata } from 'next';
 import SideNav from '@/app/components/SideNav';
 
-import { createClient } from '@/app/utils/supabase/server';
-
 import SetUserRoleTable from '@/app/users/admin/SetUserRoleTable';
-import { user } from './columns';
+import { getUser } from '@/app/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Admin',
@@ -27,16 +25,17 @@ const assignTaskBtns: Button[] = [
   //   },
 ];
 
-async function getUsers(): Promise<user[]> {
-  const res = await fetch(
-    'https://664b9c7d35bbda10987d91c7.mockapi.io/sampler',
-  );
-  const data = await res.json();
-  return data;
-}
+// async function getUsers(): Promise<user[]> {
+//   const res = await fetch(
+//     'https://664b9c7d35bbda10987d91c7.mockapi.io/sampler',
+//   );
+//   const data = await res.json();
+//   return data;
+// }
 
 export default async function Page() {
-  const users = await getUsers();
+  const users = await getUser();
+
   return (
     <div className="flex min-h-screen flex-col bg-blue-300">
       {/* Flex container covering the entire screen */}
