@@ -5,7 +5,7 @@ import { supabase } from './supabase';
 /*------------------------------------------------------------------ */
 
 export const getUser = async () => {
-  const { data, error } = await supabase.from('auth.users').select('*');
+  const { data, error } = await supabase.from('UserTable').select('*');
   if (error) {
     console.error(error);
     return []; // Return an empty array in case of error
