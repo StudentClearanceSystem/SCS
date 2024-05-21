@@ -127,7 +127,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
           </div>
           <div className="flex gap-1">
             <Button
-              className="bg-foreground text-background"
+              className="bg-primary text-background"
               endContent={<PlusIcon className="h-5 w-5 text-white" />}
               size="sm"
             >
@@ -135,7 +135,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
             </Button>
           </div>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4 ">
           <span className="text-tiny text-default-400">
             Total {displayedUserCount} users
           </span>
