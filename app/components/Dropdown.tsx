@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import {
   Dropdown,
@@ -6,7 +7,7 @@ import {
   DropdownItem,
   Button,
 } from '@nextui-org/react';
-import { ChevronDownIcon } from './ChevronDownIcon';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 interface DropdownProps {
   onSelect: (value: string) => void;
@@ -25,7 +26,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({ onSelect }) => {
       <DropdownTrigger>
         <Button radius="full" variant="light">
           {selectedValue || 'USER'}
-          <ChevronDownIcon />
+          <ChevronDownIcon className=" h-3 w-3" />
         </Button>
       </DropdownTrigger>
       <DropdownMenu>

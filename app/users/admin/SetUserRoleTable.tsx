@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import DropdownComponent from '@/app/components/Dropdown';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 import {
@@ -12,21 +11,17 @@ import {
   TableCell,
   Input,
   Button,
-  User,
   Pagination,
   SortDescriptor,
-  Tooltip,
 } from '@nextui-org/react';
-import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { columns, users } from '../../components/data';
+import { PlusIcon } from '@heroicons/react/24/outline';
+import { user, columns, renderCell } from './columns';
 
-type User = (typeof users)[0];
-
-export default function Page() {
+export default function SetUserRoleTable({ users }: { users: user[] }) {
   const [filterValue, setFilterValue] = React.useState('');
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: 'age',
+    column: 'id',
     direction: 'ascending',
   });
   const [page, setPage] = React.useState(1);
@@ -47,7 +42,7 @@ export default function Page() {
     }
 
     return filteredUsers;
-  }, [hasSearchFilter, filterValue]);
+  }, [users, hasSearchFilter, filterValue]);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
@@ -57,48 +52,24 @@ export default function Page() {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: User, b: User) => {
-      const first = a[sortDescriptor.column as keyof User] as number;
-      const second = b[sortDescriptor.column as keyof User] as number;
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
+    return [...items].sort((a: user, b: user) => {
+      const first = a[sortDescriptor.column as keyof user];
+      const second = b[sortDescriptor.column as keyof user];
+
+      let cmp = 0;
+
+      if (sortDescriptor.column === 'id') {
+        cmp = Number(first) - Number(second);
+      } else {
+        cmp =
+          typeof first === 'number' && typeof second === 'number'
+            ? first - second
+            : String(first).localeCompare(String(second));
+      }
 
       return sortDescriptor.direction === 'descending' ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
-
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
-
-    switch (columnKey) {
-      case 'name':
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-          </div>
-        );
-      case 'role':
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-          </div>
-        );
-      case 'set role':
-        return (
-          <div className="relative flex items-center">
-            <DropdownComponent
-              onSelect={(value) => console.log(value)}
-            ></DropdownComponent>
-            <Tooltip color="danger" content="Delete user">
-              <span className="cursor-pointer text-sm text-danger active:opacity-50">
-                <TrashIcon className=" h-5 w-5" />
-              </span>
-            </Tooltip>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
 
   const onRowsPerPageChange = React.useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -118,25 +89,43 @@ export default function Page() {
   }, []);
 
   const topContent = React.useMemo(() => {
+    // Filtered users based on the search input
+    const filteredUsers = users.filter((user) => {
+      const searchValue = filterValue.toLowerCase();
+      return (
+        user.id.toString().includes(searchValue) ||
+        user.name.toLowerCase().includes(searchValue) ||
+        user.role.toLowerCase().includes(searchValue) ||
+        user.email.toLowerCase().includes(searchValue)
+      );
+    });
+
+    // Determine the count to display
+    const displayedUserCount = filterValue
+      ? filteredUsers.length
+      : users.length;
+
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1">
         <div className="flex items-end justify-between gap-3">
-          <Input
-            isClearable
-            classNames={{
-              input: 'border-none',
-              base: 'w-full sm:max-w-[56%]',
-            }}
-            placeholder="Search..."
-            size="sm"
-            startContent={
-              <MagnifyingGlassIcon className=" h-5 w-5 text-default-400" />
-            }
-            value={filterValue}
-            onClear={() => setFilterValue('')}
-            onValueChange={onSearchChange}
-          />
-          <div className="flex gap-3">
+          <div className="flex w-full items-center gap-2 sm:max-w-[75%]">
+            <Input
+              isClearable
+              classNames={{
+                input: 'border-none',
+                base: 'w-full',
+              }}
+              placeholder="Search by ID, Name, Role, or Email..."
+              size="sm"
+              startContent={
+                <MagnifyingGlassIcon className=" h-5 w-5 text-default-400" />
+              }
+              value={filterValue}
+              onClear={() => setFilterValue('')}
+              onValueChange={onSearchChange}
+            />
+          </div>
+          <div className="flex gap-1">
             <Button
               className="bg-foreground text-background"
               endContent={<PlusIcon className="h-5 w-5 text-white" />}
@@ -147,24 +136,26 @@ export default function Page() {
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-small text-default-400">
-            Total {users.length} users
+          <span className="text-tiny text-default-400">
+            Total {displayedUserCount} users
           </span>
-          <label className="flex items-center text-small text-default-400">
+          <label className="flex items-center text-tiny text-default-400">
             Rows per page:
             <select
-              className="bg-transparent text-small text-default-400 outline-none"
+              className=" border-none bg-transparent text-tiny text-default-400 outline-none"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
               <option value="10">10</option>
               <option value="15">15</option>
+              <option value="35">35</option>
+              <option value="45">45</option>
             </select>
           </label>
         </div>
       </div>
     );
-  }, [filterValue, onRowsPerPageChange, onSearchChange]);
+  }, [filterValue, onRowsPerPageChange, onSearchChange, users]);
 
   return (
     <Table
@@ -193,11 +184,16 @@ export default function Page() {
     >
       <TableHeader columns={columns}>
         {(column) => (
-          <TableColumn allowsSorting={column.sortable} key={column.uid}>
+          <TableColumn
+            allowsSorting={column.sortable}
+            key={column.uid}
+            className="cursor-pointer hover:bg-gray-200"
+          >
             {column.name}
           </TableColumn>
         )}
       </TableHeader>
+
       <TableBody emptyContent={'No users found'} items={sortedItems}>
         {(item) => (
           <TableRow key={item.id}>

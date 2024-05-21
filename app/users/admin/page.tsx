@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
-import SideNav from '@/app/components/SideNav'; // adjust the import path as per your project structure
+import SideNav from '@/app/components/SideNav';
+
+import { createClient } from '@/app/utils/supabase/server';
 
 import SetUserRoleTable from '@/app/users/admin/SetUserRoleTable';
-import { User } from '../columns';
+import { user } from './columns';
 
 export const metadata: Metadata = {
   title: 'Admin',
@@ -25,9 +27,9 @@ const assignTaskBtns: Button[] = [
   //   },
 ];
 
-async function getUsers(): Promise<User[]> {
+async function getUsers(): Promise<user[]> {
   const res = await fetch(
-    'https://64a6f5fc096b3f0fcc80e3fa.mockapi.io/api/users',
+    'https://664b9c7d35bbda10987d91c7.mockapi.io/sampler',
   );
   const data = await res.json();
   return data;
@@ -51,10 +53,8 @@ export default async function Page() {
       {/* Content area with scrolling */}
       <div className="flex-grow px-4 sm:px-6 lg:px-8">
         {/* Flex item with horizontal padding */}
-        <div className="h-full w-full">
-          {/* Container covering the entire space */}
-          <SetUserRoleTable />
-        </div>
+        {/* Container covering the entire space */}
+        <SetUserRoleTable users={users} />
       </div>
     </div>
   );
