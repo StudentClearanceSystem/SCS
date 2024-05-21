@@ -1,11 +1,22 @@
-import NextAuth from 'next-auth';
-import { authConfig } from './auth.config';
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default NextAuth(authConfig).auth;
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.rewrite(new URL('/users', req.url));
+  const supabase = createMiddlewareClient({ req, res });
 
-export { auth as middleware } from "@/auth"
+  const {
+    data: { session },
+    error,
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    return NextResponse.rewrite(new URL('/login', req.url));
+  }
+
+  return res;
+}
 
 export const config = {
-  // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|/assets|).*)'],
 };

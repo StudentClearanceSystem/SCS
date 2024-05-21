@@ -25,14 +25,6 @@ const assignTaskBtns: Button[] = [
   //   },
 ];
 
-// async function getUsers(): Promise<user[]> {
-//   const res = await fetch(
-//     'https://664b9c7d35bbda10987d91c7.mockapi.io/sampler',
-//   );
-//   const data = await res.json();
-//   return data;
-// }
-
 export default async function Page() {
   const users = await getUser();
 

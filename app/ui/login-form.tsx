@@ -1,15 +1,13 @@
-'use client';
 import React from 'react';
-import { Button } from './button';
-import { useFormState, useFormStatus } from 'react-dom';
-import { authenticate } from '@/app/lib/actions';
 import classes from '@/app/login/Login.module.css';
 
 export default function LoginForm() {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-
   return (
-    <form action={dispatch} className="flex flex-col justify-center">
+    <form
+      action="/auth/login"
+      method="post"
+      className="flex flex-col justify-center"
+    >
       <div className={classes.input}>
         <div className={classes.emailInput}>
           <label htmlFor="email" className={classes.email}>
@@ -38,32 +36,12 @@ export default function LoginForm() {
           />
         </div>
       </div>
-      <div>{errorMessage && <p>{errorMessage}</p>}</div>
-
-      <LoginButton />
+      <div></div>
+      <button className={classes.buttonLogin}>
+        <div className={classes.loginWrapper}>
+          <div className={classes.lOGIN}>LOGIN</div>
+        </div>
+      </button>
     </form>
-  );
-}
-
-function LoginButton() {
-  const { pending } = useFormStatus();
-
-  const handleClick = (event: { preventDefault: () => void }) => {
-    if (pending) {
-      event.preventDefault();
-    }
-  };
-
-  return (
-    <Button
-      type="submit"
-      className={classes.buttonLogin}
-      aria-disabled={pending}
-      onClick={handleClick}
-    >
-      <div className={classes.loginWrapper}>
-        <div className={classes.lOGIN}>LOGIN</div>
-      </div>
-    </Button>
   );
 }

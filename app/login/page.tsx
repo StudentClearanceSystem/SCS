@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Login',
 };
 
-export default function LoginPage() {
+export default function Login() {
   return (
     <div className={classes.root}>
       <div className={classes.mainContainer}>
