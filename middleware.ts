@@ -11,12 +11,14 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    return NextResponse.rewrite(new URL('/login', req.url));
+    return NextResponse.rewrite(new URL('/', req.url));
   }
 
   return res;
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|assets|auth|.*\\.png$|favicon\\.ico$).*)',
+  ],
 };

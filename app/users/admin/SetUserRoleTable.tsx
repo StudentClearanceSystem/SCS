@@ -14,8 +14,8 @@ import {
   Pagination,
   SortDescriptor,
 } from '@nextui-org/react';
-import { PlusIcon } from '@heroicons/react/24/outline';
 import { user, columns, renderCell } from './columns';
+import { AddNewUser } from './buttons';
 
 export default function SetUserRoleTable({ users }: { users: user[] }) {
   const [filterValue, setFilterValue] = React.useState('');
@@ -126,23 +126,17 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
             />
           </div>
           <div className="flex gap-1">
-            <Button
-              className="bg-primary text-background"
-              endContent={<PlusIcon className="h-5 w-5 text-white" />}
-              size="sm"
-            >
-              Add New
-            </Button>
+            <AddNewUser />
           </div>
         </div>
         <div className="flex items-center gap-4 ">
           <span className="text-tiny text-default-400">
             Total {displayedUserCount} users
           </span>
-          <label className="flex items-center text-tiny text-default-400">
+          <label className="flex items-center space-x-0.5 text-tiny text-default-400">
             Rows per page:
             <select
-              className=" border-none bg-transparent text-tiny text-default-400 outline-none"
+              className=" border-none bg-transparent pr-6 text-xs text-default-400 outline-none"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -162,7 +156,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
       onSortChange={setSortDescriptor}
       sortDescriptor={sortDescriptor}
       isHeaderSticky
-      className="pb-8"
+      className="pb-8 "
       isStriped
       aria-label="Users table"
       bottomContent={

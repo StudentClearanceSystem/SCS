@@ -18,11 +18,16 @@ const assignTaskBtns: Button[] = [
     label: 'Role Setter',
     href: '/users/admin', // Provide the href for the Link component
   },
-  //   // If want to add another button
-  //   {
-  //     label: 'Assign Task 2',
-  //     href: '/users', // Provide the href for the Link component
-  //   },
+  // If want to add another button
+  {
+    label: 'cashier',
+    href: '/users/cashier', // Provide the href for the Link component
+  },
+  // If want to add another button
+  {
+    label: 'Assign Task 2',
+    href: '/users', // Provide the href for the Link component
+  },
 ];
 
 export default async function Page() {

@@ -6,9 +6,10 @@ export async function POST(req: NextRequest) {
   const url = new URL(req.url);
   const cookieStore = cookies();
 
+  // Ensure formData is correctly parsed
   const formData = await req.formData();
-  const email = String(formData.get('email'));
-  const password = String(formData.get('password'));
+  const email = formData.get('email')?.toString() ?? '';
+  const password = formData.get('password')?.toString() ?? '';
 
   console.log(email, password);
 
@@ -22,7 +23,6 @@ export async function POST(req: NextRequest) {
   });
 
   if (data) console.log(data);
-
   if (error) console.log(error);
 
   return NextResponse.redirect(url.origin, {

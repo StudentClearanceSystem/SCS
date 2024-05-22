@@ -5,7 +5,7 @@ export default function LoginForm() {
   return (
     <form
       action="/auth/login"
-      method="post"
+      method="POST"
       className="flex flex-col justify-center"
     >
       <div className={classes.input}>
@@ -16,8 +16,10 @@ export default function LoginForm() {
           <input
             type="email"
             name="email"
+            id="email"
             placeholder="you@sjdelmonte.sti.edu.ph"
             required
+            autoComplete="off"
             className={classes.inputField}
           />
         </div>
@@ -29,6 +31,7 @@ export default function LoginForm() {
           <input
             type="password"
             name="password"
+            id="password"
             placeholder="Enter 6 characters or more"
             required
             minLength={6}
@@ -37,7 +40,7 @@ export default function LoginForm() {
         </div>
       </div>
       <div></div>
-      <button className={classes.buttonLogin}>
+      <button className={classes.buttonLogin} type="submit">
         <div className={classes.loginWrapper}>
           <div className={classes.lOGIN}>LOGIN</div>
         </div>
