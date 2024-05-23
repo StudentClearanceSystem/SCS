@@ -52,7 +52,7 @@ const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
       </div>
 
       {isOpen && !disabled && (
-        <div className="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute right-0 z-30 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:w-56">
           <div className="py-1">
             <input
               type="text"

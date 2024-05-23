@@ -12,7 +12,7 @@ export const columns = [
   { name: 'NAME', uid: 'name', sortable: true },
   { name: 'PROGRAM', uid: 'program', sortable: true },
   { name: 'YEAR', uid: 'year', sortable: true },
-  { name: 'ACTION', uid: 'action', sortable: false },
+  { name: 'ACTION', uid: 'CashierIsCleared', sortable: false },
 ];
 
 export const renderCell = (users: user, columnKey: React.Key) => {
@@ -43,7 +43,7 @@ export const renderCell = (users: user, columnKey: React.Key) => {
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
-    case 'action':
+    case 'CashierIsCleared':
       return <ActionCell />;
     default:
       return cellValue;

@@ -16,11 +16,11 @@ import {
 } from '@nextui-org/react';
 import { user, columns, renderCell } from './columns';
 
-export default function SetUserRoleTable({ users }: { users: user[] }) {
+export default function SetCashierTable({ users }: { users: user[] }) {
   const [filterValue, setFilterValue] = React.useState('');
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: 'id',
+    column: 'studentNo',
     direction: 'ascending',
   });
   const [page, setPage] = React.useState(1);
@@ -114,7 +114,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
                 input: 'border-none',
                 base: 'w-full',
               }}
-              placeholder="Search by ID, Name, Role, or Email..."
+              placeholder="Search..."
               size="sm"
               startContent={
                 <MagnifyingGlassIcon className=" h-5 w-5 text-default-400" />
@@ -155,7 +155,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
       isHeaderSticky
       className="pb-8 "
       isStriped
-      aria-label="Users table"
+      aria-label="Students table"
       bottomContent={
         <div className="flex w-full justify-center">
           <Pagination

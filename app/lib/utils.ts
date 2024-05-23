@@ -10,7 +10,26 @@ export const getUser = async () => {
     console.error(error);
     return []; // Return an empty array in case of error
   }
+  console.error(data);
+
   return data; // Return the fetched data
+};
+
+export const getStudentsTable = async () => {
+  try {
+    const { data, error } = await supabase.from('StudentsTable').select('*');
+
+    if (error) {
+      console.error('Error fetching data:', error);
+      return []; // Return an empty array in case of error
+    }
+
+    console.log('Fetched data:', data); // Log fetched data
+    return data; // Return the fetched data
+  } catch (err) {
+    console.error('Unexpected error:', err);
+    return []; // Return an empty array in case of unexpected error
+  }
 };
 
 const deleteUser = async (userId: any) => {
