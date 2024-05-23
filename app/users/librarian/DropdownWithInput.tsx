@@ -3,12 +3,12 @@ import { Button } from '@nextui-org/react';
 import { useState, useEffect, useRef } from 'react';
 
 const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
+  // Set the background color variable
+  const bgColor = '#C7E484';
+
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Set the background color variable
-  const bgColor = '#6CCEE8';
 
   const handleToggle = () => {
     if (!disabled) {

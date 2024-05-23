@@ -4,6 +4,8 @@ export const metadata: Metadata = {
   title: 'Librarian',
 };
 
+import { getStudentsTable } from '@/app/lib/utils';
+import TableGuidance from './TableGuidance';
 import SideNav from '@/app/components/SideNav';
 
 interface Button {
@@ -13,18 +15,31 @@ interface Button {
 
 // const assignTaskBtns: Button[] = [];
 
-export default function Page() {
+export default async function Page() {
+  const students = await getStudentsTable();
+
   return (
-    <div className="flex h-screen" style={{ backgroundColor: '#B3BF97' }}>
+    <main
+      className="no-scrollbar flex min-h-screen flex-col"
+      style={{ backgroundColor: '#B3BF97' }}
+    >
       <SideNav title={'LIBRARIAN'} assignTaskBtns={[]} />
       <div className="flex-grow p-8">
         <header>
-          <h3 className="font-arimo ml-16 text-2xl">Student Progress</h3>
-          <h1 className="font-arimo ml-16 text-4xl font-bold">
+          <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>
+          <h1 className="ml-16 font-arimo text-4xl font-bold">
             Librarian Dashboard
           </h1>
         </header>
       </div>
-    </div>
+      {/* table div to copy */}
+      {/* Content area with scrolling */}
+      <div className=" flex-grow px-4 sm:px-6 lg:px-8">
+        {/* Flex item with horizontal padding */}
+        {/* Container covering the entire space */}
+        <TableGuidance students={students} />
+      </div>
+      {/* table div to copy */}
+    </main>
   );
 }
