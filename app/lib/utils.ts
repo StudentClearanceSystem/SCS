@@ -15,7 +15,7 @@ export const getUser = async () => {
 
 export const getStudentsTable = async () => {
   try {
-    const { data, error } = await supabase.from('StudentsTable').select('*');
+    const { data, error } = await supabase.from('tablestudents').select('*');
 
     if (error) {
       console.error('Error fetching data:', error);
@@ -29,6 +29,7 @@ export const getStudentsTable = async () => {
     return []; // Return an empty array in case of unexpected error
   }
 };
+getStudentsTable();
 
 const deleteUser = async (userId: any) => {
   const { data, error } = await supabase

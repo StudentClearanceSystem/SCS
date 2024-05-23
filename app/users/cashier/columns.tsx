@@ -1,22 +1,22 @@
 import ActionCell from './ActionCell'; // Adjust the import path as needed
 
-export type user = {
-  studentNo: string;
+export type student = {
+  studentno: string;
   name: string;
   program: string;
   year: string;
 };
 
 export const columns = [
-  { name: 'STUDENT NO.', uid: 'studentNo', sortable: true },
+  { name: 'STUDENT NO.', uid: 'studentno', sortable: true },
   { name: 'NAME', uid: 'name', sortable: true },
   { name: 'PROGRAM', uid: 'program', sortable: true },
   { name: 'YEAR', uid: 'year', sortable: true },
   { name: 'ACTION', uid: 'CashierIsCleared', sortable: false },
 ];
 
-export const renderCell = (users: user, columnKey: React.Key) => {
-  const cellValue = users[columnKey as keyof user];
+export const renderCell = (students: student, columnKey: React.Key) => {
+  const cellValue = students[columnKey as keyof student];
 
   switch (columnKey) {
     case 'studentNo':

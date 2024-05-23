@@ -10,38 +10,37 @@ import {
   TableRow,
   TableCell,
   Input,
-  Button,
   Pagination,
   SortDescriptor,
 } from '@nextui-org/react';
-import { user, columns, renderCell } from './columns';
+import { student, columns, renderCell } from './columns';
 
-export default function SetCashierTable({ users }: { users: user[] }) {
+export default function SetCashierTable({ students }: { students: student[] }) {
   const [filterValue, setFilterValue] = React.useState('');
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: 'studentNo',
+    column: 'studentno',
     direction: 'ascending',
   });
   const [page, setPage] = React.useState(1);
 
-  const pages = Math.ceil(users.length / rowsPerPage);
+  const pages = Math.ceil(students.length / rowsPerPage);
 
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...users];
+    let filteredUsers = [...students];
 
     if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Object.values(user).some((value) =>
+      filteredUsers = filteredUsers.filter((student) =>
+        Object.values(student).some((value) =>
           String(value).toLowerCase().includes(filterValue.toLowerCase()),
         ),
       );
     }
 
     return filteredUsers;
-  }, [users, hasSearchFilter, filterValue]);
+  }, [students, hasSearchFilter, filterValue]);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
@@ -51,9 +50,9 @@ export default function SetCashierTable({ users }: { users: user[] }) {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: user, b: user) => {
-      const first = a[sortDescriptor.column as keyof user];
-      const second = b[sortDescriptor.column as keyof user];
+    return [...items].sort((a: student, b: student) => {
+      const first = a[sortDescriptor.column as keyof student];
+      const second = b[sortDescriptor.column as keyof student];
 
       let cmp = 0;
 
@@ -88,21 +87,21 @@ export default function SetCashierTable({ users }: { users: user[] }) {
   }, []);
 
   const topContent = React.useMemo(() => {
-    // Filtered users based on the search input
-    const filteredUsers = users.filter((user) => {
+    // Filtered students based on the search input
+    const filteredUsers = students.filter((student) => {
       // const searchValue = filterValue.toLowerCase();
       // return (
-      //   user.studentNo.toString().includes(searchValue) ||
-      //   user.name.toLowerCase().includes(searchValue) ||
-      //   user.program.toLowerCase().includes(searchValue) ||
-      //   user.year.toLowerCase().includes(searchValue)
+      //   student.studentNo.toString().includes(searchValue) ||
+      //   student.name.toLowerCase().includes(searchValue) ||
+      //   student.program.toLowerCase().includes(searchValue) ||
+      //   student.year.toLowerCase().includes(searchValue)
       // );
     });
 
     // Determine the count to display
     const displayedUserCount = filterValue
       ? filteredUsers.length
-      : users.length;
+      : students.length;
 
     return (
       <div className="flex flex-col gap-1">
@@ -128,7 +127,7 @@ export default function SetCashierTable({ users }: { users: user[] }) {
         </div>
         <div className="flex items-center gap-4 ">
           <span className="text-tiny text-default-400">
-            Total {displayedUserCount} users
+            Total {displayedUserCount} students
           </span>
           <label className="flex items-center space-x-0.5 text-tiny text-default-400">
             Rows per page:
@@ -146,7 +145,7 @@ export default function SetCashierTable({ users }: { users: user[] }) {
         </div>
       </div>
     );
-  }, [filterValue, onRowsPerPageChange, onSearchChange, users]);
+  }, [filterValue, onRowsPerPageChange, onSearchChange, students]);
 
   return (
     <Table
@@ -185,9 +184,9 @@ export default function SetCashierTable({ users }: { users: user[] }) {
         )}
       </TableHeader>
 
-      <TableBody emptyContent={'No users found'} items={sortedItems}>
+      <TableBody emptyContent={'No students found'} items={sortedItems}>
         {(item) => (
-          <TableRow key={item.studentNo}>
+          <TableRow key={item.studentno}>
             {(columnKey) => (
               <TableCell className=" border-1 text-center">
                 {renderCell(item, columnKey)}

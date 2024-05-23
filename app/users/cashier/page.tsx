@@ -1,8 +1,8 @@
 import SideNav from '@/app/components/SideNav';
 
 import { Metadata } from 'next';
-import CashierTable from './TableCashier';
-import { getUser } from '@/app/lib/utils';
+import TableCashier from './TableCashier';
+import { getStudentsTable } from '@/app/lib/utils';
 export const metadata: Metadata = {
   title: 'Cashier',
 };
@@ -25,7 +25,7 @@ const assignTaskBtns: Button[] = [
 ];
 
 export default async function Page() {
-  const users = await getUser();
+  const students = await getStudentsTable();
 
   return (
     <main
@@ -45,7 +45,7 @@ export default async function Page() {
       <div className=" flex-grow px-4 sm:px-6 lg:px-8">
         {/* Flex item with horizontal padding */}
         {/* Container covering the entire space */}
-        <CashierTable users={users} />
+        <TableCashier students={students} />
       </div>
     </main>
   );
