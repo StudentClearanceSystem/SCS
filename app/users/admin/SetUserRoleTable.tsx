@@ -115,7 +115,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
                 input: 'border-none',
                 base: 'w-full',
               }}
-              placeholder="Search by ID, Name, Role, or Email..."
+              placeholder="Search..."
               size="sm"
               startContent={
                 <MagnifyingGlassIcon className=" h-5 w-5 text-default-400" />
