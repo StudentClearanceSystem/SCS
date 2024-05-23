@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import SideNav from '@/app/components/SideNav';
 
-import SetUserRoleTable from '@/app/users/admin/SetUserRoleTable';
+import SetUserRoleTable from '@/app/users/admin/TableSetUserRole';
 import { getUser } from '@/app/lib/utils';
 
 export const metadata: Metadata = {
