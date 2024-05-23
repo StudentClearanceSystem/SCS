@@ -90,13 +90,13 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
   const topContent = React.useMemo(() => {
     // Filtered users based on the search input
     const filteredUsers = users.filter((user) => {
-      const searchValue = filterValue.toLowerCase();
-      return (
-        user.id.toString().includes(searchValue) ||
-        user.name.toLowerCase().includes(searchValue) ||
-        user.role.toLowerCase().includes(searchValue) ||
-        user.email.toLowerCase().includes(searchValue)
-      );
+      // const searchValue = filterValue.toLowerCase();
+      // return (
+      //   user.studentNo.toString().includes(searchValue) ||
+      //   user.name.toLowerCase().includes(searchValue) ||
+      //   user.program.toLowerCase().includes(searchValue) ||
+      //   user.year.toLowerCase().includes(searchValue)
+      // );
     });
 
     // Determine the count to display
@@ -178,7 +178,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
           <TableColumn
             allowsSorting={column.sortable}
             key={column.uid}
-            className="cursor-pointer hover:bg-gray-200"
+            className=" cursor-pointer justify-center text-center hover:bg-gray-200"
           >
             {column.name}
           </TableColumn>
@@ -187,9 +187,11 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
 
       <TableBody emptyContent={'No users found'} items={sortedItems}>
         {(item) => (
-          <TableRow key={item.id}>
+          <TableRow key={item.studentNo}>
             {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
+              <TableCell className=" border-1 text-center">
+                {renderCell(item, columnKey)}
+              </TableCell>
             )}
           </TableRow>
         )}

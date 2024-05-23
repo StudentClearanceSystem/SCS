@@ -181,7 +181,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
           <TableColumn
             allowsSorting={column.sortable}
             key={column.uid}
-            className="cursor-pointer hover:bg-gray-200"
+            className=" cursor-pointer text-center hover:bg-gray-200"
           >
             {column.name}
           </TableColumn>
@@ -192,7 +192,9 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
+              <TableCell className=" cursor-pointer border-1 text-center ">
+                {renderCell(item, columnKey)}
+              </TableCell>
             )}
           </TableRow>
         )}

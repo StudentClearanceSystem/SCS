@@ -35,10 +35,8 @@ export const renderCell = (users: user, columnKey: React.Key) => {
       );
     case 'set role':
       return (
-        <div className="relative flex items-center">
-          <DropdownComponent
-            onSelect={(value) => console.log(value)}
-          ></DropdownComponent>
+        <div className=" flex items-center justify-center ">
+          <DropdownComponent onSelect={(value) => console.log(value)} />
           <Tooltip color="danger" content="Delete user">
             <span className="cursor-pointer text-sm text-danger active:opacity-50">
               <TrashIcon className=" h-5 w-5" />

@@ -22,7 +22,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({ onSelect }) => {
   };
 
   return (
-    <Dropdown className="border-1 border-default-200 bg-background">
+    <Dropdown className="flex justify-center border-1 border-default-200 bg-background">
       <DropdownTrigger>
         <Button radius="full" variant="light">
           {selectedValue || 'USER'}
