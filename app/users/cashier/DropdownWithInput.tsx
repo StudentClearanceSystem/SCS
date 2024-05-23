@@ -12,7 +12,8 @@ const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Changed event type to React.ChangeEvent<HTMLTextAreaElement>
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -39,38 +40,41 @@ const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
 
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
-      <div className="flex justify-end p-2">
+      <div className="flex justify-center p-2">
         <button
           type="button"
           onClick={handleToggle}
-          className={`flex items-center justify-center text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none ${
+          className={`flex items-center justify-center text-black shadow-sm hover:bg-gray-50 focus:outline-none ${
             disabled ? 'cursor-not-allowed opacity-50' : ''
           }`}
         >
-          <ChevronDownIcon className="h-5 w-5" />
+          <ChevronDownIcon className="h-3 w-3" />
         </button>
       </div>
 
       {isOpen && !disabled && (
-        <div className="absolute right-0 z-30 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:w-56">
-          <div className="py-1">
-            <input
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-              className="block w-full border-0 px-4 py-2 text-sm text-gray-700 focus:ring-0"
-              placeholder="Remarks..."
-              disabled={disabled}
-            />
-            <button
-              type="button"
-              className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-              onClick={() => alert(`You typed: ${inputValue}`)}
-              disabled={disabled}
-            >
-              Submit
-            </button>
+        <div className="relative">
+          <div className="absolute right-0 z-30 mt-2 w-40 origin-top-right rounded-md bg-[#6CCEE8] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:w-56">
+            <div className="py-1">
+              <textarea
+                value={inputValue}
+                onChange={handleInputChange}
+                className="block w-full border-0 bg-[#6CCEE8] px-4 py-2 text-sm text-black focus:ring-0"
+                placeholder="Remarks..."
+                disabled={disabled}
+                rows={4} // Set the number of rows to control the height of the textarea
+              />
+              <button
+                type="button"
+                className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-[#4b90a3]"
+                onClick={() => alert(`You typed: ${inputValue}`)}
+                disabled={disabled}
+              >
+                Submit
+              </button>
+            </div>
           </div>
+          <div className="absolute right-1.5 h-2 border-b-8 border-l-8 border-r-8 border-transparent border-b-[#6CCEE8]"></div>
         </div>
       )}
     </div>

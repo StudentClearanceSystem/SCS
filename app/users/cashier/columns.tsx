@@ -44,7 +44,11 @@ export const renderCell = (users: user, columnKey: React.Key) => {
         </div>
       );
     case 'CashierIsCleared':
-      return <ActionCell />;
+      return (
+        <div className="flex justify-center">
+          <ActionCell />
+        </div>
+      );
     default:
       return cellValue;
   }
