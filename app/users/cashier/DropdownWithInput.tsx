@@ -27,6 +27,11 @@ const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
     }
   };
 
+  const handleSubmit = () => {
+    alert(`You typed: ${inputValue}`);
+    setIsOpen(false); // Close the dropdown
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
@@ -70,7 +75,7 @@ const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
                   size="sm"
                   type="button"
                   className=" text-left text-sm text-gray-700 hover:bg-[#4b90a3]"
-                  onClick={() => alert(`You typed: ${inputValue}`)}
+                  onClick={handleSubmit}
                   disabled={disabled}
                 >
                   Submit
