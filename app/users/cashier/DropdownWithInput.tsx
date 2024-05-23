@@ -63,19 +63,22 @@ const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
                 className="block w-full border-0 bg-[#6CCEE8] px-4 py-2 text-sm text-black focus:ring-0"
                 placeholder="Remarks..."
                 disabled={disabled}
-                rows={4} // Set the number of rows to control the height of the textarea
+                rows={3} // Set the number of rows to control the height of the textarea
               />
-              <Button
-                type="button"
-                className=" flex justify-self-start px-4 py-2 text-left text-sm text-gray-700 hover:bg-[#4b90a3]"
-                onClick={() => alert(`You typed: ${inputValue}`)}
-                disabled={disabled}
-              >
-                Submit
-              </Button>
+              <div className="mt-2 flex justify-center">
+                <Button
+                  size="sm"
+                  type="button"
+                  className=" text-left text-sm text-gray-700 hover:bg-[#4b90a3]"
+                  onClick={() => alert(`You typed: ${inputValue}`)}
+                  disabled={disabled}
+                >
+                  Submit
+                </Button>
+              </div>
             </div>
           </div>
-          <div className=" absolute right-1.5 z-40 h-2 border-b-8 border-l-8 border-r-8 border-transparent border-b-[#6CCEE8]"></div>
+          <div className="absolute right-1.5 z-40 h-2 border-b-8 border-l-8 border-r-8 border-transparent border-b-[#6CCEE8]"></div>
         </div>
       )}
     </div>
