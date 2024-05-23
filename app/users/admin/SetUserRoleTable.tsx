@@ -191,7 +191,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => (
-              <TableCell className=" cursor-pointer border-1 text-center ">
+              <TableCell className=" border-1 text-center ">
                 {renderCell(item, columnKey)}
               </TableCell>
             )}
