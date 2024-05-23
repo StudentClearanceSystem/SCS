@@ -10,8 +10,6 @@ export const getUser = async () => {
     console.error(error);
     return []; // Return an empty array in case of error
   }
-  console.error(data);
-
   return data; // Return the fetched data
 };
 

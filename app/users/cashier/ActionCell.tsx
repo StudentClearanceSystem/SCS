@@ -15,7 +15,7 @@ const ActionCell = () => {
 
   return (
     <div
-      className={`flex min-w-[300px] max-w-[350px] justify-center ${getBackgroundColor()}`}
+      className={`flex min-w-[300px] max-w-[350px] items-center justify-center ${getBackgroundColor()}`}
     >
       <RadioGroup
         value={selectedValue}

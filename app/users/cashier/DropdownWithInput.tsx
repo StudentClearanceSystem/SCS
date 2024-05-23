@@ -74,7 +74,7 @@ const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
               </button>
             </div>
           </div>
-          <div className="absolute right-1.5 h-2 border-b-8 border-l-8 border-r-8 border-transparent border-b-[#6CCEE8]"></div>
+          <div className=" absolute right-1.5 z-40 h-2 border-b-8 border-l-8 border-r-8 border-transparent border-b-[#6CCEE8]"></div>
         </div>
       )}
     </div>
