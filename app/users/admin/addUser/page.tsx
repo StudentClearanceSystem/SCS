@@ -1,5 +1,6 @@
 'use client';
 import { Button, Input } from '@nextui-org/react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function AddUserPage() {
@@ -28,8 +29,9 @@ export default function AddUserPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission (e.g., send data to backend)
-    console.log('Form submitted:', formData);
+    // Output all input values
+    const output = `ID: ${formData.id}\nName: ${formData.name}\nEmail: ${formData.email}\nPassword: ${formData.password}\nRole: ${formData.role}`;
+    alert(output);
     // Reset form fields after submission
     setFormData({
       id: '',
@@ -75,6 +77,7 @@ export default function AddUserPage() {
             style={inputStyle} // Apply inputStyle here
           />
           <Input
+            placeholder="you@sjdelmonte.sti.edu.ph"
             labelPlacement="outside"
             type="email"
             label="Email"
@@ -86,6 +89,7 @@ export default function AddUserPage() {
           />
 
           <Input
+            minLength={6}
             labelPlacement="outside"
             type="password"
             label="Password"
@@ -112,13 +116,15 @@ export default function AddUserPage() {
             >
               Add
             </Button>
-            <Button
-              type="button"
-              className="btn-secondary text-black"
-              onClick={handleCancel}
-            >
-              Cancel
-            </Button>
+            <Link href="/users/admin">
+              <Button
+                type="button"
+                className="btn-secondary text-black"
+                onClick={handleCancel}
+              >
+                Cancel
+              </Button>
+            </Link>
           </div>
         </form>
       </div>

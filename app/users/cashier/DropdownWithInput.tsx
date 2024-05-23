@@ -1,4 +1,5 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { Button } from '@nextui-org/react';
 import { useState, useEffect, useRef } from 'react';
 
 const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
@@ -64,14 +65,14 @@ const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
                 disabled={disabled}
                 rows={4} // Set the number of rows to control the height of the textarea
               />
-              <button
+              <Button
                 type="button"
-                className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-[#4b90a3]"
+                className=" flex justify-self-start px-4 py-2 text-left text-sm text-gray-700 hover:bg-[#4b90a3]"
                 onClick={() => alert(`You typed: ${inputValue}`)}
                 disabled={disabled}
               >
                 Submit
-              </button>
+              </Button>
             </div>
           </div>
           <div className=" absolute right-1.5 z-40 h-2 border-b-8 border-l-8 border-r-8 border-transparent border-b-[#6CCEE8]"></div>
