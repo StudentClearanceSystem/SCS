@@ -1,7 +1,7 @@
 import SideNav from '@/app/components/SideNav';
 
 import { Metadata } from 'next';
-import CashierTable from './CashierTable';
+import CashierTable from './TableCashier';
 import { getUser } from '@/app/lib/utils';
 export const metadata: Metadata = {
   title: 'Cashier',
