@@ -1,7 +1,6 @@
 'use client';
-import React from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-
 import {
   Table,
   TableHeader,
@@ -14,22 +13,46 @@ import {
   SortDescriptor,
 } from '@nextui-org/react';
 import { user, columns, renderCell } from './columns';
-import { AddNewUser } from './buttons';
+import { AddNewUser } from './components/buttons';
+import { deleteUser, updateUserRole } from '@/app/lib/utils';
 
-export default function SetUserRoleTable({ users }: { users: user[] }) {
-  const [filterValue, setFilterValue] = React.useState('');
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
+export default function SetUserRoleTable({
+  initialUsers = [],
+}: {
+  initialUsers: user[];
+}) {
+  const [users, setUsers] = useState<user[]>(initialUsers);
+  const [filterValue, setFilterValue] = useState('');
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: 'id',
     direction: 'ascending',
   });
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = useState(1);
 
   const pages = Math.ceil(users.length / rowsPerPage);
 
+  const handleDeleteUser = async (userId: string) => {
+    const success = await deleteUser(userId);
+    if (success) {
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+    }
+  };
+
+  const handleRoleChange = async (id: string, newRole: string) => {
+    console.log(`Updating user ${id} role to ${newRole}`);
+    const success = await updateUserRole(id, newRole);
+    if (success) {
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === id ? { ...user, role: newRole } : user,
+        ),
+      );
+    }
+  };
   const hasSearchFilter = Boolean(filterValue);
 
-  const filteredItems = React.useMemo(() => {
+  const filteredItems = useMemo(() => {
     let filteredUsers = [...users];
 
     if (hasSearchFilter) {
@@ -43,14 +66,14 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
     return filteredUsers;
   }, [users, hasSearchFilter, filterValue]);
 
-  const items = React.useMemo(() => {
+  const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
 
-  const sortedItems = React.useMemo(() => {
+  const sortedItems = useMemo(() => {
     return [...items].sort((a: user, b: user) => {
       const first = a[sortDescriptor.column as keyof user];
       const second = b[sortDescriptor.column as keyof user];
@@ -70,7 +93,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
     });
   }, [sortDescriptor, items]);
 
-  const onRowsPerPageChange = React.useCallback(
+  const onRowsPerPageChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
       setRowsPerPage(Number(e.target.value));
       setPage(1);
@@ -78,31 +101,13 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
     [],
   );
 
-  const onSearchChange = React.useCallback((value?: string) => {
-    if (value) {
-      setFilterValue(value);
-      setPage(1);
-    } else {
-      setFilterValue('');
-    }
+  const onSearchChange = useCallback((value?: string) => {
+    setFilterValue(value || ''); // Set filter value based on input
+    setPage(1);
   }, []);
 
-  const topContent = React.useMemo(() => {
-    // Filtered users based on the search input
-    const filteredUsers = users.filter((user) => {
-      const searchValue = filterValue.toLowerCase();
-      return (
-        user.id.toString().includes(searchValue) ||
-        user.name.toLowerCase().includes(searchValue) ||
-        user.role.toLowerCase().includes(searchValue) ||
-        user.email.toLowerCase().includes(searchValue)
-      );
-    });
-
-    // Determine the count to display
-    const displayedUserCount = filterValue
-      ? filteredUsers.length
-      : users.length;
+  const topContent = useMemo(() => {
+    const displayedUserCount = filteredItems.length; // Corrected to use filteredItems
 
     return (
       <div className="flex flex-col gap-1">
@@ -117,7 +122,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
               placeholder="Search..."
               size="sm"
               startContent={
-                <MagnifyingGlassIcon className=" h-5 w-5 text-default-400" />
+                <MagnifyingGlassIcon className="h-5 w-5 text-default-400" />
               }
               value={filterValue}
               onClear={() => setFilterValue('')}
@@ -128,14 +133,14 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
             <AddNewUser />
           </div>
         </div>
-        <div className="flex items-center gap-4 ">
+        <div className="flex items-center gap-4">
           <span className="text-tiny text-default-400">
             Total {displayedUserCount} users
           </span>
           <label className="flex items-center space-x-0.5 text-tiny text-default-400">
             Rows per page:
             <select
-              className=" border-none bg-transparent pr-6 text-xs text-default-400 outline-none"
+              className="border-none bg-transparent pr-6 text-xs text-default-400 outline-none"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -148,14 +153,13 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
         </div>
       </div>
     );
-  }, [filterValue, onRowsPerPageChange, onSearchChange, users]);
-
+  }, [filteredItems.length, filterValue, onRowsPerPageChange, onSearchChange]); // Corrected dependencies
   return (
     <Table
       onSortChange={setSortDescriptor}
       sortDescriptor={sortDescriptor}
       isHeaderSticky
-      className="pb-8 "
+      className="pb-8"
       isStriped
       aria-label="Users table"
       bottomContent={
@@ -180,7 +184,7 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
           <TableColumn
             allowsSorting={column.sortable}
             key={column.uid}
-            className=" cursor-pointer text-center hover:bg-gray-200"
+            className="cursor-pointer text-center hover:bg-gray-200"
           >
             {column.name}
           </TableColumn>
@@ -191,8 +195,8 @@ export default function SetUserRoleTable({ users }: { users: user[] }) {
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => (
-              <TableCell className=" border-1 text-center ">
-                {renderCell(item, columnKey)}
+              <TableCell className="border-1 text-center">
+                {renderCell(item, columnKey, handleDeleteUser)}
               </TableCell>
             )}
           </TableRow>
