@@ -18,7 +18,7 @@ export const getUser = async () => {
 
 export const getStudentsTable = async () => {
   try {
-    const { data, error } = await supabase.from('tablestudents').select();
+    const { data, error } = await supabase.from('table_students').select();
 
     if (error) {
       console.error('Error fetching data:', error);

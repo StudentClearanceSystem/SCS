@@ -19,7 +19,7 @@ export default function SetCashierTable({ students }: { students: student[] }) {
   const [filterValue, setFilterValue] = React.useState('');
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: 'studentno',
+    column: 'id',
     direction: 'ascending',
   });
   const [page, setPage] = React.useState(1);

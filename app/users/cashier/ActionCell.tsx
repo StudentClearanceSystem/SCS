@@ -3,13 +3,21 @@ import { RadioGroup, Radio } from '@nextui-org/radio';
 import DropdownWithInput from './DropdownWithInput';
 
 type ActionCellProps = {
-  cashieriscleared: boolean;
+  isCashierCleared: boolean;
   studentNo: string;
 };
 
-const ActionCell = ({ cashieriscleared, studentNo }: ActionCellProps) => {
+const ActionCell = ({
+  isCashierCleared,
+  studentNo,
+  cashierRemarks,
+}: {
+  isCashierCleared: boolean;
+  studentNo: string;
+  cashierRemarks: string;
+}) => {
   const [selectedValue, setSelectedValue] = useState(
-    cashieriscleared ? 'Cleared' : 'Uncleared',
+    isCashierCleared ? 'Cleared' : 'Uncleared',
   );
 
   const handleRadioChange = (value: string) => {
@@ -30,8 +38,8 @@ const ActionCell = ({ cashieriscleared, studentNo }: ActionCellProps) => {
   };
 
   useEffect(() => {
-    setSelectedValue(cashieriscleared ? 'Cleared' : 'Uncleared');
-  }, [cashieriscleared]);
+    setSelectedValue(isCashierCleared ? 'Cleared' : 'Uncleared');
+  }, [isCashierCleared]);
 
   return (
     <div
@@ -49,7 +57,10 @@ const ActionCell = ({ cashieriscleared, studentNo }: ActionCellProps) => {
           Uncleared
         </Radio>
       </RadioGroup>
-      <DropdownWithInput disabled={selectedValue === 'Cleared'} />
+      <DropdownWithInput
+        disabled={selectedValue === 'Cleared'}
+        remarks={cashierRemarks} // Pass the cashierRemarks value
+      />
     </div>
   );
 };
