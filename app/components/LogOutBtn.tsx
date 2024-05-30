@@ -10,7 +10,7 @@ export default function LogOutBtn() {
     });
 
     if (response.ok) {
-      router.push('/'); // Redirect to home page after logout
+      router.push('/'); // Redirect to login page after logout
     } else {
       console.error('Failed to log out');
     }
