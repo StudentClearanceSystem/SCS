@@ -7,6 +7,8 @@ import { getStudentsTable } from '@/app/lib/utils';
 import TableDiscipline from './TableDiscipline';
 
 import SideNav from '@/app/components/SideNav';
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
 
 interface Button {
   label: string;
@@ -16,6 +18,13 @@ interface Button {
 // const assignTaskBtns: Button[] = [];
 
 export default async function Page() {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect('/');
+  }
+
   const students = await getStudentsTable();
 
   return (

@@ -3,6 +3,8 @@ import SideNav from '@/app/components/SideNav';
 import { Metadata } from 'next';
 import TableCashier from './TableCashier';
 import { getStudentsTable } from '@/app/lib/utils';
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
 export const metadata: Metadata = {
   title: 'Cashier',
 };
@@ -25,6 +27,13 @@ const assignTaskBtns: Button[] = [
 ];
 
 export default async function Page() {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect('/');
+  }
+
   const students = await getStudentsTable();
 
   return (
