@@ -1,31 +1,59 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
+'use server';
 
-export async function POST(req: NextRequest) {
-  const url = new URL(req.url);
-  const cookieStore = cookies();
+import { NextResponse } from 'next/server';
+import { createClient } from '@/utils/supabase/server';
 
-  // Ensure formData is correctly parsed
+// Function to handle POST requests
+export async function POST(req: Request) {
   const formData = await req.formData();
-  const email = formData.get('email')?.toString() ?? '';
-  const password = formData.get('password')?.toString() ?? '';
+  const supabase = createClient();
 
-  console.log(email, password);
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
+  const data = {
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  };
 
-  const supabase = createRouteHandlerClient({
-    cookies: () => cookieStore,
-  });
+  const { error } = await supabase.auth.signInWithPassword(data);
 
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+  if (error) {
+    return NextResponse.redirect('/error');
+  }
 
-  if (data) console.log(data);
-  if (error) console.log(error);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  return NextResponse.redirect(url.origin, {
-    status: 301,
-  });
+  console.log(user?.role);
+
+  if (!user) {
+    return NextResponse.redirect('/');
+  }
+
+  const userRole = user.role;
+
+  // Redirect based on user role
+  if (userRole === 'admin') {
+    return NextResponse.redirect(new URL('/users/admin', req.url));
+  } else if (userRole === 'cashier') {
+    return NextResponse.redirect(new URL('/users/cashier', req.url));
+  } else if (userRole === 'discipline') {
+    return NextResponse.redirect(new URL('/users/discipline', req.url));
+  } else if (userRole === 'guidance') {
+    return NextResponse.redirect(new URL('/users/guidance', req.url));
+  } else if (userRole === 'librarian') {
+    return NextResponse.redirect(new URL('/users/librarian', req.url));
+  } else if (userRole === 'mis') {
+    return NextResponse.redirect(new URL('/users/mis', req.url));
+  } else if (userRole === 'programHead') {
+    return NextResponse.redirect(new URL('/users/program-head', req.url));
+  } else if (userRole === 'purchasing') {
+    return NextResponse.redirect(new URL('/users/purchasing', req.url));
+  } else if (userRole === 'registrar') {
+    return NextResponse.redirect(new URL('/users/registrar', req.url));
+  }
+
+  // Default case if role does not match any known role
+  return NextResponse.redirect(new URL('/users', req.url));
 }
