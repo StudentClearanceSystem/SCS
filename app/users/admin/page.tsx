@@ -3,6 +3,8 @@ import SideNav from '@/app/components/SideNav';
 
 import SetUserRoleTable from '@/app/users/admin/TableSetUserRole';
 import { getUser } from '@/app/lib/utils';
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Admin',
@@ -29,6 +31,13 @@ const assignTaskBtns: Button[] = [
 ];
 
 export default async function Page() {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect('/');
+  }
+
   const users = await getUser();
 
   return (

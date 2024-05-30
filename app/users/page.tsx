@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import SideNav from '../components/SideNav';
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'users',
@@ -26,7 +28,14 @@ const assignTaskBtns: Button[] = [
   },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect('/');
+  }
+
   return (
     <>
       <SideNav title={'User'} assignTaskBtns={assignTaskBtns} />
