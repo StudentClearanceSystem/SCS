@@ -2,13 +2,19 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { Button } from '@nextui-org/react';
 import { useState, useEffect, useRef } from 'react';
 
-const DropdownWithInput = ({ disabled }: { disabled: boolean }) => {
+const DropdownWithInput = ({
+  disabled,
+  remarks,
+}: {
+  disabled: boolean;
+  remarks: string;
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState(remarks); // Initialize with remarks
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   // Set the background color variable
   const bgColor = '#FFB980';
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
     if (!disabled) {

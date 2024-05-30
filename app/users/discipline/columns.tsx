@@ -5,7 +5,9 @@ export type student = {
   name: string;
   program: string;
   year: string;
-  cashieriscleared: boolean; // Add this line
+  section: string;
+  is_cashier_cleared: boolean; // Add this line
+  cashier_remarks: string; // Add this line
 };
 
 export const columns = [
@@ -13,7 +15,8 @@ export const columns = [
   { name: 'NAME', uid: 'name', sortable: true },
   { name: 'PROGRAM', uid: 'program', sortable: true },
   { name: 'YEAR', uid: 'year', sortable: true },
-  { name: 'Cashier is cleared?', uid: 'cashieriscleared', sortable: false },
+  { name: 'SECTION', uid: 'section', sortable: true },
+  { name: 'Cashier is cleared?', uid: 'is_cashier_cleared', sortable: false },
 ];
 
 export const renderCell = (students: student, columnKey: React.Key) => {
@@ -44,11 +47,18 @@ export const renderCell = (students: student, columnKey: React.Key) => {
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
-    case 'cashieriscleared':
+    case 'section':
+      return (
+        <div className="flex min-w-[20px] max-w-[30px] flex-col">
+          <p className="text-bold text-small capitalize">{cellValue}</p>
+        </div>
+      );
+    case 'is_cashier_cleared':
       return (
         <div className="flex justify-center">
           <ActionCell
-            cashieriscleared={students.cashieriscleared} // Pass the cashieriscleared value
+            cashierRemarks={students.cashier_remarks}
+            isCashierCleared={students.is_cashier_cleared} // Pass the cashieriscleared value
             studentNo={students.studentno} // Pass the student number for identification
           />
         </div>

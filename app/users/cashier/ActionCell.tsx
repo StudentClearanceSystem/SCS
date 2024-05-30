@@ -2,11 +2,6 @@ import { useState, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import DropdownWithInput from './DropdownWithInput';
 
-type ActionCellProps = {
-  isCashierCleared: boolean;
-  studentNo: string;
-};
-
 const ActionCell = ({
   isCashierCleared,
   studentNo,
