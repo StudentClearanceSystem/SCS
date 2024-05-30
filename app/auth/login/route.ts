@@ -34,26 +34,28 @@ export async function POST(req: Request) {
   const userRole = user.role;
 
   // Redirect based on user role
-  if (userRole === 'admin') {
-    return NextResponse.redirect(new URL('/users/admin', req.url));
-  } else if (userRole === 'cashier') {
-    return NextResponse.redirect(new URL('/users/cashier', req.url));
-  } else if (userRole === 'discipline') {
-    return NextResponse.redirect(new URL('/users/discipline', req.url));
-  } else if (userRole === 'guidance') {
-    return NextResponse.redirect(new URL('/users/guidance', req.url));
-  } else if (userRole === 'librarian') {
-    return NextResponse.redirect(new URL('/users/librarian', req.url));
-  } else if (userRole === 'mis') {
-    return NextResponse.redirect(new URL('/users/mis', req.url));
-  } else if (userRole === 'programHead') {
-    return NextResponse.redirect(new URL('/users/program-head', req.url));
-  } else if (userRole === 'purchasing') {
-    return NextResponse.redirect(new URL('/users/purchasing', req.url));
-  } else if (userRole === 'registrar') {
-    return NextResponse.redirect(new URL('/users/registrar', req.url));
-  }
+  switch (userRole) {
+    case 'admin':
+      return NextResponse.redirect(new URL('/users/admin', req.url));
+    case 'cashier':
+      return NextResponse.redirect(new URL('/users/cashier', req.url));
+    case 'discipline':
+      return NextResponse.redirect(new URL('/users/discipline', req.url));
+    case 'guidance':
+      return NextResponse.redirect(new URL('/users/guidance', req.url));
+    case 'librarian':
+      return NextResponse.redirect(new URL('/users/librarian', req.url));
+    case 'mis':
+      return NextResponse.redirect(new URL('/users/mis', req.url));
+    case 'programhead':
+      return NextResponse.redirect(new URL('/users/program-head', req.url));
+    case 'purchasing':
+      return NextResponse.redirect(new URL('/users/purchasing', req.url));
+    case 'registrar':
+      return NextResponse.redirect(new URL('/users/registrar', req.url));
+    // Default case if role does not match any known role
 
-  // Default case if role does not match any known role
-  return NextResponse.redirect(new URL('/users', req.url));
+    default:
+      return NextResponse.redirect(new URL('/users', req.url));
+  }
 }
