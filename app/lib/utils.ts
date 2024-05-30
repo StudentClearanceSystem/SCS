@@ -5,7 +5,9 @@ import { supabase } from './supabase';
 /*------------------------------------------------------------------ */
 
 export const getUser = async () => {
-  const { data: UserTable, error } = await supabase.from('users').select('*');
+  const { data: UserTable, error } = await supabase
+    .from('UserTable')
+    .select('*');
   if (error) {
     console.error(error);
     return []; // Return an empty array in case of error
@@ -16,7 +18,7 @@ export const getUser = async () => {
 
 export const getStudentsTable = async () => {
   try {
-    const { data, error } = await supabase.from('table_students').select();
+    const { data, error } = await supabase.from('students').select();
 
     if (error) {
       console.error('Error fetching data:', error);
