@@ -5,14 +5,12 @@ import { supabase } from './supabase';
 /*------------------------------------------------------------------ */
 
 export const getUser = async () => {
-  const { data: UserTable, error } = await supabase
-    .from('UserTable')
-    .select('*');
+  const { data: UserTable, error } = await supabase.from('users').select('*');
   if (error) {
     console.error(error);
     return []; // Return an empty array in case of error
   }
-  console.log(UserTable);
+  // console.log(UserTable);
   return UserTable; // Return the fetched data
 };
 
@@ -25,7 +23,7 @@ export const getStudentsTable = async () => {
       return []; // Return an empty array in case of error
     }
 
-    console.log('Fetched data:', data); // Log fetched data
+    // console.log('Fetched data:', data); // Log fetched data
     return data; // Return the fetched data
   } catch (err) {
     console.error('Unexpected error:', err);
