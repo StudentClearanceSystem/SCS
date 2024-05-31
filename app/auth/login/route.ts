@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    return NextResponse.redirect('/error');
+    return NextResponse.redirect(new URL('/', req.url));
   }
 
   const {
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
   console.log(user?.role);
 
   if (!user) {
-    return NextResponse.redirect('/');
+    return NextResponse.redirect(new URL('/', req.url));
   }
 
   const userRole = user.role;
