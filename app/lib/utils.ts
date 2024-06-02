@@ -36,7 +36,7 @@ export const getStudentsTable = async () => {
 
 export const deleteUser = async (userId: string) => {
   const { data, error } = await supabase
-    .from('UserTable')
+    .from('profiles')
     .delete()
     .eq('id', userId)
     .select();
@@ -49,7 +49,7 @@ export const deleteUser = async (userId: string) => {
   console.log(`User deleted: ${userId}`, data);
 
   const { data: updatedData, error: fetchError } = await supabase
-    .from('UserTable')
+    .from('profiles')
     .select('*');
 
   if (fetchError) {
@@ -61,7 +61,7 @@ export const deleteUser = async (userId: string) => {
 };
 export const updateUserRole = async (userId: string, newRole: string) => {
   const { error } = await supabase
-    .from('UserTable')
+    .from('profiles')
     .update({ role: newRole })
     .eq('id', userId)
     .select();
