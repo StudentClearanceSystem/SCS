@@ -42,7 +42,9 @@ export const renderCell = (
     case 'role':
       return (
         <div className="flex flex-col">
-          <p className="text-bold text-small capitalize">{cellValue}</p>
+          <p className="text-bold text-small">
+            {String(cellValue).toUpperCase()}
+          </p>
         </div>
       );
     case 'set role':
