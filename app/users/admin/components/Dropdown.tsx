@@ -15,15 +15,18 @@ interface DropdownProps {
 }
 
 const DropdownComponent: React.FC<DropdownProps> = ({ role, onSelect }) => {
-  const [selectedValue, setSelectedValue] = useState<string>(role);
+  const [selectedValue, setSelectedValue] = useState<string>(
+    role.toUpperCase(),
+  );
 
   const handleSelect = (value: string) => {
-    setSelectedValue(value);
-    onSelect(value);
+    const upperCaseValue = value.toUpperCase();
+    setSelectedValue(upperCaseValue);
+    onSelect(upperCaseValue);
   };
 
   useEffect(() => {
-    setSelectedValue(role);
+    setSelectedValue(role.toUpperCase());
   }, [role]);
 
   return (
@@ -31,7 +34,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({ role, onSelect }) => {
       <DropdownTrigger>
         <Button radius="full" variant="light">
           {selectedValue || 'USER'}
-          <ChevronDownIcon className=" h-3 w-3" />
+          <ChevronDownIcon className="h-3 w-3" />
         </Button>
       </DropdownTrigger>
       <DropdownMenu>
