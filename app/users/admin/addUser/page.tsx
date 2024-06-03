@@ -35,10 +35,10 @@ export default function AddUserPage() {
     setErrorMessage('');
 
     // Validate email
-    const emailPattern = /^[a-zA-Z]+[.]+[0-9]{6}@sjdelmonte\.sti\.edu\.ph$/;
+    const emailPattern = /^[a-zA-Z.]+@sjdelmonte\.sti\.edu\.ph$/;
     if (!emailPattern.test(formData.email)) {
       setErrorMessage(
-        'Email must follow the structure name6digits@sjdelmonte.sti.edu.ph',
+        'Email must follow the structure name@sjdelmonte.sti.edu.ph',
       );
       return;
     }
@@ -74,52 +74,63 @@ export default function AddUserPage() {
   };
 
   return (
-    <main className="flex h-screen min-h-screen flex-col items-center justify-center bg-blue-300">
-      <div className="m-5 rounded-lg bg-gray-200 p-5 shadow-2xl">
-        <h2 className="mb-8 text-lg font-bold">ADD NEW USER</h2>
+    <main className="flex h-screen  flex-col items-center justify-center bg-blue-300 p-5">
+      <div className="m-5 w-full max-w-[500px] rounded-lg bg-gray-200 p-5 shadow-2xl">
+        <h2 className="mb-8 text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
+          ADD NEW USER
+        </h2>
         {errorMessage && (
-          <div className="mb-4 text-red-600">{errorMessage}</div>
+          <div className="mb-4 text-red-600 sm:text-[8px] md:text-base lg:text-lg">
+            {errorMessage}
+          </div>
         )}
         <form onSubmit={handleSubmit} className="space-y-10">
           <Input
             labelPlacement="outside"
-            label="Name"
+            label="Name: (firstname.lastname)"
             name="name"
             value={formData.name}
             onChange={handleChange}
             isRequired
             style={inputStyle} // Apply inputStyle here
+            className="sm:text-[8px] md:text-base lg:text-lg" // Adjust font size for different screen sizes
           />
           <Input
             labelPlacement="outside"
             type="email"
-            label="Email"
+            label="Email: (name@sjdelmonte.sti.edu.ph)"
             name="email"
             value={formData.email}
             onChange={handleChange}
             isRequired
             style={inputStyle} // Apply inputStyle here
+            className="sm:text-[8px] md:text-base lg:text-lg" // Adjust font size for different screen sizes
           />
           <Input
             minLength={6}
             labelPlacement="outside"
             type="password"
-            label="Password"
+            label="Password: (6 digits)"
             name="password"
             value={formData.password}
             onChange={handleChange}
             isRequired
             style={inputStyle} // Apply inputStyle here
+            className="sm:text-[8px] md:text-base lg:text-lg" // Adjust font size for different screen sizes
           />
-          <p>Role:</p>
-          <DropdownComponent
-            onSelect={handleRoleChange} // Set selected role
-            role={selectedRole} // Pass selected role
-          />
+          <div className="flex flex-row items-center pt-2">
+            <p className="text-center text-lg sm:text-[8px] md:text-base lg:text-lg">
+              Role:
+            </p>
+            <DropdownComponent
+              onSelect={handleRoleChange} // Set selected role
+              role={selectedRole} // Pass selected role
+            />
+          </div>
           <div className="flex justify-end space-x-3">
             <Button
               type="submit"
-              className="bg-primary text-background"
+              className="bg-primary text-background sm:text-[8px] md:text-base lg:text-lg"
               onClick={handleSubmit}
             >
               Add
@@ -127,7 +138,7 @@ export default function AddUserPage() {
             <Link href="/users/admin">
               <Button
                 type="button"
-                className="btn-secondary text-black"
+                className="btn-secondary text-black sm:text-[8px] md:text-base lg:text-lg"
                 onClick={handleCancel}
               >
                 Cancel
