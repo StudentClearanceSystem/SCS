@@ -13,7 +13,6 @@ export default function AddUserPage() {
 
   // State
   const [formData, setFormData] = useState({
-    id: '',
     name: '',
     email: '',
     password: '',
@@ -35,12 +34,6 @@ export default function AddUserPage() {
     e.preventDefault();
     setErrorMessage('');
 
-    // Validate ID
-    if (!/^\d{6}$/.test(formData.id)) {
-      setErrorMessage('ID must be exactly 6 digits.');
-      return;
-    }
-
     // Validate email
     const emailPattern = /^[a-zA-Z]+[.]+[0-9]{6}@sjdelmonte\.sti\.edu\.ph$/;
     if (!emailPattern.test(formData.email)) {
@@ -51,12 +44,11 @@ export default function AddUserPage() {
     }
 
     // Output all input values
-    const output = `ID: ${formData.id}\nName: ${formData.name}\nEmail: ${formData.email}\nPassword: ${formData.password}\nRole: ${selectedRole}`;
+    const output = `Name: ${formData.name}\nEmail: ${formData.email}\nPassword: ${formData.password}\nRole: ${selectedRole}`;
     alert(output);
 
     // Reset form fields after submission
     setFormData({
-      id: '',
       name: '',
       email: '',
       password: '',
@@ -68,7 +60,6 @@ export default function AddUserPage() {
   const handleCancel = () => {
     // Reset form fields on cancel
     setFormData({
-      id: '',
       name: '',
       email: '',
       password: '',
