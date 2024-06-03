@@ -20,9 +20,9 @@ const DropdownComponent: React.FC<DropdownProps> = ({ role, onSelect }) => {
   );
 
   const handleSelect = (value: string) => {
-    const upperCaseValue = value.toUpperCase();
-    setSelectedValue(upperCaseValue);
-    onSelect(upperCaseValue);
+    const lowerCaseValue = value.toLowerCase();
+    setSelectedValue(lowerCaseValue);
+    onSelect(lowerCaseValue);
   };
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({ role, onSelect }) => {
           'GUIDANCE',
           'LIBRARIAN',
           'MIS',
-          'PROGRAM HEAD',
+          'PROGRAMHEAD',
           'PURCHASING',
           'REGISTRAR',
         ].map((role) => (
