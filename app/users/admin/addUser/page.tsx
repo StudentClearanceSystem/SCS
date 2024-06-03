@@ -92,15 +92,6 @@ export default function AddUserPage() {
         <form onSubmit={handleSubmit} className="space-y-10">
           <Input
             labelPlacement="outside"
-            label="ID"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            isRequired
-            style={inputStyle} // Apply inputStyle here
-          />
-          <Input
-            labelPlacement="outside"
             label="Name"
             name="name"
             value={formData.name}

@@ -34,21 +34,22 @@ export const getStudentsTable = async () => {
 };
 // getStudentsTable();
 
-export const deleteUser = async (userId: string) => {
-  const { data, error } = await supabase
+export const deleteUser = async (email: string) => {
+  // Delete the user from the profiles table
+  const { data: deletedUserData, error: deleteError } = await supabase
     .from('profiles')
     .delete()
-    .eq('id', userId)
-    .select();
+    .eq('email', email);
 
-  if (error) {
-    console.error(`Error deleting user: ${userId}`, error);
+  if (deleteError) {
+    console.error(`Error deleting user: ${email}`, deleteError);
     return false;
   }
 
-  console.log(`User deleted: ${userId}`, data);
+  console.log(`User deleted: ${email}`, deletedUserData);
 
-  const { data: updatedData, error: fetchError } = await supabase
+  // Fetch updated user data after deletion
+  const { data: updatedUserData, error: fetchError } = await supabase
     .from('profiles')
     .select('*');
 
@@ -57,21 +58,23 @@ export const deleteUser = async (userId: string) => {
     return false;
   }
 
-  return updatedData;
+  return updatedUserData;
 };
-export const updateUserRole = async (userId: string, newRole: string) => {
+
+export const updateUserRole = async (userEmail: string, newRole: string) => {
   const { error } = await supabase
     .from('profiles')
     .update({ role: newRole })
-    .eq('id', userId)
+    .eq('email', userEmail)
     .select();
+  console.log(userEmail + ' = ' + newRole);
 
   if (error) {
-    console.error(`Error updating user ${userId} role:`, error);
+    console.error(`Error updating user ${userEmail} role:`, error);
     return false;
   }
 
-  console.log(`User ${userId} role updated to ${newRole}`);
+  console.log(`User ${userEmail} role updated to ${newRole}`);
   return true;
 };
 

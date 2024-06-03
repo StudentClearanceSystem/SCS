@@ -1,7 +1,7 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { Tooltip } from '@nextui-org/react';
 import DropdownComponent from './components/Dropdown';
-import { deleteUser, updateUserRole } from '@/app/lib/utils';
+import { updateUserRole } from '@/app/lib/utils';
 
 export type user = {
   id: string;
@@ -19,28 +19,16 @@ export const columns = [
 ];
 
 export const renderCell = (
-  user: user, // Changed from 'users' to 'user' to match the type
+  user: user,
   columnKey: React.Key,
-  deleteUserHandler: (userId: string) => Promise<void>,
+  deleteUserHandler: (userEmail: string) => Promise<void>,
 ) => {
-  const cellValue = user[columnKey as keyof user]; // Changed 'users' to 'user'
-  const handleRoleChange = async (id: string, newRole: string) => {
-    console.log(`Updating user ${id} role to ${newRole}`);
-    const success = await updateUserRole(id, newRole);
+  const cellValue = user[columnKey as keyof user];
+  const handleRoleChange = async (email: string, newRole: string) => {
+    console.log(`Updating user ${email} role to ${newRole}`);
+    const success = await updateUserRole(email, newRole);
     if (success) {
       // Optionally, you can update the UI or perform any additional actions here
-    }
-  };
-
-  const handleDeleteUser = async (userId: string, userName: string) => {
-    const confirmed = window.confirm(
-      `Are you sure you want to remove user: ${userName}?`,
-    ); // Added confirmation prompt
-    if (confirmed) {
-      const success = await deleteUser(userId);
-      if (success) {
-        deleteUserHandler(userId);
-      }
     }
   };
 
@@ -61,13 +49,13 @@ export const renderCell = (
       return (
         <div className="flex items-center justify-center">
           <DropdownComponent
-            role={user.role} // Changed 'users' to 'user'
-            onSelect={(newRole) => handleRoleChange(user.id, newRole)} // Changed 'users' to 'user'
+            role={user.role}
+            onSelect={(newRole) => handleRoleChange(user.email, newRole)}
           />
           <Tooltip color="danger" content={`Remove ${user.name}`}>
             <span
               className="cursor-pointer text-sm text-danger active:opacity-50"
-              onClick={() => handleDeleteUser(user.id, user.name)} // Modified to pass user name
+              onClick={() => deleteUserHandler(user.email)}
             >
               <TrashIcon className="h-5 w-5" />
             </span>

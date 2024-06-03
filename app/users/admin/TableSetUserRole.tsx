@@ -32,24 +32,20 @@ export default function SetUserRoleTable({
 
   const pages = Math.ceil(users.length / rowsPerPage);
 
-  const handleDeleteUser = async (userId: string) => {
-    const success = await deleteUser(userId);
-    if (success) {
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+  const handleDeleteUser = async (userEmail: string) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to remove user: ${userEmail}?`,
+    );
+    if (confirmed) {
+      const success = await deleteUser(userEmail);
+      if (success) {
+        setUsers((prevUsers) =>
+          prevUsers.filter((user) => user.email !== userEmail),
+        );
+      }
     }
   };
 
-  const handleRoleChange = async (id: string, newRole: string) => {
-    console.log(`Updating user ${id} role to ${newRole}`);
-    const success = await updateUserRole(id, newRole);
-    if (success) {
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === id ? { ...user, role: newRole } : user,
-        ),
-      );
-    }
-  };
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = useMemo(() => {
@@ -154,6 +150,7 @@ export default function SetUserRoleTable({
       </div>
     );
   }, [filteredItems.length, filterValue, onRowsPerPageChange, onSearchChange]); // Corrected dependencies
+
   return (
     <Table
       onSortChange={setSortDescriptor}
