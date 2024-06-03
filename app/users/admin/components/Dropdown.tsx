@@ -40,6 +40,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({ role, onSelect }) => {
       <DropdownMenu>
         {[
           'USER',
+          'ADMIN',
           'CASHIER',
           'DISCIPLINE',
           'GUIDANCE',
