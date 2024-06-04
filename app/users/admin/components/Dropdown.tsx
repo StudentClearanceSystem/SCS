@@ -39,7 +39,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({ role, onSelect }) => {
       </DropdownTrigger>
       <DropdownMenu>
         {[
-          'USER',
+          'AUTHENTICATED',
           'ADMIN',
           'CASHIER',
           'DISCIPLINE',

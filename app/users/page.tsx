@@ -11,22 +11,7 @@ interface Button {
   href: string; // Adjust the type to accept a string for href
 }
 
-const assignTaskBtns: Button[] = [
-  {
-    label: 'Role Setter',
-    href: '/users/admin', // Provide the href for the Link component
-  },
-  // If want to add another button
-  {
-    label: 'cashier',
-    href: '/users/cashier', // Provide the href for the Link component
-  },
-  // If want to add another button
-  {
-    label: 'Assign Task 2',
-    href: '/users', // Provide the href for the Link component
-  },
-];
+const assignTaskBtns: Button[] = [];
 
 export default async function Page() {
   const supabase = createClient();
@@ -37,11 +22,12 @@ export default async function Page() {
   }
 
   return (
-    <>
+    <main className=" h-screen bg-blue-200">
       <SideNav title={'User'} assignTaskBtns={assignTaskBtns} />
-
-      <h1>you are now logined</h1>
-      <h1>users contact admin to set your role then refresh this page</h1>
-    </>
+      <div className=" p-20 text-center">
+        <h1>you are now logined</h1>
+        <h1>please contact admin to set your role then refresh this page</h1>
+      </div>
+    </main>
   );
 }
