@@ -108,7 +108,7 @@ export default function SetUserRoleTable({
     return (
       <div className="flex flex-col gap-1">
         <div className="flex items-end justify-between gap-3">
-          <div className="flex w-full items-center gap-2 sm:max-w-[75%]">
+          <div className="flex w-full items-center gap-2">
             <Input
               isClearable
               classNames={{

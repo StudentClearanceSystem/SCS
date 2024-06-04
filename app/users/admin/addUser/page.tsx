@@ -2,7 +2,6 @@
 import { Button, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import { useState } from 'react';
-import DropdownComponent from './Dropdown';
 
 export default function AddUserPage() {
   // Style
@@ -16,10 +15,8 @@ export default function AddUserPage() {
     name: '',
     email: '',
     password: '',
-    role: '',
   });
 
-  const [selectedRole, setSelectedRole] = useState(''); // New state for selected role
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,9 +56,7 @@ export default function AddUserPage() {
         name: '',
         email: '',
         password: '',
-        role: '',
       });
-      setSelectedRole(''); // Reset selected role
       alert('User added successfully!');
     } else {
       const data = await response.json();
@@ -75,18 +70,12 @@ export default function AddUserPage() {
       name: '',
       email: '',
       password: '',
-      role: '',
     });
     setErrorMessage('');
-    setSelectedRole(''); // Reset selected role
-  };
-
-  const handleRoleChange = (newRole: string) => {
-    setSelectedRole(newRole);
   };
 
   return (
-    <main className="flex h-screen  flex-col items-center justify-center bg-blue-300 p-5">
+    <main className="flex h-screen flex-col items-center justify-center bg-blue-300 p-5">
       <div className="m-5 w-full max-w-[500px] rounded-lg bg-gray-200 p-5 shadow-2xl">
         <h2 className="mb-8 text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
           ADD NEW USER
@@ -130,20 +119,10 @@ export default function AddUserPage() {
             style={inputStyle} // Apply inputStyle here
             className="sm:text-[8px] md:text-base lg:text-lg" // Adjust font size for different screen sizes
           />
-          <div className="flex flex-row items-center">
-            <p className="text-center text-lg sm:text-[8px] md:text-base lg:text-lg">
-              Role:
-            </p>
-            <DropdownComponent
-              onSelect={handleRoleChange} // Set selected role
-              role={selectedRole} // Pass selected role
-            />
-          </div>
           <div className="flex justify-end space-x-3">
             <Button
               type="submit"
               className="bg-primary text-background sm:text-[8px] md:text-base lg:text-lg"
-              onClick={handleSubmit}
             >
               Add
             </Button>
