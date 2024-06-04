@@ -59,8 +59,21 @@ export default function AddUserPage() {
       });
       alert('User added successfully!');
     } else {
-      const data = await response.json();
-      setErrorMessage(data.error.message);
+      try {
+        // Attempt to parse the JSON response
+        const data = await response.json();
+
+        // Check if the response contains valid JSON data
+        if (data && data.error && data.error.message) {
+          setErrorMessage(data.error.message);
+        } else {
+          // Handle other types of errors if needed
+          setErrorMessage('An error occurred while processing your request.');
+        }
+      } catch (error) {
+        // Handle JSON parsing error
+        setErrorMessage('An error occurred while processing the response.');
+      }
     }
   };
 
