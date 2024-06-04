@@ -3,34 +3,42 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const url = new URL(req.url);
   const cookieStore = cookies();
 
-  const formData = await req.formData();
-  const name = String(formData.get('name'));
-  const email = String(formData.get('email'));
-  const password = String(formData.get('password'));
-  const role = String(formData.get('role'));
+  const formData = await req.json(); // Assuming you're sending JSON data from the frontend
+  const { name, email, password, role } = formData;
 
   const supabase = createRouteHandlerClient({
     cookies: () => cookieStore,
   });
 
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: {
-        name,
-        role,
+  try {
+    // Create the user account in Supabase
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          name,
+          role,
+        },
       },
-    },
-  });
+    });
 
-  if (data) console.log(data);
-  if (error) console.log(error);
+    if (error) {
+      console.error(error);
+      return NextResponse.error();
+    }
 
-  return NextResponse.redirect(url.origin, {
-    status: 301,
-  });
+    // If the user account is created successfully
+    if (data) {
+      console.log(data);
+
+      // Return a success response
+      return NextResponse.json({ message: 'User signed up successfully!' });
+    }
+  } catch (error) {
+    console.error(error);
+    return NextResponse.error();
+  }
 }

@@ -30,7 +30,7 @@ export default function AddUserPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
 
@@ -43,18 +43,30 @@ export default function AddUserPage() {
       return;
     }
 
-    // Output all input values
-    const output = `Name: ${formData.name}\nEmail: ${formData.email}\nPassword: ${formData.password}\nRole: ${selectedRole}`;
-    alert(output);
-
-    // Reset form fields after submission
-    setFormData({
-      name: '',
-      email: '',
-      password: '',
-      role: '',
+    // Submit to Supabase
+    const url = '/auth/signup'; // Assuming this is the endpoint where you handle signup
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
-    setSelectedRole(''); // Reset selected role
+
+    if (response.ok) {
+      // Reset form fields after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        password: '',
+        role: '',
+      });
+      setSelectedRole(''); // Reset selected role
+      alert('User added successfully!');
+    } else {
+      const data = await response.json();
+      setErrorMessage(data.error.message);
+    }
   };
 
   const handleCancel = () => {
@@ -118,7 +130,7 @@ export default function AddUserPage() {
             style={inputStyle} // Apply inputStyle here
             className="sm:text-[8px] md:text-base lg:text-lg" // Adjust font size for different screen sizes
           />
-          <div className="flex flex-row items-center pt-2">
+          <div className="flex flex-row items-center">
             <p className="text-center text-lg sm:text-[8px] md:text-base lg:text-lg">
               Role:
             </p>
