@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Initialize Supabase client with your Supabase project URL and API key
@@ -9,8 +8,6 @@ const supabase = createClient(
 );
 
 export async function POST(req: NextRequest) {
-  const cookieStore = cookies();
-
   const formData = await req.json(); // Assuming you're sending JSON data from the frontend
   const { name, email, password, role } = formData;
 
