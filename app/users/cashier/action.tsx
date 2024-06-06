@@ -14,10 +14,17 @@ export const updateCashierStatus = async (studentDetails: StudentDetails) => {
   const { studentno, name, program, year, section, is_cashier_cleared } =
     studentDetails;
 
-  // Update the is_cashier_cleared value in the database
+  let updateData: Partial<StudentDetails> = { is_cashier_cleared };
+
+  // If the cashier is cleared, set cashier_remarks to an empty string
+  if (is_cashier_cleared) {
+    updateData.cashier_remarks = '';
+  }
+
+  // Update the database
   const { data, error } = await supabase
     .from('table_students')
-    .update({ is_cashier_cleared })
+    .update(updateData)
     .eq('studentno', studentno)
     .select();
 
@@ -34,8 +41,15 @@ export const updateCashierStatus = async (studentDetails: StudentDetails) => {
 };
 
 export const updateCashierRemarks = async (studentDetails: StudentDetails) => {
-  const { studentno, name, program, year, section, cashier_remarks } =
-    studentDetails;
+  const {
+    studentno,
+    name,
+    program,
+    year,
+    section,
+    is_cashier_cleared,
+    cashier_remarks,
+  } = studentDetails;
 
   // Update the cashier_remarks value in the database
   const { data, error } = await supabase
@@ -52,6 +66,7 @@ export const updateCashierRemarks = async (studentDetails: StudentDetails) => {
     Program: ${program}
     Year: ${year}
     Section: ${section}
+    Cashier Cleared: ${is_cashier_cleared ? 'Yes' : 'No'}
     Remarks: ${cashier_remarks}`);
   }
 };
