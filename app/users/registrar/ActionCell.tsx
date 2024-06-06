@@ -1,31 +1,30 @@
 import { useState, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import DropdownWithInput from './DropdownWithInput';
+import { updateRegistrarStatus, StudentDetails } from './action'; // Import the function and interface
 
 const ActionCell = ({
-  isCashierCleared,
+  isRegistrarCleared,
   studentNo,
-  cashierRemarks,
+  registrarRemarks,
+  studentDetails, // Add studentDetails prop
 }: {
-  isCashierCleared: boolean;
+  isRegistrarCleared: boolean;
   studentNo: string;
-  cashierRemarks: string;
+  registrarRemarks: string;
+  studentDetails: StudentDetails; // Define prop type
 }) => {
   const [selectedValue, setSelectedValue] = useState(
-    isCashierCleared ? 'Cleared' : 'Uncleared',
+    isRegistrarCleared ? 'Cleared' : 'Uncleared',
   );
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
-    // Update the backend or parent state with the new value
-    updateCashierStatus(studentNo, value === 'Cleared');
-  };
-
-  const updateCashierStatus = async (studentNo: string, isCleared: boolean) => {
-    // This function should update the cashieriscleared status in the backend or parent state
-    // Here we just log it for demonstration
-    console.log(`Updating studentNo ${studentNo} to ${isCleared}`);
-    // Add your update logic here
+    const updatedDetails = {
+      ...studentDetails,
+      is_registrar_cleared: value === 'Cleared',
+    };
+    updateRegistrarStatus(updatedDetails);
   };
 
   const getBackgroundColor = () => {
@@ -33,8 +32,8 @@ const ActionCell = ({
   };
 
   useEffect(() => {
-    setSelectedValue(isCashierCleared ? 'Cleared' : 'Uncleared');
-  }, [isCashierCleared]);
+    setSelectedValue(isRegistrarCleared ? 'Cleared' : 'Uncleared');
+  }, [isRegistrarCleared]);
 
   return (
     <div
@@ -54,7 +53,8 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        remarks={cashierRemarks} // Pass the cashierRemarks value
+        remarks={registrarRemarks} // Pass the registrarRemarks value
+        studentDetails={studentDetails} // Pass the studentDetails prop
       />
     </div>
   );

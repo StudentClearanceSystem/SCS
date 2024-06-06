@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { student } from './columns';
 import { SortDescriptor } from '@nextui-org/react';
-import TableTopContent from '@/app/components/TableTopContent';
+import TableTopContent from './TableTopContent';
 import StudentTable from './StudentTable';
 import { fetchDataAndListenForUpdates } from '@/app/lib/utils';
 

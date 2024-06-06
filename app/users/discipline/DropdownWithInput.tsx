@@ -1,13 +1,16 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { Button } from '@nextui-org/react';
 import { useState, useEffect, useRef } from 'react';
+import { updateDisciplineRemarks, StudentDetails } from './action'; // Import the function and interface
 
 const DropdownWithInput = ({
   disabled,
   remarks,
+  studentDetails, // Add studentDetails prop
 }: {
   disabled: boolean;
   remarks: string;
+  studentDetails: StudentDetails; // Define prop type
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(remarks); // Initialize with remarks
@@ -22,7 +25,6 @@ const DropdownWithInput = ({
     }
   };
 
-  // Changed event type to React.ChangeEvent<HTMLTextAreaElement>
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
   };
@@ -37,7 +39,11 @@ const DropdownWithInput = ({
   };
 
   const handleSubmit = () => {
-    alert(`You typed: ${inputValue}`);
+    const updatedDetails = {
+      ...studentDetails,
+      discipline_remarks: inputValue,
+    };
+    updateDisciplineRemarks(updatedDetails);
     setIsOpen(false); // Close the dropdown
   };
 

@@ -6,11 +6,11 @@ import TableTopContent from './TableTopContent';
 import StudentTable from './StudentTable';
 import { fetchDataAndListenForUpdates } from '@/app/lib/utils';
 
-interface SetGuidanceTableProps {
+interface SetRegistrarTableProps {
   students: student[];
 }
 
-const SetGuidanceTable: React.FC<SetGuidanceTableProps> = ({ students }) => {
+const SetRegistrarTable: React.FC<SetRegistrarTableProps> = ({ students }) => {
   const [filterValue, setFilterValue] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
@@ -68,4 +68,4 @@ const SetGuidanceTable: React.FC<SetGuidanceTableProps> = ({ students }) => {
   );
 };
 
-export default SetGuidanceTable;
+export default SetRegistrarTable;

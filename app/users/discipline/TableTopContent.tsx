@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
-import SearchInput from './SearchInput';
-import RowsPerPageSelect from './RowsPerPageSelect';
-import { student } from '../users/cashier/columns';
+import { student } from './columns';
+import SearchInput from '@/app/components/SearchInput';
+import RowsPerPageSelect from '@/app/components/RowsPerPageSelect';
 
 interface TableTopContentProps {
   students: student[];
