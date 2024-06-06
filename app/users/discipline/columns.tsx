@@ -1,5 +1,5 @@
 import ActionCell from './ActionCell'; // Adjust the import path as needed
-import { StudentDetails } from './action'; // Import the StudentDetails type
+import { StudentDetailsDisipline } from './action'; // Import the StudentDetails type
 
 export type student = {
   studentno: string;
