@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import {
   Table,
@@ -14,7 +14,10 @@ import {
 } from '@nextui-org/react';
 import { user, columns, renderCell } from './columns';
 import { AddNewUser } from './components/buttons';
-import { deleteUser, updateUserRole } from '@/app/lib/utils';
+import {
+  deleteUser,
+  fetchDataAndListenForUpdatesForUserRole,
+} from '@/app/lib/utils';
 
 export default function SetUserRoleTable({
   initialUsers = [],
@@ -29,6 +32,10 @@ export default function SetUserRoleTable({
     direction: 'ascending',
   });
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    fetchDataAndListenForUpdatesForUserRole(setUsers);
+  }, []);
 
   const pages = Math.ceil(users.length / rowsPerPage);
 
@@ -50,7 +57,6 @@ export default function SetUserRoleTable({
 
   const filteredItems = useMemo(() => {
     let filteredUsers = [...users];
-
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
         Object.values(user).some((value) =>
@@ -58,14 +64,12 @@ export default function SetUserRoleTable({
         ),
       );
     }
-
     return filteredUsers;
   }, [users, hasSearchFilter, filterValue]);
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
-
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
 
@@ -73,9 +77,7 @@ export default function SetUserRoleTable({
     return [...items].sort((a: user, b: user) => {
       const first = a[sortDescriptor.column as keyof user];
       const second = b[sortDescriptor.column as keyof user];
-
       let cmp = 0;
-
       if (sortDescriptor.column === 'id') {
         cmp = Number(first) - Number(second);
       } else {
@@ -84,7 +86,6 @@ export default function SetUserRoleTable({
             ? first - second
             : String(first).localeCompare(String(second));
       }
-
       return sortDescriptor.direction === 'descending' ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
@@ -98,23 +99,19 @@ export default function SetUserRoleTable({
   );
 
   const onSearchChange = useCallback((value?: string) => {
-    setFilterValue(value || ''); // Set filter value based on input
+    setFilterValue(value || '');
     setPage(1);
   }, []);
 
   const topContent = useMemo(() => {
-    const displayedUserCount = filteredItems.length; // Corrected to use filteredItems
-
+    const displayedUserCount = filteredItems.length;
     return (
       <div className="flex flex-col gap-1">
         <div className="flex items-end justify-between gap-3">
           <div className="flex w-full items-center gap-2">
             <Input
               isClearable
-              classNames={{
-                input: 'border-none',
-                base: 'w-full',
-              }}
+              classNames={{ input: 'border-none', base: 'w-full' }}
               placeholder="Search..."
               size="sm"
               startContent={
@@ -149,7 +146,7 @@ export default function SetUserRoleTable({
         </div>
       </div>
     );
-  }, [filteredItems.length, filterValue, onRowsPerPageChange, onSearchChange]); // Corrected dependencies
+  }, [filteredItems.length, filterValue, onRowsPerPageChange, onSearchChange]);
 
   return (
     <Table

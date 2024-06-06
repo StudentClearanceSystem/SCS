@@ -32,7 +32,7 @@ export default function AddUserPage() {
     setErrorMessage('');
 
     // Validate email
-    const emailPattern = /^[a-zA-Z.]+@sjdelmonte\.sti\.edu\.ph$/;
+    const emailPattern = /^[a-zA-Z0-9.]+@sjdelmonte\.sti\.edu\.ph$/;
     if (!emailPattern.test(formData.email)) {
       setErrorMessage(
         'Email must follow the structure name@sjdelmonte.sti.edu.ph',
