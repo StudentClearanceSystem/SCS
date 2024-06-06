@@ -48,7 +48,7 @@ export async function POST(req: Request) {
     case 'mis':
       return NextResponse.redirect(new URL('/users/mis', req.url));
     case 'programhead':
-      return NextResponse.redirect(new URL('/users/program-head', req.url));
+      return NextResponse.redirect(new URL('/users/program_head', req.url));
     case 'purchasing':
       return NextResponse.redirect(new URL('/users/purchasing', req.url));
     case 'registrar':
