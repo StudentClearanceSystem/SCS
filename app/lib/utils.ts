@@ -16,23 +16,57 @@ export const getUser = async () => {
   return UserTable; // Return the fetched data
 };
 
+// Fetch the initial data from the table_students table
 export const getStudentsTable = async () => {
   try {
     const { data, error } = await supabase.from('table_students').select();
-
     if (error) {
       console.error('Error fetching data:', error);
       return []; // Return an empty array in case of error
     }
-
-    // console.log('Fetched data:', data); // Log fetched data
     return data; // Return the fetched data
   } catch (err) {
     console.error('Unexpected error:', err);
     return []; // Return an empty array in case of unexpected error
   }
 };
-// getStudentsTable();
+
+// Function to handle real-time updates
+const handleRealtimeUpdates = (callback: () => Promise<void>) => {
+  const channel = supabase
+    .channel('table-db-changes')
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'table_students',
+      },
+      (payload) => {
+        console.log('Change received:', payload);
+        // Re-fetch data or handle updates as necessary
+        callback();
+      },
+    )
+    .subscribe();
+
+  return channel;
+};
+
+// Fetch initial data and set up a listener for real-time updates
+export const fetchDataAndListenForUpdates = async (
+  setStudents: (students: any) => void,
+) => {
+  const data = await getStudentsTable();
+  console.log('Initial data:', data);
+  setStudents(data);
+
+  handleRealtimeUpdates(async () => {
+    const updatedData = await getStudentsTable();
+    console.log('Updated data:', updatedData);
+    setStudents(updatedData);
+  });
+};
 
 export const deleteUser = async (email: string) => {
   // Delete the user from the profiles table

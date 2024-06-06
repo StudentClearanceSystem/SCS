@@ -1,4 +1,5 @@
 import ActionCell from './ActionCell'; // Adjust the import path as needed
+import { StudentDetails } from './action'; // Import the StudentDetails type
 
 export type student = {
   studentno: string;
@@ -23,7 +24,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
   const cellValue = students[columnKey as keyof student];
 
   switch (columnKey) {
-    case 'studentNo':
+    case 'studentno':
       return (
         <div className="flex min-w-[100px] max-w-[150px] flex-col">
           <p className="text-bold text-small capitalize">{cellValue}</p>
@@ -58,8 +59,9 @@ export const renderCell = (students: student, columnKey: React.Key) => {
         <div className="flex justify-center">
           <ActionCell
             cashierRemarks={students.cashier_remarks}
-            isCashierCleared={students.is_cashier_cleared} // Pass the cashieriscleared value
+            isCashierCleared={students.is_cashier_cleared} // Pass the is_cashier_cleared value
             studentNo={students.studentno} // Pass the student number for identification
+            studentDetails={students as StudentDetails} // Pass the entire student object as studentDetails
           />
         </div>
       );

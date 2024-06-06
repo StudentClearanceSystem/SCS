@@ -1,28 +1,23 @@
 import SideNav from '@/app/components/SideNav';
-
-import { Metadata } from 'next';
 import TableCashier from './TableCashier';
 import { getStudentsTable } from '@/app/lib/utils';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
+import { Metadata } from 'next';
+
 export const metadata: Metadata = {
   title: 'Cashier',
 };
 
 interface Button {
   label: string;
-  href: string; // Adjust the type to accept a string for href
+  href: string;
 }
 
 const assignTaskBtns: Button[] = [
-  // {
-  //   label: 'Role Setter',
-  //   href: '/users/admin', // Provide the href for the Link component
-  // },
-  // If want to add another button
   {
     label: 'cashier',
-    href: '/users/cashier', // Provide the href for the Link component
+    href: '/users/cashier',
   },
 ];
 
@@ -35,6 +30,25 @@ export default async function Page() {
   }
 
   const students = await getStudentsTable();
+
+  // Set up real-time updates for students table
+  supabase
+    .channel('table-db-changes')
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'table_students',
+      },
+      async (payload) => {
+        console.log('Change received:', payload);
+        const updatedStudents = await getStudentsTable();
+        console.log('Updated students:', updatedStudents);
+        // You might want to send the updatedStudents data to the client side
+      },
+    )
+    .subscribe();
 
   return (
     <main
@@ -51,7 +65,7 @@ export default async function Page() {
         </header>
       </div>
       {/* Content area with scrolling */}
-      <div className=" flex-grow px-4 sm:px-6 lg:px-8">
+      <div className="flex-grow px-4 sm:px-6 lg:px-8">
         {/* Flex item with horizontal padding */}
         {/* Container covering the entire space */}
         <TableCashier students={students} />

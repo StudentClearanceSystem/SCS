@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import DropdownWithInput from './DropdownWithInput';
+import { updateCashierStatus, StudentDetails } from './action'; // Import the function and interface
 
 const ActionCell = ({
   isCashierCleared,
   studentNo,
   cashierRemarks,
+  studentDetails, // Add studentDetails prop
 }: {
   isCashierCleared: boolean;
   studentNo: string;
   cashierRemarks: string;
+  studentDetails: StudentDetails; // Define prop type
 }) => {
   const [selectedValue, setSelectedValue] = useState(
     isCashierCleared ? 'Cleared' : 'Uncleared',
@@ -17,15 +20,11 @@ const ActionCell = ({
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
-    // Update the backend or parent state with the new value
-    updateCashierStatus(studentNo, value === 'Cleared');
-  };
-
-  const updateCashierStatus = async (studentNo: string, isCleared: boolean) => {
-    // This function should update the cashieriscleared status in the backend or parent state
-    // Here we just log it for demonstration
-    console.log(`Updating studentNo ${studentNo} to ${isCleared}`);
-    // Add your update logic here
+    const updatedDetails = {
+      ...studentDetails,
+      is_cashier_cleared: value === 'Cleared',
+    };
+    updateCashierStatus(updatedDetails);
   };
 
   const getBackgroundColor = () => {
@@ -55,6 +54,7 @@ const ActionCell = ({
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
         remarks={cashierRemarks} // Pass the cashierRemarks value
+        studentDetails={studentDetails} // Pass the studentDetails prop
       />
     </div>
   );
