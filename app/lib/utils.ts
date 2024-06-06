@@ -3,6 +3,12 @@ import { supabase } from './supabase';
 /*------------------------------------------------------------------ */
 /*------------------------------------------------------------------ */
 /*------------------------------------------------------------------ */
+/*------------------------------ADMIN------------------------------- */
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
+
+/*------------------------------getUser------------------------------- */
 
 // Fetch the initial data from the profiles table
 export const getUser = async () => {
@@ -15,6 +21,8 @@ export const getUser = async () => {
   }
   return UserTable; // Return the fetched data
 };
+
+/*------------------------------handleRealtimeUpdatesForUserRole------------------------------- */
 
 // Function to handle real-time updates
 const handleRealtimeUpdatesForUserRole = (callback: () => Promise<void>) => {
@@ -37,6 +45,7 @@ const handleRealtimeUpdatesForUserRole = (callback: () => Promise<void>) => {
 
   return channel;
 };
+/*------------------------------fetchDataAndListenForUpdatesForUserRole------------------------------- */
 
 // Fetch initial data and set up a listener for real-time updates
 export const fetchDataAndListenForUpdatesForUserRole = async (
@@ -52,6 +61,8 @@ export const fetchDataAndListenForUpdatesForUserRole = async (
     setUsers(updatedData);
   });
 };
+
+/*------------------------------deleteUser------------------------------- */
 
 export const deleteUser = async (email: string) => {
   const { data: deletedUserData, error: deleteError } = await supabase
@@ -93,6 +104,14 @@ export const updateUserRole = async (userEmail: string, newRole: string) => {
   console.log(`User ${userEmail} role updated to ${newRole}`);
   return true;
 };
+
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
 
 // Fetch the initial data from the table_students table
 export const getStudentsTable = async () => {
@@ -146,6 +165,10 @@ export const fetchDataAndListenForUpdates = async (
   });
 };
 
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
+/*------------------------------------------------------------------ */
 /*------------------------------------------------------------------ */
 /*------------------------------------------------------------------ */
 /*------------------------------------------------------------------ */
