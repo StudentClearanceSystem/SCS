@@ -13,7 +13,10 @@ interface SetCashierTableProps {
 const SetCashierTable: React.FC<SetCashierTableProps> = ({ students }) => {
   const [filterValue, setFilterValue] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({});
+  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
+    column: 'id',
+    direction: 'ascending',
+  });
   const [page, setPage] = useState(1);
   const [studentData, setStudentData] = useState<student[]>(students);
 

@@ -60,19 +60,13 @@ const StudentTable: React.FC<StudentTableProps> = ({
 
   const sortedItems = React.useMemo(() => {
     return [...items].sort((a: student, b: student) => {
-      const first = a[sortDescriptor.column as keyof student];
-      const second = b[sortDescriptor.column as keyof student];
-
-      let cmp = 0;
-
-      if (sortDescriptor.column === 'id') {
-        cmp = Number(first) - Number(second);
-      } else {
-        cmp =
-          typeof first === 'number' && typeof second === 'number'
-            ? first - second
-            : String(first).localeCompare(String(second));
-      }
+      const first = a[
+        sortDescriptor.column as keyof student
+      ] as unknown as number;
+      const second = b[
+        sortDescriptor.column as keyof student
+      ] as unknown as number;
+      const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === 'descending' ? -cmp : cmp;
     });
