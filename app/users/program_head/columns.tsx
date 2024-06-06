@@ -18,6 +18,8 @@ import { StudentDetailsGuidance } from '@/app/users/guidance/action';
 // import { StudentDetailsPurchasing } from '@/app/users/purchasing/action';
 // import { StudentDetailsRegistrar } from '@/app/users/registrar/action';
 
+// comments somthing
+
 export type student = {
   studentno: string;
   name: string;
