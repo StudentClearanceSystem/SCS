@@ -1,6 +1,6 @@
 import { supabase } from '@/app/lib/supabase';
 
-export interface StudentDetailsDisipline {
+export interface StudentDetailsDiscipline {
   studentno: string;
   name: string;
   program: string;
@@ -11,12 +11,12 @@ export interface StudentDetailsDisipline {
 }
 
 export const updateDisciplineStatus = async (
-  studentDetails: StudentDetailsDisipline,
+  studentDetails: StudentDetailsDiscipline,
 ) => {
   const { studentno, name, program, year, section, is_discipline_cleared } =
     studentDetails;
 
-  let updateData: Partial<StudentDetailsDisipline> = { is_discipline_cleared };
+  let updateData: Partial<StudentDetailsDiscipline> = { is_discipline_cleared };
 
   // If the discipline is cleared, set discipline_remarks to an empty string
   if (is_discipline_cleared) {
@@ -43,7 +43,7 @@ export const updateDisciplineStatus = async (
 };
 
 export const updateDisciplineRemarks = async (
-  studentDetails: StudentDetailsDisipline,
+  studentDetails: StudentDetailsDiscipline,
 ) => {
   const {
     studentno,

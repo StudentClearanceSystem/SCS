@@ -10,7 +10,7 @@ import ActionCellRegistrar from '@/app/users/registrar/ActionCell';
 
 import { StudentDetails } from './action';
 import { StudentDetailsCashier } from '../cashier/action';
-import { StudentDetailsDisipline } from '@/app/users/discipline/action';
+import { StudentDetailsDiscipline } from '@/app/users/discipline/action';
 import { StudentDetailsGuidance } from '@/app/users/guidance/action';
 // import {StudentDetailsLibrarian} from '@/app/users/librarian/action';
 // import {StudentDetailsMIS} from '@/app/users/mis/action';
@@ -164,7 +164,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             disciplineRemarks={students.discipline_remarks}
             isDisciplineCleared={students.is_discipline_cleared} // Pass the is_discipline_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetailsDisipline} // Pass the entire student object as studentDetails
+            studentDetails={students as StudentDetailsDiscipline} // Pass the entire student object as studentDetails
           />
         </div>
       );
