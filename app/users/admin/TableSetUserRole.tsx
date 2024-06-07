@@ -26,9 +26,9 @@ export default function SetUserRoleTable({
 }) {
   const [users, setUsers] = useState<user[]>(initialUsers);
   const [filterValue, setFilterValue] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'id',
+    column: 'name',
     direction: 'ascending',
   });
   const [page, setPage] = useState(1);
@@ -135,8 +135,8 @@ export default function SetUserRoleTable({
             <select
               className="border-none bg-transparent pr-6 text-xs text-default-400 outline-none"
               onChange={onRowsPerPageChange}
+              value={rowsPerPage}
             >
-              <option value="5">5</option>
               <option value="10">10</option>
               <option value="15">15</option>
               <option value="35">35</option>
@@ -146,7 +146,13 @@ export default function SetUserRoleTable({
         </div>
       </div>
     );
-  }, [filteredItems.length, filterValue, onRowsPerPageChange, onSearchChange]);
+  }, [
+    filteredItems.length,
+    filterValue,
+    rowsPerPage,
+    onRowsPerPageChange,
+    onSearchChange,
+  ]);
 
   return (
     <Table

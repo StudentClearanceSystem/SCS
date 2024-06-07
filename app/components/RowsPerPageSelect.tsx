@@ -15,11 +15,10 @@ const RowsPerPageSelect: React.FC<RowsPerPageSelectProps> = ({
         className=" border-none bg-transparent pr-6 text-xs text-default-400 outline-none"
         onChange={onRowsPerPageChange}
       >
-        <option value="5">5</option>
         <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="35">35</option>
         <option value="45">45</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
       </select>
     </label>
   );

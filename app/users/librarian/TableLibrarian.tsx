@@ -12,7 +12,7 @@ interface SetLibrarianTableProps {
 
 const SetLibrarianTable: React.FC<SetLibrarianTableProps> = ({ students }) => {
   const [filterValue, setFilterValue] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: 'id',
     direction: 'ascending',

@@ -11,7 +11,7 @@ import ActionCellRegistrar from '@/app/users/registrar/ActionCell';
 import { StudentDetails } from './action';
 import { StudentDetailsCashier } from '../cashier/action';
 import { StudentDetailsDiscipline } from '@/app/users/discipline/action';
-// import { StudentDetailsGuidance } from '@/app/users/guidance/action';
+import { StudentDetailsGuidance } from '@/app/users/guidance/action';
 // import {StudentDetailsLibrarian} from '@/app/users/librarian/action';
 // import {StudentDetailsMIS} from '@/app/users/mis/action';
 // import {StudentDetailsProgramHead} from '@/app/users/program_head/action';
@@ -165,6 +165,17 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             isDisciplineCleared={students.is_discipline_cleared} // Pass the is_discipline_cleared value
             studentNo={students.studentno} // Pass the student number for identification
             studentDetails={students as StudentDetailsDiscipline} // Pass the entire student object as studentDetails
+          />
+        </div>
+      );
+    case 'is_guidance_cleared':
+      return (
+        <div className="flex justify-center">
+          <ActionCellGuidance
+            guidanceRemarks={students.guidance_remarks}
+            isGuidanceCleared={students.is_guidance_cleared} // Pass the is_guidance_cleared value
+            studentNo={students.studentno} // Pass the student number for identification
+            studentDetails={students as StudentDetails} // Pass the entire student object as studentDetails
           />
         </div>
       );
