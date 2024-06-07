@@ -175,7 +175,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             guidanceRemarks={students.guidance_remarks}
             isGuidanceCleared={students.is_guidance_cleared} // Pass the is_guidance_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetails} // Pass the entire student object as studentDetails
+            studentDetails={students as StudentDetailsGuidance} // Pass the entire student object as studentDetails
           />
         </div>
       );
