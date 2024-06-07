@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import DropdownWithInput from './DropdownWithInput';
-import { updateGuidanceStatus, StudentDetails } from './action'; // Import the function and interface
+import { updateGuidanceStatus, StudentDetailsGuidance } from './action'; // Import the function and interface
 
 const ActionCell = ({
   isGuidanceCleared,
@@ -12,7 +12,7 @@ const ActionCell = ({
   isGuidanceCleared: boolean;
   studentNo: string;
   guidanceRemarks: string;
-  studentDetails: StudentDetails; // Define prop type
+  studentDetails: StudentDetailsGuidance; // Define prop type
 }) => {
   const [selectedValue, setSelectedValue] = useState(
     isGuidanceCleared ? 'Cleared' : 'Uncleared',
