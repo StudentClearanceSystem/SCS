@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { Button } from '@nextui-org/react';
 import { useState, useEffect, useRef } from 'react';
-import { updatePurchasingRemarks, StudentDetails } from './action'; // Import the function and interface
+import { updatePurchasingRemarks, StudentDetailsPurchasing } from './action'; // Import the function and interface
 
 const DropdownWithInput = ({
   disabled,
@@ -10,7 +10,7 @@ const DropdownWithInput = ({
 }: {
   disabled: boolean;
   remarks: string;
-  studentDetails: StudentDetails; // Define prop type
+  studentDetails: StudentDetailsPurchasing; // Define prop type
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(remarks); // Initialize with remarks

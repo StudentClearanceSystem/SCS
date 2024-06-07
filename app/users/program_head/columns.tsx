@@ -1,4 +1,3 @@
-import ActionCell from './ActionCell';
 import ActionCellCashier from '@/app/users/cashier/ActionCell';
 import ActionCellDisipline from '@/app/users/discipline/ActionCell';
 import ActionCellGuidance from '@/app/users/guidance/ActionCell';
@@ -8,17 +7,14 @@ import ActionCellProgramHead from '@/app/users/program_head/ActionCell';
 import ActionCellPurchasing from '@/app/users/purchasing/ActionCell';
 import ActionCellRegistrar from '@/app/users/registrar/ActionCell';
 
-import { StudentDetails } from './action';
 import { StudentDetailsCashier } from '../cashier/action';
 import { StudentDetailsDiscipline } from '@/app/users/discipline/action';
 import { StudentDetailsGuidance } from '@/app/users/guidance/action';
-// import {StudentDetailsLibrarian} from '@/app/users/librarian/action';
-// import {StudentDetailsMIS} from '@/app/users/mis/action';
-// import {StudentDetailsProgramHead} from '@/app/users/program_head/action';
-// import { StudentDetailsPurchasing } from '@/app/users/purchasing/action';
-// import { StudentDetailsRegistrar } from '@/app/users/registrar/action';
-
-// comments somthing
+import { StudentDetailsLibrarian } from '@/app/users/librarian/action';
+import { StudentDetailsMIS } from '@/app/users/mis/action';
+import { StudentDetailsProgramHead } from './action';
+import { StudentDetailsPurchasing } from '@/app/users/purchasing/action';
+import { StudentDetailsRegistrar } from '@/app/users/registrar/action';
 
 export type student = {
   studentno: string;
@@ -137,11 +133,11 @@ export const renderCell = (students: student, columnKey: React.Key) => {
     case 'is_programhead_cleared':
       return (
         <div className="flex justify-center">
-          <ActionCell
+          <ActionCellProgramHead
             programheadRemarks={students.programhead_remarks}
             isProgramHeadCleared={students.is_programhead_cleared} // Pass the is_programhead_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetails} // Pass the entire student object as studentDetails
+            studentDetails={students as StudentDetailsProgramHead} // Pass the entire student object as studentDetails
           />
         </div>
       );
@@ -176,6 +172,54 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             isGuidanceCleared={students.is_guidance_cleared} // Pass the is_guidance_cleared value
             studentNo={students.studentno} // Pass the student number for identification
             studentDetails={students as StudentDetailsGuidance} // Pass the entire student object as studentDetails
+          />
+        </div>
+      );
+
+    case 'is_librarian_cleared':
+      return (
+        <div className="flex justify-center">
+          <ActionCellLibrarian
+            librarianRemarks={students.librarian_remarks}
+            isLibrarianCleared={students.is_librarian_cleared} // Pass the is_librarian_cleared value
+            studentNo={students.studentno} // Pass the student number for identification
+            studentDetails={students as StudentDetailsLibrarian} // Pass the entire student object as studentDetails
+          />
+        </div>
+      );
+
+    case 'is_mis_cleared':
+      return (
+        <div className="flex justify-center">
+          <ActionCellMIS
+            misRemarks={students.mis_remarks}
+            isMISCleared={students.is_mis_cleared} // Pass the is_mis_cleared value
+            studentNo={students.studentno} // Pass the student number for identification
+            studentDetails={students as StudentDetailsMIS} // Pass the entire student object as studentDetails
+          />
+        </div>
+      );
+
+    case 'is_purchasing_cleared':
+      return (
+        <div className="flex justify-center">
+          <ActionCellPurchasing
+            purchasingRemarks={students.purchasing_remarks}
+            isPurchasingCleared={students.is_purchasing_cleared} // Pass the is_purchasing_cleared value
+            studentNo={students.studentno} // Pass the student number for identification
+            studentDetails={students as StudentDetailsPurchasing} // Pass the entire student object as studentDetails
+          />
+        </div>
+      );
+
+    case 'is_registrar_cleared':
+      return (
+        <div className="flex justify-center">
+          <ActionCellRegistrar
+            registrarRemarks={students.registrar_remarks}
+            isRegistrarCleared={students.is_registrar_cleared} // Pass the is_registrar_cleared value
+            studentNo={students.studentno} // Pass the student number for identification
+            studentDetails={students as StudentDetailsRegistrar} // Pass the entire student object as studentDetails
           />
         </div>
       );

@@ -1,5 +1,5 @@
 import ActionCell from './ActionCell'; // Adjust the import path as needed
-import { StudentDetails } from './action'; // Import the StudentDetails type
+import { StudentDetailsLibrarian } from './action'; // Import the StudentDetailsLibrarian type
 
 export type student = {
   studentno: string;
@@ -65,7 +65,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             librarianRemarks={students.librarian_remarks}
             isLibrarianCleared={students.is_librarian_cleared} // Pass the is_librarian_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetails} // Pass the entire student object as studentDetails
+            studentDetails={students as StudentDetailsLibrarian} // Pass the entire student object as studentDetails
           />
         </div>
       );

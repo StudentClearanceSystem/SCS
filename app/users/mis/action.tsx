@@ -1,6 +1,6 @@
 import { supabase } from '@/app/lib/supabase';
 
-export interface StudentDetails {
+export interface StudentDetailsMIS {
   studentno: string;
   name: string;
   program: string;
@@ -10,11 +10,11 @@ export interface StudentDetails {
   mis_remarks: string;
 }
 
-export const updateMISStatus = async (studentDetails: StudentDetails) => {
+export const updateMISStatus = async (studentDetails: StudentDetailsMIS) => {
   const { studentno, name, program, year, section, is_mis_cleared } =
     studentDetails;
 
-  let updateData: Partial<StudentDetails> = { is_mis_cleared };
+  let updateData: Partial<StudentDetailsMIS> = { is_mis_cleared };
 
   // If the mis is cleared, set mis_remarks to an empty string
   if (is_mis_cleared) {
@@ -40,7 +40,7 @@ export const updateMISStatus = async (studentDetails: StudentDetails) => {
   }
 };
 
-export const updateMISRemarks = async (studentDetails: StudentDetails) => {
+export const updateMISRemarks = async (studentDetails: StudentDetailsMIS) => {
   const {
     studentno,
     name,
