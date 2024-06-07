@@ -11,7 +11,7 @@ import ActionCellRegistrar from '@/app/users/registrar/ActionCell';
 import { StudentDetails } from './action';
 import { StudentDetailsCashier } from '../cashier/action';
 import { StudentDetailsDiscipline } from '@/app/users/discipline/action';
-import { StudentDetailsGuidance } from '@/app/users/guidance/action';
+// import { StudentDetailsGuidance } from '@/app/users/guidance/action';
 // import {StudentDetailsLibrarian} from '@/app/users/librarian/action';
 // import {StudentDetailsMIS} from '@/app/users/mis/action';
 // import {StudentDetailsProgramHead} from '@/app/users/program_head/action';
