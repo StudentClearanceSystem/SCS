@@ -1,5 +1,8 @@
 import { supabase } from '@/app/lib/supabase';
 
+/**
+ * Interface representing student details for cashier clearance.
+ */
 export interface StudentDetailsCashier {
   studentno: string;
   name: string;
@@ -10,12 +13,20 @@ export interface StudentDetailsCashier {
   cashier_remarks: string;
 }
 
+/**
+ * Updates the cashier clearance status for a student in the database.
+ *
+ * @param studentDetails - Student details object containing updated cashier clearance status.
+ */
 export const updateCashierStatus = async (
   studentDetails: StudentDetailsCashier,
 ) => {
   const { studentno, name, program, year, section, is_cashier_cleared } =
     studentDetails;
 
+  /**
+   * Create a partial update object with the updated cashier clearance status.
+   */
   let updateData: Partial<StudentDetailsCashier> = { is_cashier_cleared };
 
   // If the cashier is cleared, set cashier_remarks to an empty string
@@ -42,6 +53,11 @@ export const updateCashierStatus = async (
   }
 };
 
+/**
+ * Updates the cashier remarks for a student in the database.
+ *
+ * @param studentDetails - Student details object containing updated cashier remarks.
+ */
 export const updateCashierRemarks = async (
   studentDetails: StudentDetailsCashier,
 ) => {
