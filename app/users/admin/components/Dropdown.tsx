@@ -33,7 +33,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({ role, onSelect }) => {
     <Dropdown className="flex justify-center border-1 border-default-200 bg-background">
       <DropdownTrigger>
         <Button radius="full" variant="light">
-          {selectedValue || 'USER'}
+          {selectedValue}
           <ChevronDownIcon className="h-3 w-3" />
         </Button>
       </DropdownTrigger>

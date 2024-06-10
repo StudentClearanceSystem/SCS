@@ -14,7 +14,7 @@ const SetMISTable: React.FC<SetMISTableProps> = ({ students }) => {
   const [filterValue, setFilterValue] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'id',
+    column: 'name',
     direction: 'ascending',
   });
   const [page, setPage] = useState(1);
