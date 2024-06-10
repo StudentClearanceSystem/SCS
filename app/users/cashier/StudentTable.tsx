@@ -15,6 +15,9 @@ import { student, columns, renderCell } from './columns';
 interface StudentTableProps {
   students: student[];
   filterValue: string;
+  filterProgram: string;
+  filterYear: string;
+  filterSection: string;
   rowsPerPage: number;
   sortDescriptor: SortDescriptor;
   page: number;
@@ -26,6 +29,9 @@ interface StudentTableProps {
 const StudentTable: React.FC<StudentTableProps> = ({
   students,
   filterValue,
+  filterProgram,
+  filterYear,
+  filterSection,
   rowsPerPage,
   sortDescriptor,
   page,
@@ -36,6 +42,9 @@ const StudentTable: React.FC<StudentTableProps> = ({
   const pages = Math.ceil(students.length / rowsPerPage);
 
   const hasSearchFilter = Boolean(filterValue);
+  const hasProgramFilter = Boolean(filterProgram);
+  const hasYearFilter = Boolean(filterYear);
+  const hasSectionFilter = Boolean(filterSection);
 
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...students];
@@ -48,8 +57,36 @@ const StudentTable: React.FC<StudentTableProps> = ({
       );
     }
 
+    if (hasProgramFilter) {
+      filteredUsers = filteredUsers.filter(
+        (student) => student.program === filterProgram,
+      );
+    }
+
+    if (hasYearFilter) {
+      filteredUsers = filteredUsers.filter(
+        (student) => String(student.year) === filterYear,
+      );
+    }
+
+    if (hasSectionFilter) {
+      filteredUsers = filteredUsers.filter(
+        (student) => student.section === filterSection,
+      );
+    }
+
     return filteredUsers;
-  }, [students, hasSearchFilter, filterValue]);
+  }, [
+    students,
+    hasSearchFilter,
+    filterValue,
+    hasProgramFilter,
+    filterProgram,
+    hasYearFilter,
+    filterYear,
+    hasSectionFilter,
+    filterSection,
+  ]);
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;

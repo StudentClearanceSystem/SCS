@@ -9,27 +9,53 @@ interface TableTopContentProps {
   filterValue: string;
   setFilterValue: React.Dispatch<React.SetStateAction<string>>;
   onSearchChange: (value?: string) => void;
+
+  filterProgram: string;
+  filterYear: string;
+  filterSection: string;
+  setFilterProgram: React.Dispatch<React.SetStateAction<string>>;
+  setFilterYear: React.Dispatch<React.SetStateAction<string>>;
+  setFilterSection: React.Dispatch<React.SetStateAction<string>>;
   onRowsPerPageChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const TableTopContent: React.FC<TableTopContentProps> = ({
   students,
   filterValue,
+  filterProgram,
+  filterYear,
+  filterSection,
   setFilterValue,
+  setFilterProgram,
+  setFilterYear,
+  setFilterSection,
   onSearchChange,
   onRowsPerPageChange,
 }) => {
-  const displayedUserCount = filterValue
-    ? students.filter((student) => {
-        const searchValue = filterValue.toLowerCase();
-        return (
-          student.studentno.toString().includes(searchValue) ||
-          student.name.toLowerCase().includes(searchValue) ||
-          student.program.toLowerCase().includes(searchValue) ||
-          student.year.toString().toLowerCase().includes(searchValue)
-        );
-      }).length
-    : students.length;
+  const displayedUserCount = students.filter((student) => {
+    const searchValue = filterValue.toLowerCase();
+
+    const matchesSearchFilter =
+      !filterValue ||
+      student.studentno.toString().includes(searchValue) ||
+      student.name.toLowerCase().includes(searchValue) ||
+      student.program.toLowerCase().includes(searchValue) ||
+      student.year.toString().toLowerCase().includes(searchValue);
+
+    const matchesProgramFilter =
+      !filterProgram || student.program === filterProgram;
+    const matchesYearFilter =
+      !filterYear || String(student.year) === filterYear;
+    const matchesSectionFilter =
+      !filterSection || student.section === filterSection;
+
+    return (
+      matchesSearchFilter &&
+      matchesProgramFilter &&
+      matchesYearFilter &&
+      matchesSectionFilter
+    );
+  }).length;
 
   return (
     <div className="flex flex-col gap-1">
@@ -52,7 +78,7 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
             label="Program"
             options={getUniqueValues(students, 'program')}
             onSelect={(selectedProgram) => {
-              setFilterValue(selectedProgram);
+              setFilterProgram(selectedProgram);
             }}
           />
           {/* Dropdown for Year */}
@@ -60,7 +86,7 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
             label="Year"
             options={getUniqueValues(students, 'year')}
             onSelect={(selectedYear) => {
-              setFilterValue(selectedYear);
+              setFilterYear(selectedYear);
             }}
           />
           {/* Dropdown for Section */}
@@ -68,7 +94,7 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
             label="Section"
             options={getUniqueValues(students, 'section')}
             onSelect={(selectedSection) => {
-              setFilterValue(selectedSection);
+              setFilterSection(selectedSection);
             }}
           />
         </div>
