@@ -71,7 +71,7 @@ const StudentTable: React.FC<StudentTableProps> = ({
 
     if (hasSectionFilter) {
       filteredUsers = filteredUsers.filter(
-        (student) => student.section === filterSection,
+        (student) => String(student.section) === filterSection,
       );
     }
 

@@ -39,14 +39,15 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
       student.studentno.toString().includes(searchValue) ||
       student.name.toLowerCase().includes(searchValue) ||
       student.program.toLowerCase().includes(searchValue) ||
-      student.year.toString().toLowerCase().includes(searchValue);
+      student.year.toString().toLowerCase().includes(searchValue) ||
+      student.section.toString().toLowerCase().includes(searchValue);
 
     const matchesProgramFilter =
       !filterProgram || student.program === filterProgram;
     const matchesYearFilter =
       !filterYear || String(student.year) === filterYear;
     const matchesSectionFilter =
-      !filterSection || student.section === filterSection;
+      !filterSection || String(student.section) === filterSection;
 
     return (
       matchesSearchFilter &&
