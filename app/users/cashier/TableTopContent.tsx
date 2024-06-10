@@ -7,15 +7,14 @@ import Dropdown from '@/app/components/Dropdown';
 interface TableTopContentProps {
   students: student[];
   filterValue: string;
-  setFilterValue: React.Dispatch<React.SetStateAction<string>>;
-  onSearchChange: (value?: string) => void;
-
   filterProgram: string;
   filterYear: string;
   filterSection: string;
+  setFilterValue: React.Dispatch<React.SetStateAction<string>>;
   setFilterProgram: React.Dispatch<React.SetStateAction<string>>;
   setFilterYear: React.Dispatch<React.SetStateAction<string>>;
   setFilterSection: React.Dispatch<React.SetStateAction<string>>;
+  onSearchChange: (value?: string) => void;
   onRowsPerPageChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
