@@ -15,6 +15,9 @@ import { student, columns, renderCell } from './columns';
 interface StudentTableProps {
   students: student[];
   filterValue: string;
+  filterProgram: string;
+  filterYear: string;
+  filterSection: string;
   rowsPerPage: number;
   sortDescriptor: SortDescriptor;
   page: number;
@@ -26,6 +29,9 @@ interface StudentTableProps {
 const StudentTable: React.FC<StudentTableProps> = ({
   students,
   filterValue,
+  filterProgram,
+  filterYear,
+  filterSection,
   rowsPerPage,
   sortDescriptor,
   page,
@@ -36,6 +42,9 @@ const StudentTable: React.FC<StudentTableProps> = ({
   const pages = Math.ceil(students.length / rowsPerPage);
 
   const hasSearchFilter = Boolean(filterValue);
+  const hasProgramFilter = Boolean(filterProgram);
+  const hasYearFilter = Boolean(filterYear);
+  const hasSectionFilter = Boolean(filterSection);
 
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...students];
@@ -48,29 +57,53 @@ const StudentTable: React.FC<StudentTableProps> = ({
       );
     }
 
+    if (hasProgramFilter) {
+      filteredUsers = filteredUsers.filter(
+        (student) => student.program === filterProgram,
+      );
+    }
+
+    if (hasYearFilter) {
+      filteredUsers = filteredUsers.filter(
+        (student) => String(student.year) === filterYear,
+      );
+    }
+
+    if (hasSectionFilter) {
+      filteredUsers = filteredUsers.filter(
+        (student) => String(student.section) === filterSection,
+      );
+    }
+
     return filteredUsers;
-  }, [students, hasSearchFilter, filterValue]);
-
-  const items = React.useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return filteredItems.slice(start, end);
-  }, [page, filteredItems, rowsPerPage]);
+  }, [
+    students,
+    hasSearchFilter,
+    filterValue,
+    hasProgramFilter,
+    filterProgram,
+    hasYearFilter,
+    filterYear,
+    hasSectionFilter,
+    filterSection,
+  ]);
 
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: student, b: student) => {
-      const first = a[
-        sortDescriptor.column as keyof student
-      ] as unknown as number;
-      const second = b[
-        sortDescriptor.column as keyof student
-      ] as unknown as number;
+    return [...filteredItems].sort((a: student, b: student) => {
+      const first = a[sortDescriptor.column as keyof student];
+      const second = b[sortDescriptor.column as keyof student];
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === 'descending' ? -cmp : cmp;
     });
-  }, [sortDescriptor, items]);
+  }, [sortDescriptor, filteredItems]);
+
+  const paginatedItems = React.useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    return sortedItems.slice(start, end);
+  }, [page, sortedItems, rowsPerPage]);
 
   return (
     <Table
@@ -109,7 +142,7 @@ const StudentTable: React.FC<StudentTableProps> = ({
         )}
       </TableHeader>
 
-      <TableBody emptyContent={'No students found'} items={sortedItems}>
+      <TableBody emptyContent={'No students found'} items={paginatedItems}>
         {(item) => (
           <TableRow key={item.studentno}>
             {(columnKey) => (

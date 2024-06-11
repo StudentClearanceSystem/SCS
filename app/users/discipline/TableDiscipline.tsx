@@ -6,15 +6,20 @@ import TableTopContent from './TableTopContent';
 import StudentTable from './StudentTable';
 import { fetchDataAndListenForUpdates } from '@/app/lib/utils';
 
-interface SetCashierTableProps {
+interface SetDisciplineTableProps {
   students: student[];
 }
 
-const SetCashierTable: React.FC<SetCashierTableProps> = ({ students }) => {
+const SetDisciplineTable: React.FC<SetDisciplineTableProps> = ({
+  students,
+}) => {
   const [filterValue, setFilterValue] = useState('');
+  const [filterProgram, setFilterProgram] = useState('');
+  const [filterYear, setFilterYear] = useState('');
+  const [filterSection, setFilterSection] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'id',
+    column: 'program',
     direction: 'ascending',
   });
   const [page, setPage] = useState(1);
@@ -46,18 +51,35 @@ const SetCashierTable: React.FC<SetCashierTableProps> = ({ students }) => {
       <TableTopContent
         students={studentData}
         filterValue={filterValue}
+        filterProgram={filterProgram}
+        filterYear={filterYear}
+        filterSection={filterSection}
         setFilterValue={setFilterValue}
+        setFilterProgram={setFilterProgram}
+        setFilterYear={setFilterYear}
+        setFilterSection={setFilterSection}
         onSearchChange={onSearchChange}
         onRowsPerPageChange={onRowsPerPageChange}
       />
     ),
-    [filterValue, onRowsPerPageChange, onSearchChange, studentData],
+    [
+      filterValue,
+      filterProgram,
+      filterYear,
+      filterSection,
+      onRowsPerPageChange,
+      onSearchChange,
+      studentData,
+    ],
   );
 
   return (
     <StudentTable
       students={studentData}
       filterValue={filterValue}
+      filterProgram={filterProgram}
+      filterYear={filterYear}
+      filterSection={filterSection}
       rowsPerPage={rowsPerPage}
       sortDescriptor={sortDescriptor}
       page={page}
@@ -68,4 +90,4 @@ const SetCashierTable: React.FC<SetCashierTableProps> = ({ students }) => {
   );
 };
 
-export default SetCashierTable;
+export default SetDisciplineTable;

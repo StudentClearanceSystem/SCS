@@ -88,26 +88,22 @@ const StudentTable: React.FC<StudentTableProps> = ({
     filterSection,
   ]);
 
-  const items = React.useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return filteredItems.slice(start, end);
-  }, [page, filteredItems, rowsPerPage]);
-
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: student, b: student) => {
-      const first = a[
-        sortDescriptor.column as keyof student
-      ] as unknown as number;
-      const second = b[
-        sortDescriptor.column as keyof student
-      ] as unknown as number;
+    return [...filteredItems].sort((a: student, b: student) => {
+      const first = a[sortDescriptor.column as keyof student];
+      const second = b[sortDescriptor.column as keyof student];
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === 'descending' ? -cmp : cmp;
     });
-  }, [sortDescriptor, items]);
+  }, [sortDescriptor, filteredItems]);
+
+  const paginatedItems = React.useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    return sortedItems.slice(start, end);
+  }, [page, sortedItems, rowsPerPage]);
 
   return (
     <Table
@@ -146,7 +142,7 @@ const StudentTable: React.FC<StudentTableProps> = ({
         )}
       </TableHeader>
 
-      <TableBody emptyContent={'No students found'} items={sortedItems}>
+      <TableBody emptyContent={'No students found'} items={paginatedItems}>
         {(item) => (
           <TableRow key={item.studentno}>
             {(columnKey) => (

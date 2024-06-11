@@ -1,23 +1,27 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { Button } from '@nextui-org/react';
 import { useState, useEffect, useRef } from 'react';
-import { updateCashierRemarks, StudentDetailsCashier } from './action'; // Import the function and interface
 
-const DropdownWithInput = ({
-  disabled,
-  remarks,
-  studentDetails, // Add studentDetails prop
-}: {
+interface DropdownWithInputProps {
   disabled: boolean;
-  remarks: string;
-  studentDetails: StudentDetailsCashier; // Define prop type
+  initialInputValue: string;
+  placeholder?: string;
+  buttonLabel?: string;
+  bgColor?: string; // Add bgColor prop
+  onSubmit: (inputValue: string) => void;
+}
+
+const DropdownWithInput: React.FC<DropdownWithInputProps> = ({
+  disabled,
+  initialInputValue,
+  placeholder = 'Enter text...',
+  buttonLabel = 'Submit',
+  bgColor = '#6CCEE8', // Default value for bgColor
+  onSubmit,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState(remarks); // Initialize with remarks
+  const [inputValue, setInputValue] = useState(initialInputValue);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Set the background color variable
-  const bgColor = '#6CCEE8';
 
   const handleToggle = () => {
     if (!disabled) {
@@ -39,11 +43,7 @@ const DropdownWithInput = ({
   };
 
   const handleSubmit = () => {
-    const updatedDetails = {
-      ...studentDetails,
-      cashier_remarks: inputValue,
-    };
-    updateCashierRemarks(updatedDetails);
+    onSubmit(inputValue);
     setIsOpen(false); // Close the dropdown
   };
 
@@ -77,17 +77,17 @@ const DropdownWithInput = ({
         <div className="relative">
           <div
             className={`absolute right-0 z-30 mt-2 w-40 origin-top-right rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:w-56`}
-            style={{ backgroundColor: bgColor }}
+            style={{ backgroundColor: bgColor }} // Use bgColor prop
           >
             <div className="py-1">
               <textarea
                 value={inputValue}
                 onChange={handleInputChange}
                 className="block w-full border-0 px-4 py-2 text-sm text-black focus:ring-0"
-                placeholder="Remarks..."
+                placeholder={placeholder}
                 disabled={disabled}
                 rows={3} // Set the number of rows to control the height of the textarea
-                style={{ backgroundColor: bgColor }}
+                style={{ backgroundColor: bgColor }} // Use bgColor prop
               />
               <div className="mt-2 flex justify-center">
                 <Button
@@ -97,14 +97,14 @@ const DropdownWithInput = ({
                   onClick={handleSubmit}
                   disabled={disabled}
                 >
-                  Submit
+                  {buttonLabel}
                 </Button>
               </div>
             </div>
           </div>
           <div
             className="absolute right-1.5 z-40 h-2 border-b-8 border-l-8 border-r-8 border-transparent"
-            style={{ borderBottomColor: bgColor }}
+            style={{ borderBottomColor: bgColor }} // Use bgColor prop
           ></div>
         </div>
       )}

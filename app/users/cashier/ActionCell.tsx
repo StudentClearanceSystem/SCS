@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
-import DropdownWithInput from './DropdownWithInput';
-import { updateCashierStatus, StudentDetailsCashier } from './action'; // Import the function and interface
+import DropdownWithInput from '../../components/DropdownWithInput';
+import {
+  updateCashierStatus,
+  updateCashierRemarks,
+  StudentDetailsCashier,
+} from './action';
 
 const ActionCell = ({
   isCashierCleared,
   studentNo,
   cashierRemarks,
-  studentDetails, // Add studentDetails prop
+  studentDetails,
 }: {
   isCashierCleared: boolean;
   studentNo: string;
   cashierRemarks: string;
-  studentDetails: StudentDetailsCashier; // Define prop type
+  studentDetails: StudentDetailsCashier;
 }) => {
   const [selectedValue, setSelectedValue] = useState(
     isCashierCleared ? 'Cleared' : 'Uncleared',
@@ -25,6 +29,14 @@ const ActionCell = ({
       is_cashier_cleared: value === 'Cleared',
     };
     updateCashierStatus(updatedDetails);
+  };
+
+  const handleRemarksSubmit = (remarks: string) => {
+    const updatedDetails = {
+      ...studentDetails,
+      cashier_remarks: remarks,
+    };
+    updateCashierRemarks(updatedDetails);
   };
 
   const getBackgroundColor = () => {
@@ -53,8 +65,11 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        remarks={cashierRemarks} // Pass the cashierRemarks value
-        studentDetails={studentDetails} // Pass the studentDetails prop
+        initialInputValue={cashierRemarks}
+        placeholder="Remarks..."
+        buttonLabel="Submit"
+        bgColor={'#6CCEE8'} // Pass the bgColor prop
+        onSubmit={handleRemarksSubmit}
       />
     </div>
   );

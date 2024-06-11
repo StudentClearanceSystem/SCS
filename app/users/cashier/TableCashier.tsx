@@ -17,7 +17,7 @@ const SetCashierTable: React.FC<SetCashierTableProps> = ({ students }) => {
   const [filterSection, setFilterSection] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'name',
+    column: 'program',
     direction: 'ascending',
   });
   const [page, setPage] = useState(1);
