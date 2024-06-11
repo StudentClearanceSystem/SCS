@@ -101,7 +101,8 @@ export default function AddStudentPage() {
               minLength={11}
               maxLength={11}
               style={inputStyle}
-              className="w-32 sm:text-[8px] md:text-[12px] lg:text-[10px]"
+              size="sm"
+              className="w-40 sm:text-[8px] md:text-[12px] lg:text-[10px]"
             />
             <Input
               labelPlacement="outside"
@@ -111,7 +112,8 @@ export default function AddStudentPage() {
               onChange={handleChange}
               isRequired
               style={inputStyle}
-              className="w-32 sm:text-[8px] md:text-[12px] lg:text-[10px]"
+              size="sm"
+              className="w-40 sm:text-[8px] md:text-[12px] lg:text-[10px]"
             />
             <Input
               labelPlacement="outside"
@@ -121,7 +123,8 @@ export default function AddStudentPage() {
               onChange={handleChange}
               isRequired
               style={inputStyle}
-              className="w-32 sm:text-[8px] md:text-[12px] lg:text-[10px]"
+              size="sm"
+              className="w-40 sm:text-[8px] md:text-[12px] lg:text-[10px]"
             />
             <Input
               labelPlacement="outside"
@@ -129,21 +132,25 @@ export default function AddStudentPage() {
               name="middleName"
               value={formData.middleName}
               onChange={handleChange}
+              isRequired
               style={inputStyle}
-              className="w-32 sm:text-[8px] md:text-[12px] lg:text-[10px]"
+              size="sm"
+              className="w-40 sm:text-[8px] md:text-[12px] lg:text-[10px]"
             />
           </div>
           <div className="flex justify-end space-x-3">
             <Button
+              size="sm"
               type="submit"
-              className="bg-primary text-background sm:text-[8px] md:text-base lg:text-lg"
+              className="bg-primary text-background"
             >
-              Add
+              Submit
             </Button>
             <Link href="/users/registrar">
               <Button
+                size="sm"
                 type="button"
-                className="btn-secondary text-black sm:text-[8px] md:text-base lg:text-lg"
+                className="btn-secondary text-black"
                 onClick={handleCancel}
               >
                 Cancel
