@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
-import DropdownWithInput from './DropdownWithInput';
-import { updatePurchasingStatus, StudentDetailsPurchasing } from './action'; // Import the function and interface
+import DropdownWithInput from '../../components/DropdownWithInput';
+import {
+  updatePurchasingStatus,
+  StudentDetailsPurchasing,
+  updatePurchasingRemarks,
+} from './action'; // Import the function and interface
 
 const ActionCell = ({
   isPurchasingCleared,
@@ -25,6 +29,14 @@ const ActionCell = ({
       is_purchasing_cleared: value === 'Cleared',
     };
     updatePurchasingStatus(updatedDetails);
+  };
+
+  const handleRemarksSubmit = (remarks: string) => {
+    const updatedDetails = {
+      ...studentDetails,
+      cashier_remarks: remarks,
+    };
+    updatePurchasingRemarks(updatedDetails);
   };
 
   const getBackgroundColor = () => {
@@ -53,8 +65,11 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        remarks={purchasingRemarks} // Pass the purchasingRemarks value
-        studentDetails={studentDetails} // Pass the studentDetails prop
+        initialInputValue={purchasingRemarks}
+        placeholder="Remarks..."
+        buttonLabel="Submit"
+        bgColor={'#FFB980'} // Pass the bgColor prop
+        onSubmit={handleRemarksSubmit}
       />
     </div>
   );

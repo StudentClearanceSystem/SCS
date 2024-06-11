@@ -5,7 +5,7 @@ import {
   StudentDetailsDiscipline,
   updateDisciplineRemarks,
 } from './action'; // Import the function and interface
-import DropdownWithInput from '@/app/components/DropdownWithInput';
+import DropdownWithInput from '../../components/DropdownWithInput';
 
 const ActionCell = ({
   isDisciplineCleared,
