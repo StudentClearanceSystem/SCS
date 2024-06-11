@@ -21,12 +21,8 @@ const assignTaskBtns: Button[] = [
     href: '/users/registrar',
   },
   {
-    label: 'Add Students',
-    href: '/users/registrar/Add_Student',
-  },
-  {
     label: 'Modify Students',
-    href: '/users/registrar/Modify_Student',
+    href: '/users/registrar/modify_student',
   },
 ];
 
