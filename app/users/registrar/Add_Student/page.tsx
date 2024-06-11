@@ -1,7 +1,28 @@
 'use client';
+import SideNav from '@/app/components/SideNav';
 import { Button, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import { useState } from 'react';
+
+interface Button {
+  label: string;
+  href: string;
+}
+
+const assignTaskBtns: Button[] = [
+  {
+    label: 'Clearance',
+    href: '/users/registrar',
+  },
+  {
+    label: 'Add Students',
+    href: '/users/registrar/Add_Student',
+  },
+  {
+    label: 'Modify Students',
+    href: '/users/registrar/Modify_Student',
+  },
+];
 
 export default function AddStudentPage() {
   // Style
@@ -53,7 +74,6 @@ export default function AddStudentPage() {
     // try {
     //   // Attempt to parse the JSON response
     //   const data = await response.json();
-
     //   // Check if the response contains valid JSON data
     //   if (data && data.error && data.error.message) {
     //     setErrorMessage(data.error.message);
@@ -80,6 +100,8 @@ export default function AddStudentPage() {
 
   return (
     <main className="flex h-screen flex-col items-center justify-center bg-[#C28FC2] p-5">
+      <SideNav title={'REGISTRAR'} assignTaskBtns={assignTaskBtns} />
+
       <div className=" w-full max-w-[95%] rounded-lg bg-gray-200 p-5 shadow-2xl">
         <h2 className="mb-8 text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
           ADD STUDENT
