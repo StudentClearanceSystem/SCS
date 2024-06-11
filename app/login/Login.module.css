@@ -188,7 +188,7 @@
   top: calc(100% - 100px);
   width: 84px;
   height: 84px;
-  background-image: /* webpackIgnore: true */ url('/assets/credits.jpg');
+  background-image: /* webpackIgnore: true */ url('/assets/credits.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

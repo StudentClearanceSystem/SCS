@@ -15,7 +15,16 @@ interface Button {
   href: string;
 }
 
-// const assignTaskBtns: Button[] = [];
+const assignTaskBtns: Button[] = [
+  {
+    label: 'Clearance',
+    href: '/users/registrar',
+  },
+  {
+    label: 'Modify Students',
+    href: '/users/registrar/addStudent',
+  },
+];
 
 export default async function Page() {
   const supabase = createClient();
@@ -51,7 +60,7 @@ export default async function Page() {
       className="no-scrollbar flex min-h-screen flex-col"
       style={{ backgroundColor: '#C28FC2' }}
     >
-      <SideNav title={'REGISTRAR'} assignTaskBtns={[]} />
+      <SideNav title={'REGISTRAR'} assignTaskBtns={assignTaskBtns} />
       <div className="flex-grow p-8">
         <header>
           <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>
