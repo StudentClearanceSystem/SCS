@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
+
+import DropdownWithInput from '@/app/components/DropdownWithInput';
 import {
-  updateRegistrarStatus,
   StudentDetailsRegistrar,
   updateRegistrarRemarks,
-} from './action'; // Import the function and interface
-import DropdownWithInput from '@/app/components/DropdownWithInput';
+  updateRegistrarStatus,
+} from '../action';
 
 const ActionCell = ({
   isRegistrarCleared,
