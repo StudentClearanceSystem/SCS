@@ -9,6 +9,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import TableRegistrar from './TableRegistrar';
 import SideNav from '@/app/components/SideNav';
+import AddStudent from './AddStudent';
 
 interface Button {
   label: string;
@@ -73,6 +74,7 @@ export default async function Page() {
       <div className="flex-grow px-4 sm:px-6 lg:px-8">
         {/* Flex item with horizontal padding */}
         {/* Container covering the entire space */}
+        <AddStudent />
         <TableRegistrar students={students} />
       </div>
     </main>
