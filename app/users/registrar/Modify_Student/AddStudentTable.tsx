@@ -12,6 +12,7 @@ import {
   getKeyValue,
 } from '@nextui-org/react';
 import Link from 'next/link';
+import DropdownComponent from './DropdownComponent';
 
 export default function AddStudentTable() {
   // Style
@@ -26,6 +27,9 @@ export default function AddStudentTable() {
     firstName: '',
     lastName: '',
     middleName: '',
+    program: 'ACT',
+    year: '1',
+    section: '101',
   });
 
   const [rows, setRows] = useState([{ key: 'initial', ...formData }]);
@@ -33,13 +37,25 @@ export default function AddStudentTable() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number,
   ) => {
     const { name, value } = e.target;
     setRows((prevRows) => {
       const updatedRows = [...prevRows];
       updatedRows[index] = { ...updatedRows[index], [name]: value };
+      return updatedRows;
+    });
+  };
+
+  const handleDropdownChange = (
+    index: number,
+    field: string,
+    value: string,
+  ) => {
+    setRows((prevRows) => {
+      const updatedRows = [...prevRows];
+      updatedRows[index] = { ...updatedRows[index], [field]: value };
       return updatedRows;
     });
   };
@@ -71,20 +87,38 @@ export default function AddStudentTable() {
     // Output form data with alert after successful submission
     rows.forEach((row) => {
       alert(
-        `User added successfully!\nID: ${row.id}\nFirst Name: ${row.firstName}\nLast Name: ${row.lastName}\nMiddle Name: ${row.middleName}`,
+        `User added successfully!\nID: ${row.id}\nFirst Name: ${row.firstName}\nLast Name: ${row.lastName}\nMiddle Name: ${row.middleName}\nProgram: ${row.program}\nYear: ${row.year}\nSection: ${row.section}`,
       );
     });
 
     // Reset form fields
     setRows([
-      { key: 'initial', id: '', firstName: '', lastName: '', middleName: '' },
+      {
+        key: 'initial',
+        id: '',
+        firstName: '',
+        lastName: '',
+        middleName: '',
+        program: 'ACT',
+        year: '1',
+        section: '101',
+      },
     ]);
   };
 
   const handleCancel = () => {
     // Reset form fields on cancel
     setRows([
-      { key: 'initial', id: '', firstName: '', lastName: '', middleName: '' },
+      {
+        key: 'initial',
+        id: '',
+        firstName: '',
+        lastName: '',
+        middleName: '',
+        program: 'ACT',
+        year: '1',
+        section: '101',
+      },
     ]);
     setErrorMessage('');
   };
@@ -94,6 +128,9 @@ export default function AddStudentTable() {
     { key: 'firstName', label: 'First Name' },
     { key: 'lastName', label: 'Last Name' },
     { key: 'middleName', label: 'Middle Name' },
+    { key: 'program', label: 'Program' },
+    { key: 'year', label: 'Year' },
+    { key: 'section', label: 'Section' },
   ];
 
   return (
@@ -117,22 +154,96 @@ export default function AddStudentTable() {
             <TableBody>
               {rows.map((row, rowIndex) => (
                 <TableRow key={row.key}>
-                  {(columnKey) => (
-                    <TableCell>
-                      <Input
-                        labelPlacement="outside"
-                        name={String(columnKey)}
-                        label={String(columnKey)}
-                        value={String(getKeyValue(row, columnKey))}
-                        onChange={(e) => handleChange(e, rowIndex)}
-                        isRequired
-                        style={inputStyle}
-                        size="sm"
-                        minLength={columnKey === 'id' ? 11 : undefined}
-                        maxLength={columnKey === 'id' ? 11 : undefined}
-                      />
-                    </TableCell>
-                  )}
+                  {(columnKey) => {
+                    if (['program', 'year', 'section'].includes(columnKey)) {
+                      let items = [];
+                      switch (columnKey) {
+                        case 'program':
+                          items = [
+                            'ACT',
+                            'ART',
+                            'BACOMM',
+                            'BAPsych',
+                            'BSA',
+                            'BSAIS',
+                            'BSBA',
+                            'BSCpE',
+                            'BSCS',
+                            'BSTM',
+                            'BSRTCS',
+                            'BSIT',
+                          ];
+                          break;
+                        case 'year':
+                          items = ['1', '2', '3', '4'];
+                          break;
+                        case 'section':
+                          items = [
+                            '101',
+                            '102',
+                            '103',
+                            '104',
+                            '201',
+                            '202',
+                            '203',
+                            '204',
+                            '301',
+                            '302',
+                            '303',
+                            '304',
+                            '401',
+                            '402',
+                            '403',
+                            '404',
+                            '501',
+                            '502',
+                            '503',
+                            '504',
+                            '601',
+                            '602',
+                            '603',
+                            '604',
+                            '701',
+                            '702',
+                            '703',
+                            '704',
+                          ];
+                          break;
+                        default:
+                          break;
+                      }
+                      return (
+                        <TableCell key={columnKey}>
+                          <DropdownComponent
+                            items={items}
+                            label={
+                              columnKey.charAt(0).toUpperCase() +
+                              columnKey.slice(1)
+                            }
+                            onSelectionChange={(value) =>
+                              handleDropdownChange(rowIndex, columnKey, value)
+                            }
+                          />
+                        </TableCell>
+                      );
+                    }
+                    return (
+                      <TableCell key={columnKey}>
+                        <Input
+                          labelPlacement="outside"
+                          name={String(columnKey)}
+                          label={String(columnKey)}
+                          value={String(getKeyValue(row, columnKey))}
+                          onChange={(e) => handleChange(e, rowIndex)}
+                          isRequired
+                          style={inputStyle}
+                          size="sm"
+                          minLength={columnKey === 'id' ? 11 : undefined}
+                          maxLength={columnKey === 'id' ? 11 : undefined}
+                        />
+                      </TableCell>
+                    );
+                  }}
                 </TableRow>
               ))}
             </TableBody>
