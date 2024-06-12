@@ -51,6 +51,13 @@ export default function AddStudentTable() {
     ]);
   };
 
+  const handleDeleteRow = () => {
+    setRows((prevRows) => {
+      if (prevRows.length === 1) return prevRows; // Prevent deleting the last row
+      return prevRows.slice(0, -1);
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
@@ -138,6 +145,14 @@ export default function AddStudentTable() {
               onClick={handleAddRow}
             >
               Add Row
+            </Button>
+            <Button
+              size="sm"
+              type="button"
+              className="bg-danger text-background"
+              onClick={handleDeleteRow}
+            >
+              Delete Row
             </Button>
             <Button
               size="sm"
