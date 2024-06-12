@@ -7,8 +7,6 @@ export type student = {
   program: string;
   year: string;
   section: string;
-  is_registrar_cleared: boolean; // Add this line
-  registrar_remarks: string; // Add this line
 };
 
 export const columns = [
@@ -18,8 +16,8 @@ export const columns = [
   { name: 'YEAR', uid: 'year', sortable: true },
   { name: 'SECTION', uid: 'section', sortable: true },
   {
-    name: 'Registrar is cleared?',
-    uid: 'is_registrar_cleared',
+    name: 'ACTION',
+    uid: 'edit_students',
     sortable: false,
   },
 ];
@@ -62,8 +60,6 @@ export const renderCell = (students: student, columnKey: React.Key) => {
       return (
         <div className="flex justify-center">
           <ActionCell
-            registrarRemarks={students.registrar_remarks}
-            isRegistrarCleared={students.is_registrar_cleared} // Pass the is_registrar_cleared value
             studentNo={students.studentno} // Pass the student number for identification
             studentDetails={students as StudentDetailsRegistrar} // Pass the entire student object as studentDetails
           />
