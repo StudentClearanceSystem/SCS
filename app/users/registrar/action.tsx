@@ -4,8 +4,8 @@ export interface StudentDetailsRegistrar {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  year: number;
+  section: number;
   is_registrar_cleared: boolean;
   registrar_remarks: string;
 }
