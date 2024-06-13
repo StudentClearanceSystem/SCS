@@ -14,6 +14,7 @@ import {
 import Link from 'next/link';
 import StringDropdownComponent from './StringDropdownComponent';
 import NumberDropdownComponent from './NumberDropdownComponent';
+import { insertStudentData } from './action';
 
 export default function AddStudentTable() {
   // Style
@@ -86,25 +87,40 @@ export default function AddStudentTable() {
     }
 
     // Output form data with alert after successful submission
-    rows.forEach((row) => {
-      alert(
-        `User added successfully!\nID: ${row.id}\nFirst Name: ${row.firstName}\nLast Name: ${row.lastName}\nMiddle Name: ${row.middleName}\nProgram: ${row.program}\nYear: ${row.year}\nSection: ${row.section}`,
-      );
-    });
+    try {
+      for (const row of rows) {
+        const name = `${row.firstName} ${row.lastName} ${row.middleName}`;
+        await insertStudentData({
+          studentno: row.id,
+          name: name.trim(), // Trim any leading/trailing whitespace from the name
+          program: row.program,
+          year: row.year,
+          section: row.section,
+        });
 
-    // Reset form fields
-    setRows([
-      {
-        key: 'initial',
-        id: '',
-        firstName: '',
-        lastName: '',
-        middleName: '',
-        program: 'ACT',
-        year: 1,
-        section: 101,
-      },
-    ]);
+        // Alert for successful submission with details
+        alert(
+          `User added successfully!\nID: ${row.id}\nName: ${name}\nProgram: ${row.program}\nYear: ${row.year}\nSection: ${row.section}`,
+        );
+      }
+
+      // Reset form fields after successful submission
+      setRows([
+        {
+          key: 'initial',
+          id: '',
+          firstName: '',
+          lastName: '',
+          middleName: '',
+          program: 'ACT',
+          year: 0,
+          section: 0,
+        },
+      ]);
+    } catch (error) {
+      console.error('Error inserting student data:', error);
+      setErrorMessage('Failed to submit data. Please try again.');
+    }
   };
 
   const handleCancel = () => {
@@ -158,6 +174,7 @@ export default function AddStudentTable() {
                   {(columnKey) => {
                     if (columnKey === 'program') {
                       const items = [
+                        'Select',
                         'ACT',
                         'ART',
                         'BACOMM',
@@ -188,11 +205,11 @@ export default function AddStudentTable() {
                     ) {
                       const items =
                         columnKey === 'year'
-                          ? [1, 2, 3, 4]
+                          ? [0, 1, 2, 3, 4]
                           : [
-                              101, 102, 103, 104, 201, 202, 203, 204, 301, 302,
-                              303, 304, 401, 402, 403, 404, 501, 502, 503, 504,
-                              601, 602, 603, 604, 701, 702, 703, 704,
+                              0, 101, 102, 103, 104, 201, 202, 203, 204, 301,
+                              302, 303, 304, 401, 402, 403, 404, 501, 502, 503,
+                              504, 601, 602, 603, 604, 701, 702, 703, 704,
                             ];
                       return (
                         <TableCell key={columnKey}>

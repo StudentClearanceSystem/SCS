@@ -4,73 +4,46 @@ export interface StudentDetailsRegistrar {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  year: number;
+  section: number;
   is_registrar_cleared: boolean;
   registrar_remarks: string;
 }
 
-export const updateRegistrarStatus = async (
-  studentDetails: StudentDetailsRegistrar,
+export const insertStudentData = async (
+  studentData: Omit<
+    StudentDetailsRegistrar,
+    'is_registrar_cleared' | 'registrar_remarks'
+  >,
 ) => {
-  const { studentno, name, program, year, section, is_registrar_cleared } =
-    studentDetails;
-
-  let updateData: Partial<StudentDetailsRegistrar> = { is_registrar_cleared };
-
-  // If the registrar is cleared, set registrar_remarks to an empty string
-  if (is_registrar_cleared) {
-    updateData.registrar_remarks = '';
-  }
-
-  // Update the database
-  const { data, error } = await supabase
-    .from('table_students')
-    .update(updateData)
-    .eq('studentno', studentno)
-    .select();
+  const { data, error } = await supabase.from('table_students').insert({
+    studentno: studentData.studentno,
+    name: studentData.name,
+    program: studentData.program,
+    year: studentData.year,
+    section: studentData.section,
+    is_cashier_cleared: false,
+    is_discipline_cleared: false,
+    is_guidance_cleared: false,
+    is_librarian_cleared: false,
+    is_mis_cleared: false,
+    is_programhead_cleared: false,
+    is_purchasing_cleared: false,
+    is_registrar_cleared: false,
+    cashier_remarks: '',
+    discipline_remarks: '',
+    guidance_remarks: '',
+    librarian_remarks: '',
+    mis_remarks: '',
+    programhead_remarks: '',
+    purchasing_remarks: '',
+    registrar_remarks: '',
+  });
 
   if (error) {
-    console.error('Error updating registrar status:', error);
-  } else {
-    alert(`Student No: ${studentno}
-    Name: ${name}
-    Program: ${program}
-    Year: ${year}
-    Section: ${section}
-    Registrar Cleared: ${is_registrar_cleared ? 'Yes' : 'No'}`);
+    console.error('Error inserting data:', error);
+    throw error;
   }
-};
 
-export const updateRegistrarRemarks = async (
-  studentDetails: StudentDetailsRegistrar,
-) => {
-  const {
-    studentno,
-    name,
-    program,
-    year,
-    section,
-    is_registrar_cleared,
-    registrar_remarks,
-  } = studentDetails;
-
-  // Update the registrar_remarks value in the database
-  const { data, error } = await supabase
-    .from('table_students')
-    .update({ registrar_remarks })
-    .eq('studentno', studentno)
-    .select();
-
-  if (error) {
-    console.error('Error updating registrar remarks:', error);
-  } else {
-    alert(`Student No: ${studentno}
-    Name: ${name}
-    Program: ${program}
-    Year: ${year}
-    Section: ${section}
-    Registrar Cleared: ${is_registrar_cleared ? 'Yes' : 'No'}
-    Remarks: ${registrar_remarks}`);
-  }
+  return data; // Return the inserted data for further processing if needed
 };
