@@ -9,6 +9,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import TableRegistrar from './TableRegistrar';
 import SideNav from '@/app/components/SideNav';
+import ViewEditToggle from '../components/ViewEditToggle';
 
 interface Button {
   label: string;
@@ -58,11 +59,11 @@ const assignTaskBtns: Button[] = [
   },
   {
     label: 'Clearance',
-    href: '/users/registrar',
+    href: '/users/admin/registrar',
   },
   {
     label: 'Modify Students',
-    href: '/users/registrar/modify_student',
+    href: '/users/admin/registrar/modify_student',
   },
 ];
 
@@ -100,7 +101,10 @@ export default async function Page() {
       className="no-scrollbar flex min-h-screen flex-col"
       style={{ backgroundColor: '#C28FC2' }}
     >
-      <SideNav title={'REGISTRAR'} assignTaskBtns={assignTaskBtns} />
+      <div className=" z-50">
+        <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
+      </div>
+      <ViewEditToggle />
       <div className="flex-grow p-8">
         <header>
           <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>

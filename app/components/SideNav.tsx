@@ -43,19 +43,19 @@ export default function SideNav({ title, assignTaskBtns }: SideNavProps) {
           style={{ marginLeft: '4px' }}
         >
           <div
-            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-md bg-white"
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-md bg-white hover:bg-opacity-75"
             onClick={toggleMenu}
           >
             {isOpen ? (
-              <XMarkIcon className="h-8 w-8 text-gray-800" />
+              <XMarkIcon className="z-40 h-8 w-8 text-gray-800" />
             ) : (
-              <Bars3Icon className="h-8 w-8 text-gray-800" />
+              <Bars3Icon className="z-40 h-8 w-8 text-gray-800" />
             )}
           </div>
         </div>
         {isOpen && (
           <>
-            <ScrollShadow hideScrollBar className="max-h-[500px]">
+            <ScrollShadow hideScrollBar className="max-h-[470px]">
               <div className="flex  flex-col items-center overflow-y-auto">
                 <div className="mt-5 flex flex-col items-start">
                   <p className="text-left text-xl text-black">Hello,</p>

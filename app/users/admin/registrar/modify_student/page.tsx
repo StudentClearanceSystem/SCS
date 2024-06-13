@@ -10,6 +10,7 @@ import { redirect } from 'next/navigation';
 import TableRegistrar from './TableRegistrar';
 import SideNav from '@/app/components/SideNav';
 import AddStudentTable from './AddStudentTable';
+import ViewEditToggle from '../../components/ViewEditToggle';
 
 interface Button {
   label: string;
@@ -18,12 +19,52 @@ interface Button {
 
 const assignTaskBtns: Button[] = [
   {
+    label: 'ADMIN',
+    href: '/users/admin',
+  },
+  {
+    label: 'CASHIER',
+    href: '/users/admin/cashier',
+  },
+  {
+    label: 'DISCIPLINE',
+    href: '/users/admin/discipline',
+  },
+  {
+    label: 'GUIDANCE',
+    href: '/users/admin/guidance',
+  },
+  {
+    label: 'LIBRARIAN',
+    href: '/users/admin/librarian',
+  },
+  {
+    label: 'DISCIPLINE',
+    href: '/users/admin/discipline',
+  },
+  {
+    label: 'MIS',
+    href: '/users/admin/mis',
+  },
+  {
+    label: 'PROGRAMHEAD',
+    href: '/users/admin/program_head',
+  },
+  {
+    label: 'PURCHASING',
+    href: '/users/admin/purchasing',
+  },
+  {
+    label: 'REGISTRAR',
+    href: '/users/admin/registrar',
+  },
+  {
     label: 'Clearance',
-    href: '/users/registrar',
+    href: '/users/admin/registrar',
   },
   {
     label: 'Modify Students',
-    href: '/users/registrar/modify_student',
+    href: '/users/admin/registrar/modify_student',
   },
 ];
 
@@ -61,7 +102,10 @@ export default async function Page() {
       className="no-scrollbar flex min-h-screen flex-col"
       style={{ backgroundColor: '#C28FC2' }}
     >
-      <SideNav title={'REGISTRAR'} assignTaskBtns={assignTaskBtns} />
+      <div className=" z-50">
+        <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
+      </div>
+      <ViewEditToggle />
       <div className="flex-grow p-8">
         <header>
           <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>

@@ -9,6 +9,7 @@ import SideNav from '@/app/components/SideNav';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import TableLibrarian from './TableLibrarian';
+import ViewEditToggle from '../components/ViewEditToggle';
 
 interface Button {
   label: string;
@@ -92,7 +93,10 @@ export default async function Page() {
       className="no-scrollbar flex min-h-screen flex-col"
       style={{ backgroundColor: '#B3BF97' }}
     >
-      <SideNav title={'LIBRARIAN'} assignTaskBtns={assignTaskBtns} />
+      <div className=" z-50">
+        <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
+      </div>
+      <ViewEditToggle />
       <div className="flex-grow p-8">
         <header>
           <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>
