@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link'; // Import Link component
 import LogOutBtn from './LogOutBtn';
+import { ScrollShadow } from '@nextui-org/react';
 
 interface Button {
   label: string;
@@ -54,26 +55,29 @@ export default function SideNav({ title, assignTaskBtns }: SideNavProps) {
         </div>
         {isOpen && (
           <>
-            <div className="flex flex-col items-center">
-              <div className="mt-5 flex flex-col items-start">
-                <p className="text-left text-xl text-black">Hello,</p>
-                <h4 className="flex justify-center text-3xl font-bold text-black">
-                  {title}
-                </h4>
+            <ScrollShadow hideScrollBar className="max-h-[500px]">
+              <div className="flex  flex-col items-center overflow-y-auto">
+                <div className="mt-5 flex flex-col items-start">
+                  <p className="text-left text-xl text-black">Hello,</p>
+                  <h4 className="flex justify-center text-3xl font-bold text-black">
+                    {title}
+                  </h4>
+                </div>
+                {/* Render buttons dynamically */}
+                {assignTaskBtns.map((button, index) => (
+                  <Link
+                    href={button.href}
+                    key={index}
+                    className="hover:bg-sky-150 mt-3 flex h-[40px] w-[70%] items-center justify-center gap-2 rounded-full bg-white p-3 text-sm font-bold hover:bg-opacity-75 hover:text-blue-500 md:flex-none md:justify-center md:p-2 md:px-3"
+                  >
+                    <div className="flex items-center md:block">
+                      {button.label}
+                    </div>
+                  </Link>
+                ))}
               </div>
-              {/* Render buttons dynamically */}
-              {assignTaskBtns.map((button, index) => (
-                <Link
-                  href={button.href}
-                  key={index}
-                  className="hover:bg-sky-150 mt-3 flex h-[40px] w-[70%] items-center justify-center gap-2 rounded-full bg-white p-3 text-sm font-bold hover:bg-opacity-75 hover:text-blue-500 md:flex-none md:justify-center md:p-2 md:px-3"
-                >
-                  <div className="flex items-center md:block">
-                    {button.label}
-                  </div>
-                </Link>
-              ))}
-            </div>
+            </ScrollShadow>
+
             <LogOutBtn />
           </>
         )}

@@ -1,18 +1,18 @@
 import { Metadata } from 'next';
-import SideNav from '@/app/components/SideNav';
+export const metadata: Metadata = {
+  title: 'Discipline Office',
+};
 
-import SetUserRoleTable from '@/app/users/admin/TableSetUserRole';
-import { getUser } from '@/app/lib/utils';
+import { getStudentsTable } from '@/app/lib/utils';
+import TableDiscipline from './TableDiscipline';
+
+import SideNav from '@/app/components/SideNav';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: 'Admin',
-};
-
 interface Button {
   label: string;
-  href: string;
+  href: string; // Adjust the type to accept a string for href
 }
 
 const assignTaskBtns: Button[] = [
@@ -66,21 +66,28 @@ export default async function Page() {
     redirect('/');
   }
 
-  const users = await getUser();
+  const students = await getStudentsTable();
 
   return (
-    <div className="flex min-h-screen flex-col bg-blue-300">
-      <SideNav title={'Admin'} assignTaskBtns={assignTaskBtns} />
-
+    <main
+      className="no-scrollbar flex min-h-screen flex-col"
+      style={{ backgroundColor: '#A094AE' }}
+    >
+      <SideNav title={'DISCIPLINE'} assignTaskBtns={assignTaskBtns} />
       <div className="flex-grow p-8">
         <header>
-          <h1 className="ml-16 font-arimo text-4xl font-bold">Role Setter</h1>
+          <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>
+          <h1 className="ml-16 font-arimo text-4xl font-bold">
+            Discipline Office Dashboard
+          </h1>
         </header>
       </div>
-
-      <div className="flex-grow px-4 sm:px-6 lg:px-8">
-        <SetUserRoleTable initialUsers={users} />
+      {/* Content area with scrolling */}
+      <div className=" flex-grow px-4 sm:px-6 lg:px-8">
+        {/* Flex item with horizontal padding */}
+        {/* Container covering the entire space */}
+        <TableDiscipline students={students} />
       </div>
-    </div>
+    </main>
   );
 }

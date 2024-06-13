@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import SideNav from '../components/SideNav';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'users',
