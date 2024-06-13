@@ -1,3 +1,4 @@
+import React from 'react';
 import ActionCell from './ActionCell'; // Adjust the import path as needed
 import { StudentDetailsPurchasing } from './action'; // Import the StudentDetailsPurchasing type
 

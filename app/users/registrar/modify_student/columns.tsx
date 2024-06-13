@@ -5,8 +5,8 @@ export type student = {
   studentno: string;
   name: string;
   program: string;
-  year: number;
-  section: number;
+  year: string;
+  section: string;
 };
 
 export const columns = [
