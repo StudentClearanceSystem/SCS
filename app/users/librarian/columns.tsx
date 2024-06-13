@@ -1,3 +1,4 @@
+import React from 'react';
 import ActionCell from './ActionCell'; // Adjust the import path as needed
 import { StudentDetailsLibrarian } from './action'; // Import the StudentDetailsLibrarian type
 
@@ -30,31 +31,31 @@ export const renderCell = (students: student, columnKey: React.Key) => {
   switch (columnKey) {
     case 'studentno':
       return (
-        <div className="flex min-w-[100px] max-w-[150px] flex-col">
+        <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
     case 'name':
       return (
-        <div className="flex min-w-[150px] max-w-[300px] flex-col">
+        <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
     case 'program':
       return (
-        <div className="flex min-w-[50px] max-w-[100px] flex-col">
+        <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
     case 'year':
       return (
-        <div className="flex min-w-[20px] max-w-[30px] flex-col">
+        <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
     case 'section':
       return (
-        <div className="flex min-w-[20px] max-w-[30px] flex-col">
+        <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
