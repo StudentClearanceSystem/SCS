@@ -41,7 +41,7 @@ export default function SetUserRoleTable({
 
   const handleDeleteUser = async (userEmail: string) => {
     const confirmed = window.confirm(
-      `Are you sure you want to remove user: ${userEmail}?`,
+      `Are you sure you want to delete permanently user: ${userEmail}?`,
     );
     if (confirmed) {
       const success = await deleteUser(userEmail);

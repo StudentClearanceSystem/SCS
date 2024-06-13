@@ -53,7 +53,7 @@ export const renderCell = (
             role={user.role}
             onSelect={(newRole) => handleRoleChange(user.email, newRole)}
           />
-          <Tooltip color="danger" content={`Remove ${user.name}`}>
+          <Tooltip color="danger" content={`Delete ${user.name}`}>
             <span
               className="cursor-pointer text-sm text-danger active:opacity-50"
               onClick={() => deleteUserHandler(user.email)}
