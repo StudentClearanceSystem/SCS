@@ -12,7 +12,8 @@ import {
   getKeyValue,
 } from '@nextui-org/react';
 import Link from 'next/link';
-import DropdownComponent from './DropdownComponent';
+import StringDropdownComponent from './StringDropdownComponent';
+import NumberDropdownComponent from './NumberDropdownComponent';
 
 export default function AddStudentTable() {
   // Style
@@ -28,8 +29,8 @@ export default function AddStudentTable() {
     lastName: '',
     middleName: '',
     program: 'ACT',
-    year: '1',
-    section: '101',
+    year: 1,
+    section: 101,
   });
 
   const [rows, setRows] = useState([{ key: 'initial', ...formData }]);
@@ -51,7 +52,7 @@ export default function AddStudentTable() {
   const handleDropdownChange = (
     index: number,
     field: string,
-    value: string,
+    value: string | number,
   ) => {
     setRows((prevRows) => {
       const updatedRows = [...prevRows];
@@ -100,8 +101,8 @@ export default function AddStudentTable() {
         lastName: '',
         middleName: '',
         program: 'ACT',
-        year: '1',
-        section: '101',
+        year: 1,
+        section: 101,
       },
     ]);
   };
@@ -116,8 +117,8 @@ export default function AddStudentTable() {
         lastName: '',
         middleName: '',
         program: 'ACT',
-        year: '1',
-        section: '101',
+        year: 1,
+        section: 101,
       },
     ]);
     setErrorMessage('');
@@ -155,66 +156,47 @@ export default function AddStudentTable() {
               {rows.map((row, rowIndex) => (
                 <TableRow key={row.key}>
                   {(columnKey) => {
-                    if (['program', 'year', 'section'].includes(columnKey)) {
-                      let items = [];
-                      switch (columnKey) {
-                        case 'program':
-                          items = [
-                            'ACT',
-                            'ART',
-                            'BACOMM',
-                            'BAPsych',
-                            'BSA',
-                            'BSAIS',
-                            'BSBA',
-                            'BSCpE',
-                            'BSCS',
-                            'BSTM',
-                            'BSRTCS',
-                            'BSIT',
-                          ];
-                          break;
-                        case 'year':
-                          items = ['1', '2', '3', '4'];
-                          break;
-                        case 'section':
-                          items = [
-                            '101',
-                            '102',
-                            '103',
-                            '104',
-                            '201',
-                            '202',
-                            '203',
-                            '204',
-                            '301',
-                            '302',
-                            '303',
-                            '304',
-                            '401',
-                            '402',
-                            '403',
-                            '404',
-                            '501',
-                            '502',
-                            '503',
-                            '504',
-                            '601',
-                            '602',
-                            '603',
-                            '604',
-                            '701',
-                            '702',
-                            '703',
-                            '704',
-                          ];
-                          break;
-                        default:
-                          break;
-                      }
+                    if (columnKey === 'program') {
+                      const items = [
+                        'ACT',
+                        'ART',
+                        'BACOMM',
+                        'BAPsych',
+                        'BSA',
+                        'BSAIS',
+                        'BSBA',
+                        'BSCpE',
+                        'BSCS',
+                        'BSTM',
+                        'BSRTCS',
+                        'BSIT',
+                      ];
                       return (
                         <TableCell key={columnKey}>
-                          <DropdownComponent
+                          <StringDropdownComponent
+                            items={items}
+                            label="Program"
+                            onSelectionChange={(value) =>
+                              handleDropdownChange(rowIndex, columnKey, value)
+                            }
+                          />
+                        </TableCell>
+                      );
+                    } else if (
+                      columnKey === 'year' ||
+                      columnKey === 'section'
+                    ) {
+                      const items =
+                        columnKey === 'year'
+                          ? [1, 2, 3, 4]
+                          : [
+                              101, 102, 103, 104, 201, 202, 203, 204, 301, 302,
+                              303, 304, 401, 402, 403, 404, 501, 502, 503, 504,
+                              601, 602, 603, 604, 701, 702, 703, 704,
+                            ];
+                      return (
+                        <TableCell key={columnKey}>
+                          <NumberDropdownComponent
                             items={items}
                             label={
                               columnKey.charAt(0).toUpperCase() +
