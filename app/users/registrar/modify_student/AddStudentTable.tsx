@@ -96,10 +96,26 @@ export default function AddStudentTable() {
     e.preventDefault();
     setErrorMessage('');
 
-    // Validate ID length
-    if (rows.some((row) => row.id.length !== 11)) {
-      setErrorMessage('ID must be exactly 11 digits long for all rows');
-      return;
+    // Validate ID length and dropdown selections
+    for (const row of rows) {
+      if (row.id.length !== 11) {
+        setErrorMessage('ID must be exactly 11 digits long for all rows');
+        return;
+      }
+
+      switch (true) {
+        case row.program === 'Select':
+          setErrorMessage('Program is not selected.');
+          return;
+        case row.year === 0:
+          setErrorMessage('Year is not selected.');
+          return;
+        case row.section === 0:
+          setErrorMessage('Section is not selected.');
+          return;
+        default:
+          break;
+      }
     }
 
     try {
@@ -150,9 +166,9 @@ export default function AddStudentTable() {
         firstName: '',
         lastName: '',
         middleName: '',
-        program: 'ACT',
-        year: 1,
-        section: 101,
+        program: 'Select',
+        year: 0,
+        section: 0,
       },
     ]);
     setErrorMessage('');
@@ -291,16 +307,14 @@ export default function AddStudentTable() {
             >
               Submit
             </Button>
-            <Link href="/users/registrar">
-              <Button
-                size="sm"
-                type="button"
-                className="btn-secondary text-black"
-                onClick={handleCancel}
-              >
-                Cancel
-              </Button>
-            </Link>
+            <Button
+              size="sm"
+              type="button"
+              className="btn-secondary text-black"
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
           </div>
         </form>
       </div>
