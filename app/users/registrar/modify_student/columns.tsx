@@ -5,8 +5,8 @@ export type student = {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  year: number;
+  section: number;
 };
 
 export const columns = [
@@ -61,7 +61,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
         <div className="flex justify-center">
           <ActionCell
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetailsRegistrar} // Pass the entire student object as studentDetails
+            studentDetails={students as unknown as StudentDetailsRegistrar} // Pass the entire student object as studentDetails
           />
         </div>
       );
