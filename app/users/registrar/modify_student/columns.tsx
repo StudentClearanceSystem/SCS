@@ -1,7 +1,5 @@
 import { Tooltip } from '@nextui-org/react';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { deleteStudent } from './action'; // Import the deleteStudent function
-
 export type student = {
   studentno: string;
   name: string;

@@ -11,7 +11,6 @@ import {
   TableCell,
   getKeyValue,
 } from '@nextui-org/react';
-import Link from 'next/link';
 import StringDropdownComponent from './StringDropdownComponent';
 import NumberDropdownComponent from './NumberDropdownComponent';
 import { insertStudentData } from './action';
