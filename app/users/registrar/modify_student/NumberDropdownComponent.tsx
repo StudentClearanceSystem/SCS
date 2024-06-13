@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Dropdown,
   DropdownTrigger,
@@ -12,21 +12,22 @@ interface NumberDropdownComponentProps {
   items: number[];
   label: string;
   onSelectionChange: (value: number) => void;
+  selectedValue: number; // Add selectedValue to props
 }
 
 const NumberDropdownComponent: React.FC<NumberDropdownComponentProps> = ({
   items,
   label,
   onSelectionChange,
+  selectedValue, // Destructure selectedValue
 }) => {
   const [selectedKeys, setSelectedKeys] = useState<Set<number>>(
-    new Set<number>([items[0]]),
+    new Set<number>([selectedValue]),
   );
 
-  const selectedValue = useMemo(
-    () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
-    [selectedKeys],
-  );
+  useEffect(() => {
+    setSelectedKeys(new Set<number>([selectedValue]));
+  }, [selectedValue]);
 
   const handleSelectionChange = (keys: Set<number>) => {
     setSelectedKeys(keys);
@@ -37,7 +38,7 @@ const NumberDropdownComponent: React.FC<NumberDropdownComponentProps> = ({
     <Dropdown>
       <DropdownTrigger>
         <Button variant="bordered" className="mt-5 capitalize">
-          {selectedValue || label}
+          {selectedValue !== undefined ? selectedValue : label}
         </Button>
       </DropdownTrigger>
       <DropdownMenu

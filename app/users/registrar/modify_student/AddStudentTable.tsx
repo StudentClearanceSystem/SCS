@@ -29,13 +29,12 @@ export default function AddStudentTable() {
     firstName: '',
     lastName: '',
     middleName: '',
-    program: 'ACT',
-    year: 1,
-    section: 101,
+    program: 'Select',
+    year: 0,
+    section: 0,
   });
 
   const [rows, setRows] = useState([{ key: 'initial', ...formData }]);
-
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (
@@ -60,13 +59,30 @@ export default function AddStudentTable() {
       updatedRows[index] = { ...updatedRows[index], [field]: value };
       return updatedRows;
     });
+
+    // Save the changed value for future new rows
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [field]: value,
+    }));
   };
 
   const handleAddRow = () => {
-    setRows((prevRows) => [
-      ...prevRows,
-      { key: `row-${prevRows.length}`, ...formData },
-    ]);
+    setRows((prevRows) => {
+      return [
+        ...prevRows,
+        {
+          key: `row-${prevRows.length}`,
+          id: '',
+          firstName: '',
+          lastName: '',
+          middleName: '',
+          program: formData.program,
+          year: formData.year,
+          section: formData.section,
+        },
+      ];
+    });
   };
 
   const handleDeleteRow = () => {
@@ -86,13 +102,12 @@ export default function AddStudentTable() {
       return;
     }
 
-    // Output form data with alert after successful submission
     try {
       for (const row of rows) {
         const name = `${row.firstName} ${row.lastName} ${row.middleName}`;
         await insertStudentData({
           studentno: row.id,
-          name: name.trim(), // Trim any leading/trailing whitespace from the name
+          name: name.trim(),
           program: row.program,
           year: row.year,
           section: row.section,
@@ -112,14 +127,17 @@ export default function AddStudentTable() {
           firstName: '',
           lastName: '',
           middleName: '',
-          program: 'ACT',
-          year: 0,
-          section: 0,
+          program: formData.program,
+          year: formData.year,
+          section: formData.section,
         },
       ]);
     } catch (error) {
-      console.error('Error inserting student data:', error);
-      setErrorMessage('Failed to submit data. Please try again.');
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Failed to submit data. Please try again.');
+      }
     }
   };
 
@@ -196,6 +214,7 @@ export default function AddStudentTable() {
                             onSelectionChange={(value) =>
                               handleDropdownChange(rowIndex, columnKey, value)
                             }
+                            selectedValue={row.program}
                           />
                         </TableCell>
                       );
@@ -222,6 +241,7 @@ export default function AddStudentTable() {
                             onSelectionChange={(value) =>
                               handleDropdownChange(rowIndex, columnKey, value)
                             }
+                            selectedValue={row[columnKey]}
                           />
                         </TableCell>
                       );
