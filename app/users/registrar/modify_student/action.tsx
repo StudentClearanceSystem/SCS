@@ -47,3 +47,34 @@ export const insertStudentData = async (
 
   return data; // Return the inserted data for further processing if needed
 };
+
+export const deleteStudent = async (studentno: string) => {
+  // Fetch student data before deletion
+  const { data: studentData, error: fetchError } = await supabase
+    .from('table_students')
+    .select('name')
+    .eq('studentno', studentno)
+    .single(); // Use single() to get a single record
+
+  if (fetchError) {
+    console.error(`Error fetching student: ${studentno}`, fetchError);
+    throw fetchError;
+  }
+
+  const studentName = studentData?.name;
+
+  // Proceed to delete the student
+  const { data, error } = await supabase
+    .from('table_students')
+    .delete()
+    .eq('studentno', studentno);
+
+  if (error) {
+    console.error(`Error deleting student: ${studentno}`, error);
+    throw error;
+  }
+
+  console.log(`Student deleted: ${studentno} (${studentName})`, data);
+  alert(`Student deleted: ${studentno} (${studentName})`);
+  return data;
+};

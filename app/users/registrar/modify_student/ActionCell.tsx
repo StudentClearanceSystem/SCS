@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { StudentDetailsRegistrar } from '../action';
+import React from 'react';
 
 const ActionCell = ({
   studentNo,

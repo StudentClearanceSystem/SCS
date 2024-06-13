@@ -11,6 +11,7 @@ import {
   SortDescriptor,
 } from '@nextui-org/react';
 import { student, columns, renderCell } from './columns';
+import { deleteStudent } from './action'; // Import the deleteStudent function
 
 interface StudentTableProps {
   students: student[];
@@ -45,6 +46,22 @@ const StudentTable: React.FC<StudentTableProps> = ({
   const hasProgramFilter = Boolean(filterProgram);
   const hasYearFilter = Boolean(filterYear);
   const hasSectionFilter = Boolean(filterSection);
+
+  const deleteStudentHandler = async (studentno: string) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to permanently delete student: ${studentno}?`,
+    );
+    if (confirmed) {
+      try {
+        await deleteStudent(studentno);
+        // Optionally, update the local state to remove the deleted student
+        // This assumes you have a way to update the parent state or refetch the data
+        alert(`Student with student number ${studentno} deleted successfully.`);
+      } catch (error) {
+        alert(`Failed to delete student with student number ${studentno}.`);
+      }
+    }
+  };
 
   const filteredItems = React.useMemo(() => {
     let filteredUsers = [...students];
@@ -135,7 +152,7 @@ const StudentTable: React.FC<StudentTableProps> = ({
           <TableColumn
             allowsSorting={column.sortable}
             key={column.uid}
-            className=" cursor-pointer justify-center text-center hover:bg-gray-200"
+            className="cursor-pointer justify-center text-center hover:bg-gray-200"
           >
             {column.name}
           </TableColumn>
@@ -146,8 +163,8 @@ const StudentTable: React.FC<StudentTableProps> = ({
         {(item) => (
           <TableRow key={item.studentno}>
             {(columnKey) => (
-              <TableCell className=" border-1 text-center">
-                {renderCell(item, columnKey)}
+              <TableCell className="border-1 text-center">
+                {renderCell(item, columnKey, deleteStudentHandler)}
               </TableCell>
             )}
           </TableRow>

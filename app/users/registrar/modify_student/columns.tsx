@@ -1,5 +1,6 @@
-import ActionCell from './ActionCell'; // Adjust the import path as needed
-import { StudentDetailsRegistrar } from './action'; // Import the StudentDetails type
+import { Tooltip } from '@nextui-org/react';
+import { TrashIcon } from '@heroicons/react/24/outline';
+import { deleteStudent } from './action'; // Import the deleteStudent function
 
 export type student = {
   studentno: string;
@@ -22,7 +23,11 @@ export const columns = [
   },
 ];
 
-export const renderCell = (students: student, columnKey: React.Key) => {
+export const renderCell = (
+  students: student,
+  columnKey: React.Key,
+  deleteStudentHandler: (studentno: string) => void, // Function to handle deletion
+) => {
   const cellValue = students[columnKey as keyof student];
 
   switch (columnKey) {
@@ -45,25 +50,24 @@ export const renderCell = (students: student, columnKey: React.Key) => {
         </div>
       );
     case 'year':
-      return (
-        <div className="flex min-w-[20px] max-w-[30px] flex-col">
-          <p className="text-bold text-small capitalize">{cellValue}</p>
-        </div>
-      );
     case 'section':
       return (
         <div className="flex min-w-[20px] max-w-[30px] flex-col">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
-    case 'is_registrar_cleared':
+    case 'edit_students':
       return (
-        <div className="flex justify-center">
-          <ActionCell
-            studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as unknown as StudentDetailsRegistrar} // Pass the entire student object as studentDetails
-          />
-        </div>
+        <>
+          <Tooltip color="danger" content={`Delete "${students.name}"`}>
+            <span
+              className="flex cursor-pointer justify-center text-sm text-danger active:opacity-50"
+              onClick={() => deleteStudentHandler(students.studentno)}
+            >
+              <TrashIcon className="h-5 w-5" />
+            </span>
+          </Tooltip>
+        </>
       );
     default:
       return cellValue;
