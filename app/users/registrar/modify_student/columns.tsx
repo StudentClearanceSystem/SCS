@@ -24,33 +24,33 @@ export const columns = [
 export const renderCell = (
   students: student,
   columnKey: React.Key,
-  deleteStudentHandler: (studentno: string) => void, // Function to handle deletion
+  deleteStudentHandler: (Student: student) => void, // Function to handle deletion
 ) => {
   const cellValue = students[columnKey as keyof student];
 
   switch (columnKey) {
     case 'studentno':
       return (
-        <div className="flex min-w-[100px] max-w-[150px] flex-col">
+        <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
     case 'name':
       return (
-        <div className="flex min-w-[150px] max-w-[300px] flex-col">
+        <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
     case 'program':
       return (
-        <div className="flex min-w-[50px] max-w-[100px] flex-col">
+        <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
     case 'year':
     case 'section':
       return (
-        <div className="flex min-w-[20px] max-w-[30px] flex-col">
+        <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
@@ -60,7 +60,7 @@ export const renderCell = (
           <Tooltip color="danger" content={`Delete "${students.name}"`}>
             <span
               className="flex cursor-pointer justify-center text-sm text-danger active:opacity-50"
-              onClick={() => deleteStudentHandler(students.studentno)}
+              onClick={() => deleteStudentHandler(students)}
             >
               <TrashIcon className="h-5 w-5" />
             </span>

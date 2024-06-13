@@ -119,7 +119,7 @@ export default function AddStudentTable() {
 
     try {
       for (const row of rows) {
-        const name = `${row.firstName} ${row.lastName} ${row.middleName}`;
+        const name = `${row.lastName} ${row.firstName} ${row.middleName}`;
         await insertStudentData({
           studentno: row.id,
           name: name.trim(),
@@ -175,8 +175,8 @@ export default function AddStudentTable() {
 
   const columns = [
     { key: 'id', label: 'ID (11 digits)' },
-    { key: 'firstName', label: 'First Name' },
     { key: 'lastName', label: 'Last Name' },
+    { key: 'firstName', label: 'First Name' },
     { key: 'middleName', label: 'Middle Name' },
     { key: 'program', label: 'Program' },
     { key: 'year', label: 'Year' },

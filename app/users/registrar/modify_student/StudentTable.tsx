@@ -47,18 +47,19 @@ const StudentTable: React.FC<StudentTableProps> = ({
   const hasYearFilter = Boolean(filterYear);
   const hasSectionFilter = Boolean(filterSection);
 
-  const deleteStudentHandler = async (studentno: string) => {
+  const deleteStudentHandler = async (Student: student) => {
     const confirmed = window.confirm(
-      `Are you sure you want to permanently delete student: ${studentno}?`,
+      `Are you sure you want to permanently DELETE student \n Name: ${Student.name}? \n Number: ${Student.studentno}\n Program: ${Student.program}\n Section: ${Student.section} \n Year: ${Student.year} `,
     );
     if (confirmed) {
       try {
-        await deleteStudent(studentno);
+        await deleteStudent(Student.studentno);
         // Optionally, update the local state to remove the deleted student
         // This assumes you have a way to update the parent state or refetch the data
-        alert(`Student with student number ${studentno} deleted successfully.`);
       } catch (error) {
-        alert(`Failed to delete student with student number ${studentno}.`);
+        alert(
+          `Failed to delete student with student number ${Student.studentno}.`,
+        );
       }
     }
   };

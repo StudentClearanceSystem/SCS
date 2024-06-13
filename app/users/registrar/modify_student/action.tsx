@@ -11,16 +11,6 @@ export interface StudentDetailsRegistrar {
   registrar_remarks: string;
 }
 
-export interface StudentDetailsRegistrar {
-  studentno: string;
-  name: string;
-  program: string;
-  year: number;
-  section: number;
-  is_registrar_cleared: boolean;
-  registrar_remarks: string;
-}
-
 export const insertStudentData = async (
   studentData: Omit<
     StudentDetailsRegistrar,
