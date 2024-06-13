@@ -7,6 +7,7 @@ import {
   Button,
   Selection,
 } from '@nextui-org/react';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 interface NumberDropdownComponentProps {
   items: number[];
@@ -35,18 +36,42 @@ const NumberDropdownComponent: React.FC<NumberDropdownComponentProps> = ({
   };
 
   return (
-    <Dropdown>
+    <Dropdown
+      classNames={{
+        base: 'before:bg-default-200', // change arrow background
+        content:
+          'py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black',
+      }}
+    >
       <DropdownTrigger>
-        <Button variant="bordered" className="mt-5 capitalize">
+        <Button
+          endContent={<ChevronDownIcon className="h-3" />}
+          variant="bordered"
+          className="mt-5"
+        >
           {selectedValue !== undefined ? selectedValue : label}
         </Button>
       </DropdownTrigger>
       <DropdownMenu
+        className=" min-w-0"
         aria-label={label}
-        variant="flat"
+        variant="light"
         disallowEmptySelection
         selectionMode="single"
         selectedKeys={selectedKeys}
+        itemClasses={{
+          base: [
+            'rounded-sm',
+            'text-default-500',
+            'transition-opacity',
+            'data-[hover=true]:text-foreground',
+            'data-[hover=true]:bg-default-100',
+            'dark:data-[hover=true]:bg-default-50',
+            'data-[selectable=true]:focus:bg-default-300',
+            'data-[pressed=true]:opacity-70',
+            'data-[focus-visible=true]:ring-default-500',
+          ],
+        }}
         onSelectionChange={(keys: Selection) =>
           handleSelectionChange(keys as Set<number>)
         }

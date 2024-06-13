@@ -7,6 +7,7 @@ import {
   Button,
   Selection,
 } from '@nextui-org/react';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 interface StringDropdownComponentProps {
   items: string[];
@@ -37,13 +38,16 @@ const StringDropdownComponent: React.FC<StringDropdownComponentProps> = ({
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered" className="mt-5 capitalize">
+        <Button
+          endContent={<ChevronDownIcon className="h-3" />}
+          variant="bordered"
+          className="mt-5 capitalize"
+        >
           {selectedValue || label}
         </Button>
       </DropdownTrigger>
       <DropdownMenu
         aria-label={label}
-        variant="flat"
         disallowEmptySelection
         selectionMode="single"
         selectedKeys={selectedKeys}
