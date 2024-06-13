@@ -60,7 +60,7 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
   return (
     <div className="flex flex-col gap-1">
       <h2 className="mb-8 text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
-        MODIFY STUDENTS
+        DELETE STUDENTS
       </h2>
       <div className="flex items-end justify-between gap-3">
         <SearchInput
