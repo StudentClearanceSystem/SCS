@@ -36,7 +36,7 @@ const StringDropdownComponent: React.FC<StringDropdownComponentProps> = ({
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered" className="capitalize">
+        <Button variant="bordered" className="mt-5 capitalize">
           {selectedValue || label}
         </Button>
       </DropdownTrigger>
