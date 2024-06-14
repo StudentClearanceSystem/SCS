@@ -56,8 +56,8 @@ export default function SideNav({ title, assignTaskBtns }: SideNavProps) {
         {isOpen && (
           <>
             <ScrollShadow hideScrollBar className="max-h-[470px]">
-              <div className="flex  flex-col items-center overflow-y-auto">
-                <div className="mt-5 flex flex-col items-start">
+              <div className="flex flex-col items-center  pb-1">
+                <div className="mt-5 flex  flex-col items-start">
                   <p className="text-left text-xl text-black">Hello,</p>
                   <h4 className="flex justify-center text-3xl font-bold text-black">
                     {title}
