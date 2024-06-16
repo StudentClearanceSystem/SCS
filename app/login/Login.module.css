@@ -216,12 +216,12 @@
 
   .inputField {
     width: 90%;
-    font: 12px sans-serif;
+    font: 14px sans-serif;
   }
 
   .password,
   .email {
-    font: 14px sans-serif;
+    font: 16px sans-serif;
     margin-top: 16px;
     margin-left: 16px;
   }
