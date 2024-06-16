@@ -116,6 +116,7 @@
 .password,
 .email {
   margin-top: 16px;
+  margin-left: 16px;
   color: #14396d;
   font-size: 1.5rem;
   font-weight: bold;
@@ -126,9 +127,9 @@
   margin: 0px 20px;
   padding: 8px 20px;
   border-radius: 8px;
-  background-color: #156082;
+  background-color: transparent;
   color: #14396d;
-  border: none;
+  border: 1px solid #14396d;
   outline: none;
 }
 
