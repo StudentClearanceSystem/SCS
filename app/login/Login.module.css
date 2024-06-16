@@ -58,7 +58,7 @@
 }
 
 .buttonLogin {
-  width: 80%;
+  width: 70%;
   height: 55px;
   border-radius: 50px;
   background-color: #3f9dc9;
@@ -67,7 +67,7 @@
   align-items: center; /* Center vertically */
   box-shadow: 2px 3px 6px #050608;
   cursor: pointer; /* Add cursor styling */
-  margin: 20px 35px 20px 40px;
+  margin: 20px 40px 20px 40px;
 }
 
 /* Hover state */
@@ -87,10 +87,11 @@
 }
 
 .buttonLogin .lOGIN {
-  color: #14396d;
-  font-size: 25px;
+  color: #fff;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
+  justify-self: center;
 }
 
 .input {
@@ -209,9 +210,17 @@
   }
 
   .studentClearance {
+    margin-top: 3rem;
+
     display: flex;
     flex-direction: column; /* Arrange text blocks in a row */
     align-items: center; /* Align items vertically */
+  }
+
+  .buttonLogin {
+    width: 50%;
+    padding: 0px 15px 0px 15px;
+    align-self: center;
   }
 
   .inputField {
@@ -243,7 +252,7 @@
   .credits {
     top: 20px;
     left: calc(100% - 80px); /* Adjust left position */
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
   }
 }
