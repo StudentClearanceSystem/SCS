@@ -215,12 +215,15 @@
   }
 
   .inputField {
-    font: 1em sans-serif;
+    width: 90%;
+    font: 12px sans-serif;
   }
 
   .password,
   .email {
-    font: 1em sans-serif;
+    font: 14px sans-serif;
+    margin-top: 16px;
+    margin-left: 16px;
   }
 
   .textBlock,
