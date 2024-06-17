@@ -97,10 +97,7 @@ export default async function Page() {
     .subscribe();
 
   return (
-    <main
-      className="no-scrollbar flex min-h-screen flex-col"
-      style={{ backgroundColor: '#C28FC2' }}
-    >
+    <main className="no-scrollbar bg-blue-bg relative flex min-h-screen flex-col">
       <div className=" z-50">
         <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
       </div>

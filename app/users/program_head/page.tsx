@@ -47,10 +47,7 @@ export default async function Page() {
     .subscribe();
 
   return (
-    <main
-      className="no-scrollbar flex min-h-screen flex-col"
-      style={{ backgroundColor: '#8ECAE6' }}
-    >
+    <main className="no-scrollbar bg-blue-bg relative flex min-h-screen flex-col">
       <SideNav title={'Program head'} assignTaskBtns={[]} />
       <div className="flex-grow p-8">
         <header>

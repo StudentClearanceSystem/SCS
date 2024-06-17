@@ -34,7 +34,7 @@ export default function SideNav({ title, assignTaskBtns }: SideNavProps) {
         className={`fixed inset-y-0 left-0 flex flex-col px-4 py-4 transition-all duration-500 ${
           isOpen ? 'z-50 w-60 px-4 py-4' : 'z-10 w-12 py-2'
         }`}
-        style={{ backgroundColor: isOpen ? '#219EBC' : 'transparent' }}
+        style={{ backgroundColor: isOpen ? '#ffb703' : 'transparent' }}
       >
         <div
           className={`flex items-center justify-between ${

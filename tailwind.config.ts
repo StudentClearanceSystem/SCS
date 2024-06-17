@@ -12,10 +12,13 @@ const config: Config = {
     extend: {
       colors: {
         blue: {
-          300: '#93c5fd',
+          bg: '#93c5fd',
           400: '#2589FE',
           500: '#0070F3',
           600: '#2F6FEB',
+        },
+        yellow: {
+          sideNav: '#fff200',
         },
       },
       fontFamily: {

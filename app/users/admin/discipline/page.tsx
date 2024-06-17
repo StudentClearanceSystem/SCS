@@ -70,10 +70,7 @@ export default async function Page() {
   const students = await getStudentsTable();
 
   return (
-    <main
-      className="no-scrollbar flex min-h-screen flex-col"
-      style={{ backgroundColor: '#A094AE' }}
-    >
+    <main className="no-scrollbar bg-blue-bg relative flex min-h-screen flex-col">
       <div className=" z-50">
         <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
       </div>

@@ -69,7 +69,7 @@ export default async function Page() {
   const users = await getUser();
 
   return (
-    <div className="flex min-h-screen flex-col bg-blue-300">
+    <div className="bg-blue-bg flex min-h-screen flex-col">
       <SideNav title={'Admin'} assignTaskBtns={assignTaskBtns} />
 
       <div className="flex-grow p-8">
