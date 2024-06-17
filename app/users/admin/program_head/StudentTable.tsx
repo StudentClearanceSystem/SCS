@@ -110,7 +110,7 @@ const StudentTable: React.FC<StudentTableProps> = ({
       onSortChange={setSortDescriptor}
       sortDescriptor={sortDescriptor}
       isHeaderSticky
-      className="pb-8 "
+      className="pb-8"
       isStriped
       aria-label="Students table"
       bottomContent={
@@ -135,7 +135,14 @@ const StudentTable: React.FC<StudentTableProps> = ({
           <TableColumn
             allowsSorting={column.sortable}
             key={column.uid}
-            className=" cursor-pointer justify-center text-center hover:bg-gray-200"
+            className={`sticky cursor-pointer justify-center  text-center  ${
+              column.uid === 'studentno'
+                ? 'left-0 z-50'
+                : column.uid === 'name'
+                  ? 'left-[120px] z-50'
+                  : ''
+            }`}
+            style={{ minWidth: '120px' }} // Adjust this width as needed
           >
             {column.name}
           </TableColumn>
@@ -146,7 +153,9 @@ const StudentTable: React.FC<StudentTableProps> = ({
         {(item) => (
           <TableRow key={item.studentno}>
             {(columnKey) => (
-              <TableCell className=" border-1 text-center">
+              <TableCell
+                className={`border-1 text-center ${columnKey === 'studentno' ? 'sticky left-0 z-30 bg-white' : ''} ${columnKey === 'name' ? 'sticky left-[120px] z-30 bg-white' : ''}`}
+              >
                 {renderCell(item, columnKey)}
               </TableCell>
             )}

@@ -103,13 +103,13 @@ export const renderCell = (students: student, columnKey: React.Key) => {
   switch (columnKey) {
     case 'studentno':
       return (
-        <div className="flex flex-col justify-center">
+        <div className="flex w-[120px] flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
     case 'name':
       return (
-        <div className="flex flex-col justify-center">
+        <div className="flex w-[130px] flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );

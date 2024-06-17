@@ -139,10 +139,10 @@ const StudentTable: React.FC<StudentTableProps> = ({
               column.uid === 'studentno'
                 ? 'left-0 z-50'
                 : column.uid === 'name'
-                  ? 'left-[200px] z-50'
+                  ? 'left-[120px] z-50'
                   : ''
             }`}
-            style={{ minWidth: '150px' }} // Adjust this width as needed
+            style={{ minWidth: '120px' }} // Adjust this width as needed
           >
             {column.name}
           </TableColumn>
@@ -154,7 +154,7 @@ const StudentTable: React.FC<StudentTableProps> = ({
           <TableRow key={item.studentno}>
             {(columnKey) => (
               <TableCell
-                className={`border-1 text-center ${columnKey === 'studentno' ? 'sticky left-0 z-30 bg-white' : ''} ${columnKey === 'name' ? 'sticky left-[200px] z-30 bg-white' : ''}`}
+                className={`border-1 text-center ${columnKey === 'studentno' ? 'sticky left-0 z-30 bg-white' : ''} ${columnKey === 'name' ? 'sticky left-[120px] z-30 bg-white' : ''}`}
               >
                 {renderCell(item, columnKey)}
               </TableCell>

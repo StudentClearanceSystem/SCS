@@ -1,20 +1,20 @@
-import ActionCellCashier from '@/app/users/cashier/ActionCell';
-import ActionCellDisipline from '@/app/users/discipline/ActionCell';
-import ActionCellGuidance from '@/app/users/guidance/ActionCell';
-import ActionCellLibrarian from '@/app/users/librarian/ActionCell';
-import ActionCellMIS from '@/app/users/mis/ActionCell';
-import ActionCellProgramHead from '@/app/users/program_head/ActionCell';
-import ActionCellPurchasing from '@/app/users/purchasing/ActionCell';
-import ActionCellRegistrar from '@/app/users/registrar/ActionCell';
+import ActionCellCashier from '@/app/users/admin/cashier/ActionCell';
+import ActionCellDisipline from '@/app/users/admin/discipline/ActionCell';
+import ActionCellGuidance from '@/app/users/admin/guidance/ActionCell';
+import ActionCellLibrarian from '@/app/users/admin/librarian/ActionCell';
+import ActionCellMIS from '@/app/users/admin/mis/ActionCell';
+import ActionCellProgramHead from './ActionCell';
+import ActionCellPurchasing from '@/app/users/admin/purchasing/ActionCell';
+import ActionCellRegistrar from '@/app/users/admin/registrar/ActionCell';
 
-import { StudentDetailsCashier } from '../cashier/action';
-import { StudentDetailsDiscipline } from '@/app/users/discipline/action';
-import { StudentDetailsGuidance } from '@/app/users/guidance/action';
-import { StudentDetailsLibrarian } from '@/app/users/librarian/action';
-import { StudentDetailsMIS } from '@/app/users/mis/action';
+import { StudentDetailsCashier } from '@/app/users/admin/cashier/action';
+import { StudentDetailsDiscipline } from '@/app/users/admin/discipline/action';
+import { StudentDetailsGuidance } from '@/app/users/admin/guidance/action';
+import { StudentDetailsLibrarian } from '@/app/users/admin/librarian/action';
+import { StudentDetailsMIS } from '@/app/users/admin/mis/action';
 import { StudentDetailsProgramHead } from './action';
-import { StudentDetailsPurchasing } from '@/app/users/purchasing/action';
-import { StudentDetailsRegistrar } from '@/app/users/registrar/action';
+import { StudentDetailsPurchasing } from '@/app/users/admin/purchasing/action';
+import { StudentDetailsRegistrar } from '@/app/users/admin/registrar/action';
 import React from 'react';
 
 export type student = {
@@ -103,7 +103,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
   switch (columnKey) {
     case 'studentno':
       return (
-        <div className="flex w-[200px] flex-col justify-center">
+        <div className="flex w-[120px] flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
