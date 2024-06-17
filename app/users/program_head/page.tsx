@@ -47,12 +47,12 @@ export default async function Page() {
     .subscribe();
 
   return (
-    <main className="no-scrollbar bg-blue-bg relative flex min-h-screen flex-col">
+    <main className="no-scrollbar relative flex min-h-screen flex-col bg-blue-bg">
       <SideNav title={'Program head'} assignTaskBtns={[]} />
       <div className="flex-grow p-8">
         <header>
           <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>
-          <h1 className="ml-16 font-arimo text-4xl font-bold">Program head</h1>
+          <h1 className="ml-16 font-arimo text-4xl font-bold">Program Head</h1>
         </header>
       </div>
       {/* Content area with scrolling */}

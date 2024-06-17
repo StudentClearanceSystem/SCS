@@ -4,8 +4,7 @@ export interface StudentDetailsPurchasing {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
   is_purchasing_cleared: boolean;
   purchasing_remarks: string;
 }
@@ -13,7 +12,7 @@ export interface StudentDetailsPurchasing {
 export const updatePurchasingStatus = async (
   studentDetails: StudentDetailsPurchasing,
 ) => {
-  const { studentno, name, program, year, section, is_purchasing_cleared } =
+  const { studentno, name, program, sy_term, is_purchasing_cleared } =
     studentDetails;
 
   let updateData: Partial<StudentDetailsPurchasing> = { is_purchasing_cleared };
@@ -36,8 +35,7 @@ export const updatePurchasingStatus = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     Purchasing Cleared: ${is_purchasing_cleared ? 'Yes' : 'No'}`);
   }
 };
@@ -49,8 +47,7 @@ export const updatePurchasingRemarks = async (
     studentno,
     name,
     program,
-    year,
-    section,
+    sy_term,
     is_purchasing_cleared,
     purchasing_remarks,
   } = studentDetails;
@@ -68,8 +65,8 @@ export const updatePurchasingRemarks = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
+
     Purchasing Cleared: ${is_purchasing_cleared ? 'Yes' : 'No'}
     Remarks: ${purchasing_remarks}`);
   }

@@ -10,7 +10,6 @@ import SideNav from '@/app/components/SideNav';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import React from 'react';
-import ViewEditToggle from '../components/ViewEditToggle';
 
 interface Button {
   label: string;
@@ -90,7 +89,7 @@ export default async function Page() {
     .subscribe();
 
   return (
-    <main className="no-scrollbar bg-blue-bg relative flex min-h-screen flex-col">
+    <main className="no-scrollbar relative flex min-h-screen flex-col bg-blue-bg">
       <div className=" z-50">
         <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
       </div>

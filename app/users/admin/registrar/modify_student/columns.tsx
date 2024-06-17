@@ -4,16 +4,14 @@ export type student = {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
 };
 
 export const columns = [
   { name: 'STUDENT NO.', uid: 'studentno', sortable: true },
   { name: 'NAME', uid: 'name', sortable: true },
   { name: 'PROGRAM', uid: 'program', sortable: true },
-  { name: 'YEAR', uid: 'year', sortable: true },
-  { name: 'SECTION', uid: 'section', sortable: true },
+  { name: 'YEAR/TERM', uid: 'sy_term', sortable: true },
   {
     name: 'ACTION',
     uid: 'edit_students',
@@ -47,8 +45,7 @@ export const renderCell = (
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
-    case 'year':
-    case 'section':
+    case 'sy_term':
       return (
         <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>

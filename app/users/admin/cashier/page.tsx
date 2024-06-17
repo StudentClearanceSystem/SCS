@@ -4,7 +4,6 @@ import { getStudentsTable } from '@/app/lib/utils';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
-import ViewEditToggle from '../components/ViewEditToggle'; // Ensure this path is correct
 
 export const metadata: Metadata = {
   title: 'Cashier',
@@ -88,7 +87,7 @@ export default async function Page() {
     .subscribe();
 
   return (
-    <main className="no-scrollbar bg-blue-bg relative flex min-h-screen flex-col">
+    <main className="no-scrollbar relative flex min-h-screen flex-col bg-blue-bg">
       <div className=" z-50">
         <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
       </div>

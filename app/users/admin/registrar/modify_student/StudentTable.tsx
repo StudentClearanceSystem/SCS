@@ -17,8 +17,7 @@ interface StudentTableProps {
   students: student[];
   filterValue: string;
   filterProgram: string;
-  filterYear: string;
-  filterSection: string;
+  filterYear_Term: string;
   rowsPerPage: number;
   sortDescriptor: SortDescriptor;
   page: number;
@@ -31,8 +30,7 @@ const StudentTable: React.FC<StudentTableProps> = ({
   students,
   filterValue,
   filterProgram,
-  filterYear,
-  filterSection,
+  filterYear_Term,
   rowsPerPage,
   sortDescriptor,
   page,
@@ -44,12 +42,10 @@ const StudentTable: React.FC<StudentTableProps> = ({
 
   const hasSearchFilter = Boolean(filterValue);
   const hasProgramFilter = Boolean(filterProgram);
-  const hasYearFilter = Boolean(filterYear);
-  const hasSectionFilter = Boolean(filterSection);
-
+  const hasYear_TermFilter = Boolean(filterYear_Term);
   const deleteStudentHandler = async (Student: student) => {
     const confirmed = window.confirm(
-      `Are you sure you want to permanently DELETE student \n Name: ${Student.name}? \n Number: ${Student.studentno}\n Program: ${Student.program}\n Section: ${Student.section} \n Year: ${Student.year} `,
+      `Are you sure you want to permanently DELETE student \n Name: ${Student.name}? \n Number: ${Student.studentno}\n Program: ${Student.program} \n Year: ${Student.sy_term} `,
     );
     if (confirmed) {
       try {
@@ -81,29 +77,20 @@ const StudentTable: React.FC<StudentTableProps> = ({
       );
     }
 
-    if (hasYearFilter) {
+    if (hasYear_TermFilter) {
       filteredUsers = filteredUsers.filter(
-        (student) => String(student.year) === filterYear,
+        (student) => String(student.sy_term) === filterYear_Term,
       );
     }
-
-    if (hasSectionFilter) {
-      filteredUsers = filteredUsers.filter(
-        (student) => String(student.section) === filterSection,
-      );
-    }
-
     return filteredUsers;
   }, [
     students,
     hasSearchFilter,
     filterValue,
     hasProgramFilter,
+    hasYear_TermFilter,
     filterProgram,
-    hasYearFilter,
-    filterYear,
-    hasSectionFilter,
-    filterSection,
+    filterYear_Term,
   ]);
 
   const sortedItems = React.useMemo(() => {

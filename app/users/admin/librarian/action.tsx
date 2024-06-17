@@ -4,8 +4,8 @@ export interface StudentDetailsLibrarian {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
+
   is_librarian_cleared: boolean;
   librarian_remarks: string;
 }
@@ -13,7 +13,7 @@ export interface StudentDetailsLibrarian {
 export const updateLibrarianStatus = async (
   studentDetails: StudentDetailsLibrarian,
 ) => {
-  const { studentno, name, program, year, section, is_librarian_cleared } =
+  const { studentno, name, program, sy_term, is_librarian_cleared } =
     studentDetails;
 
   let updateData: Partial<StudentDetailsLibrarian> = { is_librarian_cleared };
@@ -36,8 +36,7 @@ export const updateLibrarianStatus = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     Librarian Cleared: ${is_librarian_cleared ? 'Yes' : 'No'}`);
   }
 };
@@ -49,8 +48,8 @@ export const updateLibrarianRemarks = async (
     studentno,
     name,
     program,
-    year,
-    section,
+    sy_term,
+
     is_librarian_cleared,
     librarian_remarks,
   } = studentDetails;
@@ -68,8 +67,8 @@ export const updateLibrarianRemarks = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
+
     Librarian Cleared: ${is_librarian_cleared ? 'Yes' : 'No'}
     Remarks: ${librarian_remarks}`);
   }

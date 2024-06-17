@@ -10,7 +10,6 @@ import { redirect } from 'next/navigation';
 import TableProgramHead from './TableProgramHead';
 import SideNav from '@/app/components/SideNav';
 import React from 'react';
-import ViewEditToggle from '../components/ViewEditToggle';
 
 interface Button {
   label: string;
@@ -90,7 +89,7 @@ export default async function Page() {
     .subscribe();
 
   return (
-    <main className="no-scrollbar bg-blue-bg relative flex min-h-screen flex-col">
+    <main className="no-scrollbar relative flex min-h-screen flex-col bg-blue-bg">
       <div className=" z-50">
         <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
       </div>
@@ -98,7 +97,7 @@ export default async function Page() {
       <div className="flex-grow p-8">
         <header>
           <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>
-          <h1 className="ml-16 font-arimo text-4xl font-bold">Program head</h1>
+          <h1 className="ml-16 font-arimo text-4xl font-bold">Program Head</h1>
         </header>
       </div>
       {/* Content area with scrolling */}

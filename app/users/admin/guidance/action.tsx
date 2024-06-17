@@ -4,8 +4,7 @@ export interface StudentDetailsGuidance {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
   is_guidance_cleared: boolean;
   guidance_remarks: string;
 }
@@ -13,7 +12,7 @@ export interface StudentDetailsGuidance {
 export const updateGuidanceStatus = async (
   studentDetails: StudentDetailsGuidance,
 ) => {
-  const { studentno, name, program, year, section, is_guidance_cleared } =
+  const { studentno, name, program, sy_term, is_guidance_cleared } =
     studentDetails;
 
   let updateData: Partial<StudentDetailsGuidance> = { is_guidance_cleared };
@@ -36,8 +35,7 @@ export const updateGuidanceStatus = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     Guidance Cleared: ${is_guidance_cleared ? 'Yes' : 'No'}`);
   }
 };
@@ -49,8 +47,8 @@ export const updateGuidanceRemarks = async (
     studentno,
     name,
     program,
-    year,
-    section,
+    sy_term,
+
     is_guidance_cleared,
     guidance_remarks,
   } = studentDetails;
@@ -68,8 +66,8 @@ export const updateGuidanceRemarks = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
+
     Guidance Cleared: ${is_guidance_cleared ? 'Yes' : 'No'}
     Remarks: ${guidance_remarks}`);
   }

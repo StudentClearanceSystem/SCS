@@ -10,7 +10,6 @@ import { redirect } from 'next/navigation';
 import TableRegistrar from './TableRegistrar';
 import SideNav from '@/app/components/SideNav';
 import AddStudentTable from './AddStudentTable';
-import ViewEditToggle from '../../components/ViewEditToggle';
 
 interface Button {
   label: string;
@@ -98,11 +97,10 @@ export default async function Page() {
     .subscribe();
 
   return (
-    <main className="no-scrollbar bg-blue-bg relative flex min-h-screen flex-col">
+    <main className="no-scrollbar relative flex min-h-screen flex-col bg-blue-bg">
       <div className=" z-50">
         <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
       </div>
-      <ViewEditToggle />
       <div className="flex-grow p-8">
         <header>
           <h3 className="ml-16 font-arimo text-2xl">Student Progress</h3>

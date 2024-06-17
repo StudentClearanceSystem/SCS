@@ -7,8 +7,7 @@ export interface StudentDetailsCashier {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
   is_cashier_cleared: boolean;
   cashier_remarks: string;
 }
@@ -21,7 +20,7 @@ export interface StudentDetailsCashier {
 export const updateCashierStatus = async (
   studentDetails: StudentDetailsCashier,
 ) => {
-  const { studentno, name, program, year, section, is_cashier_cleared } =
+  const { studentno, name, program, sy_term, is_cashier_cleared } =
     studentDetails;
 
   /**
@@ -47,8 +46,7 @@ export const updateCashierStatus = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     Cashier Cleared: ${is_cashier_cleared ? 'Yes' : 'No'}`);
   }
 };
@@ -65,8 +63,7 @@ export const updateCashierRemarks = async (
     studentno,
     name,
     program,
-    year,
-    section,
+    sy_term,
     is_cashier_cleared,
     cashier_remarks,
   } = studentDetails;
@@ -84,8 +81,7 @@ export const updateCashierRemarks = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     Cashier Cleared: ${is_cashier_cleared ? 'Yes' : 'No'}
     Remarks: ${cashier_remarks}`);
   }

@@ -5,8 +5,7 @@ export interface StudentDetailsRegistrar {
   studentno: string;
   name: string;
   program: string;
-  year: number;
-  section: number;
+  sy_term: number;
   is_registrar_cleared: boolean;
   registrar_remarks: string;
 }
@@ -22,8 +21,7 @@ export const insertStudentData = async (
       studentno: studentData.studentno,
       name: studentData.name,
       program: studentData.program,
-      year: studentData.year,
-      section: studentData.section,
+      sy_term: studentData.sy_term,
       is_cashier_cleared: false,
       is_discipline_cleared: false,
       is_guidance_cleared: false,
