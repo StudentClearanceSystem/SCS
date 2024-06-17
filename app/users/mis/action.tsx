@@ -4,15 +4,14 @@ export interface StudentDetailsMIS {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
+
   is_mis_cleared: boolean;
   mis_remarks: string;
 }
 
 export const updateMISStatus = async (studentDetails: StudentDetailsMIS) => {
-  const { studentno, name, program, year, section, is_mis_cleared } =
-    studentDetails;
+  const { studentno, name, program, sy_term, is_mis_cleared } = studentDetails;
 
   let updateData: Partial<StudentDetailsMIS> = { is_mis_cleared };
 
@@ -34,8 +33,8 @@ export const updateMISStatus = async (studentDetails: StudentDetailsMIS) => {
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
+
     MIS Cleared: ${is_mis_cleared ? 'Yes' : 'No'}`);
   }
 };
@@ -45,8 +44,8 @@ export const updateMISRemarks = async (studentDetails: StudentDetailsMIS) => {
     studentno,
     name,
     program,
-    year,
-    section,
+    sy_term,
+
     is_mis_cleared,
     mis_remarks,
   } = studentDetails;
@@ -64,8 +63,7 @@ export const updateMISRemarks = async (studentDetails: StudentDetailsMIS) => {
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     MIS Cleared: ${is_mis_cleared ? 'Yes' : 'No'}
     Remarks: ${mis_remarks}`);
   }

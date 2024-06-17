@@ -21,8 +21,7 @@ export type student = {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
 
   is_programhead_cleared: boolean;
   programhead_remarks: string;
@@ -53,8 +52,7 @@ export const columns = [
   { name: 'STUDENT NO.', uid: 'studentno', sortable: true },
   { name: 'NAME', uid: 'name', sortable: true },
   { name: 'PROGRAM', uid: 'program', sortable: true },
-  { name: 'YEAR', uid: 'year', sortable: true },
-  { name: 'SECTION', uid: 'section', sortable: true },
+  { name: 'YEAR/TERM', uid: 'sy_term', sortable: true },
   {
     name: 'ProgramHead is cleared?',
     uid: 'is_programhead_cleared',
@@ -119,18 +117,13 @@ export const renderCell = (students: student, columnKey: React.Key) => {
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
-    case 'year':
+    case 'sy_term':
       return (
         <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
-    case 'section':
-      return (
-        <div className="flex flex-col justify-center">
-          <p className="text-bold text-small capitalize">{cellValue}</p>
-        </div>
-      );
+
     case 'is_programhead_cleared':
       return (
         <div className="flex justify-center">
@@ -149,7 +142,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             cashierRemarks={students.cashier_remarks}
             isCashierCleared={students.is_cashier_cleared} // Pass the is_cashier_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetailsCashier} // Pass the entire student object as studentDetails
+            studentDetails={students as unknown as StudentDetailsCashier} // Pass the entire student object as studentDetails
           />
         </div>
       );
@@ -161,7 +154,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             disciplineRemarks={students.discipline_remarks}
             isDisciplineCleared={students.is_discipline_cleared} // Pass the is_discipline_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetailsDiscipline} // Pass the entire student object as studentDetails
+            studentDetails={students as unknown as StudentDetailsDiscipline} // Pass the entire student object as studentDetails
           />
         </div>
       );
@@ -172,7 +165,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             guidanceRemarks={students.guidance_remarks}
             isGuidanceCleared={students.is_guidance_cleared} // Pass the is_guidance_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetailsGuidance} // Pass the entire student object as studentDetails
+            studentDetails={students as unknown as StudentDetailsGuidance} // Pass the entire student object as studentDetails
           />
         </div>
       );
@@ -184,7 +177,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             librarianRemarks={students.librarian_remarks}
             isLibrarianCleared={students.is_librarian_cleared} // Pass the is_librarian_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetailsLibrarian} // Pass the entire student object as studentDetails
+            studentDetails={students as unknown as StudentDetailsLibrarian} // Pass the entire student object as studentDetails
           />
         </div>
       );
@@ -196,7 +189,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             misRemarks={students.mis_remarks}
             isMISCleared={students.is_mis_cleared} // Pass the is_mis_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetailsMIS} // Pass the entire student object as studentDetails
+            studentDetails={students as unknown as StudentDetailsMIS} // Pass the entire student object as studentDetails
           />
         </div>
       );
@@ -208,7 +201,7 @@ export const renderCell = (students: student, columnKey: React.Key) => {
             purchasingRemarks={students.purchasing_remarks}
             isPurchasingCleared={students.is_purchasing_cleared} // Pass the is_purchasing_cleared value
             studentNo={students.studentno} // Pass the student number for identification
-            studentDetails={students as StudentDetailsPurchasing} // Pass the entire student object as studentDetails
+            studentDetails={students as unknown as StudentDetailsPurchasing} // Pass the entire student object as studentDetails
           />
         </div>
       );

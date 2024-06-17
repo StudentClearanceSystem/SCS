@@ -4,8 +4,7 @@ export interface StudentDetailsRegistrar {
   studentno: string;
   name: string;
   program: string;
-  year: number;
-  section: number;
+  sy_term: string;
   is_registrar_cleared: boolean;
   registrar_remarks: string;
 }
@@ -13,7 +12,7 @@ export interface StudentDetailsRegistrar {
 export const updateRegistrarStatus = async (
   studentDetails: StudentDetailsRegistrar,
 ) => {
-  const { studentno, name, program, year, section, is_registrar_cleared } =
+  const { studentno, name, program, sy_term, is_registrar_cleared } =
     studentDetails;
 
   let updateData: Partial<StudentDetailsRegistrar> = { is_registrar_cleared };
@@ -36,8 +35,7 @@ export const updateRegistrarStatus = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     Registrar Cleared: ${is_registrar_cleared ? 'Yes' : 'No'}`);
   }
 };
@@ -49,8 +47,7 @@ export const updateRegistrarRemarks = async (
     studentno,
     name,
     program,
-    year,
-    section,
+    sy_term,
     is_registrar_cleared,
     registrar_remarks,
   } = studentDetails;
@@ -68,8 +65,7 @@ export const updateRegistrarRemarks = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     Registrar Cleared: ${is_registrar_cleared ? 'Yes' : 'No'}
     Remarks: ${registrar_remarks}`);
   }

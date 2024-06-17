@@ -6,8 +6,7 @@ export type student = {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
   is_purchasing_cleared: boolean; // Add this line
   purchasing_remarks: string; // Add this line
 };
@@ -16,8 +15,7 @@ export const columns = [
   { name: 'STUDENT NO.', uid: 'studentno', sortable: true },
   { name: 'NAME', uid: 'name', sortable: true },
   { name: 'PROGRAM', uid: 'program', sortable: true },
-  { name: 'YEAR', uid: 'year', sortable: true },
-  { name: 'SECTION', uid: 'section', sortable: true },
+  { name: 'YEAR/TERM', uid: 'sy_term', sortable: true },
   {
     name: 'Purchasing is cleared?',
     uid: 'is_purchasing_cleared',
@@ -47,18 +45,13 @@ export const renderCell = (students: student, columnKey: React.Key) => {
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
-    case 'year':
+    case 'sy_term':
       return (
         <div className="flex flex-col justify-center">
           <p className="text-bold text-small capitalize">{cellValue}</p>
         </div>
       );
-    case 'section':
-      return (
-        <div className="flex flex-col justify-center">
-          <p className="text-bold text-small capitalize">{cellValue}</p>
-        </div>
-      );
+
     case 'is_purchasing_cleared':
       return (
         <div className="flex justify-center">

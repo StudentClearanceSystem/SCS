@@ -15,8 +15,7 @@ const SetProgramHeadTable: React.FC<SetProgramHeadTableProps> = ({
 }) => {
   const [filterValue, setFilterValue] = useState('');
   const [filterProgram, setFilterProgram] = useState('');
-  const [filterYear, setFilterYear] = useState('');
-  const [filterSection, setFilterSection] = useState('');
+  const [filterYear_Term, setFilterYear_Term] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: 'program',
@@ -52,24 +51,21 @@ const SetProgramHeadTable: React.FC<SetProgramHeadTableProps> = ({
         students={studentData}
         filterValue={filterValue}
         filterProgram={filterProgram}
-        filterYear={filterYear}
-        filterSection={filterSection}
+        filterYear_Term={filterYear_Term}
+        setFilterYear_Term={setFilterYear_Term}
         setFilterValue={setFilterValue}
         setFilterProgram={setFilterProgram}
-        setFilterYear={setFilterYear}
-        setFilterSection={setFilterSection}
         onSearchChange={onSearchChange}
         onRowsPerPageChange={onRowsPerPageChange}
       />
     ),
     [
+      studentData,
       filterValue,
       filterProgram,
-      filterYear,
-      filterSection,
-      onRowsPerPageChange,
+      filterYear_Term,
       onSearchChange,
-      studentData,
+      onRowsPerPageChange,
     ],
   );
 
@@ -78,8 +74,7 @@ const SetProgramHeadTable: React.FC<SetProgramHeadTableProps> = ({
       students={studentData}
       filterValue={filterValue}
       filterProgram={filterProgram}
-      filterYear={filterYear}
-      filterSection={filterSection}
+      filterYear_Term={filterYear_Term}
       rowsPerPage={rowsPerPage}
       sortDescriptor={sortDescriptor}
       page={page}

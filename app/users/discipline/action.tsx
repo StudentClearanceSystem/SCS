@@ -4,8 +4,7 @@ export interface StudentDetailsDiscipline {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
   is_discipline_cleared: boolean;
   discipline_remarks: string;
 }
@@ -13,7 +12,7 @@ export interface StudentDetailsDiscipline {
 export const updateDisciplineStatus = async (
   studentDetails: StudentDetailsDiscipline,
 ) => {
-  const { studentno, name, program, year, section, is_discipline_cleared } =
+  const { studentno, name, program, sy_term, is_discipline_cleared } =
     studentDetails;
 
   let updateData: Partial<StudentDetailsDiscipline> = { is_discipline_cleared };
@@ -36,8 +35,7 @@ export const updateDisciplineStatus = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     Discipline Cleared: ${is_discipline_cleared ? 'Yes' : 'No'}`);
   }
 };
@@ -49,8 +47,7 @@ export const updateDisciplineRemarks = async (
     studentno,
     name,
     program,
-    year,
-    section,
+    sy_term,
     is_discipline_cleared,
     discipline_remarks,
   } = studentDetails;
@@ -68,8 +65,7 @@ export const updateDisciplineRemarks = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
     Discipline Cleared: ${is_discipline_cleared ? 'Yes' : 'No'}
     Remarks: ${discipline_remarks}`);
   }

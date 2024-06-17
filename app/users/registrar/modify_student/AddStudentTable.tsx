@@ -29,8 +29,7 @@ export default function AddStudentTable() {
     lastName: '',
     middleName: '',
     program: 'Select',
-    year: 0,
-    section: 0,
+    sy_term: 0,
   });
 
   const [rows, setRows] = useState([{ key: 'initial', ...formData }]);
@@ -77,8 +76,7 @@ export default function AddStudentTable() {
           lastName: '',
           middleName: '',
           program: formData.program,
-          year: formData.year,
-          section: formData.section,
+          sy_term: formData.sy_term,
         },
       ];
     });
@@ -106,11 +104,8 @@ export default function AddStudentTable() {
         case row.program === 'Select':
           setErrorMessage('Program is not selected.');
           return;
-        case row.year === 0:
+        case row.sy_term === 0:
           setErrorMessage('Year is not selected.');
-          return;
-        case row.section === 0:
-          setErrorMessage('Section is not selected.');
           return;
         default:
           break;
@@ -124,13 +119,12 @@ export default function AddStudentTable() {
           studentno: row.id,
           name: name.trim(),
           program: row.program,
-          year: row.year,
-          section: row.section,
+          sy_term: row.sy_term,
         });
 
         // Alert for successful submission with details
         alert(
-          `User added successfully!\nID: ${row.id}\nName: ${name}\nProgram: ${row.program}\nYear: ${row.year}\nSection: ${row.section}`,
+          `User added successfully!\nID: ${row.id}\nName: ${name}\nProgram: ${row.program}\nsy_term: ${row.sy_term}`,
         );
       }
 
@@ -143,8 +137,7 @@ export default function AddStudentTable() {
           lastName: '',
           middleName: '',
           program: formData.program,
-          year: formData.year,
-          section: formData.section,
+          sy_term: formData.sy_term,
         },
       ]);
     } catch (error) {
@@ -166,8 +159,7 @@ export default function AddStudentTable() {
         lastName: '',
         middleName: '',
         program: 'Select',
-        year: 0,
-        section: 0,
+        sy_term: 0,
       },
     ]);
     setErrorMessage('');
@@ -179,13 +171,12 @@ export default function AddStudentTable() {
     { key: 'firstName', label: 'First Name' },
     { key: 'middleName', label: 'Middle Name' },
     { key: 'program', label: 'Program' },
-    { key: 'year', label: 'Year' },
-    { key: 'section', label: 'Section' },
+    { key: 'sy_term', label: 'sy_term' },
   ];
 
   return (
-    <main className="flex h-screen flex-col items-center bg-[#C28FC2]">
-      <div className="w-full max-w-[95%] rounded-lg bg-gray-200 p-5 shadow-2xl">
+    <main className="flex h-screen flex-col items-center">
+      <div className="w-full max-w-[100%] rounded-lg bg-gray-200 p-5 shadow-2xl">
         <h2 className="mb-8 text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
           ADD STUDENT
         </h2>
@@ -233,18 +224,9 @@ export default function AddStudentTable() {
                           />
                         </TableCell>
                       );
-                    } else if (
-                      columnKey === 'year' ||
-                      columnKey === 'section'
-                    ) {
+                    } else if (columnKey === 'sy_term') {
                       const items =
-                        columnKey === 'year'
-                          ? [0, 1, 2, 3, 4]
-                          : [
-                              0, 101, 102, 103, 104, 201, 202, 203, 204, 301,
-                              302, 303, 304, 401, 402, 403, 404, 501, 502, 503,
-                              504, 601, 602, 603, 604, 701, 702, 703, 704,
-                            ];
+                        columnKey === 'sy_term' ? [2301, 2302, 2401, 2402] : [];
                       return (
                         <TableCell key={columnKey}>
                           <NumberDropdownComponent

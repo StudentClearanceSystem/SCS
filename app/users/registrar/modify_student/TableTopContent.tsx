@@ -8,12 +8,10 @@ interface TableTopContentProps {
   students: student[];
   filterValue: string;
   filterProgram: string;
-  filterYear: string;
-  filterSection: string;
+  filterYear_Term: string;
   setFilterValue: React.Dispatch<React.SetStateAction<string>>;
   setFilterProgram: React.Dispatch<React.SetStateAction<string>>;
-  setFilterYear: React.Dispatch<React.SetStateAction<string>>;
-  setFilterSection: React.Dispatch<React.SetStateAction<string>>;
+  setFilterYear_Term: React.Dispatch<React.SetStateAction<string>>;
   onSearchChange: (value?: string) => void;
   onRowsPerPageChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -22,12 +20,10 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
   students,
   filterValue,
   filterProgram,
-  filterYear,
-  filterSection,
+  filterYear_Term,
   setFilterValue,
   setFilterProgram,
-  setFilterYear,
-  setFilterSection,
+  setFilterYear_Term,
   onSearchChange,
   onRowsPerPageChange,
 }) => {
@@ -39,29 +35,18 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
       student.studentno.toString().includes(searchValue) ||
       student.name.toLowerCase().includes(searchValue) ||
       student.program.toLowerCase().includes(searchValue) ||
-      student.year.toString().toLowerCase().includes(searchValue) ||
-      student.section.toString().toLowerCase().includes(searchValue);
+      student.sy_term.toString().toLowerCase().includes(searchValue);
 
     const matchesProgramFilter =
       !filterProgram || student.program === filterProgram;
     const matchesYearFilter =
-      !filterYear || String(student.year) === filterYear;
-    const matchesSectionFilter =
-      !filterSection || String(student.section) === filterSection;
+      !filterYear_Term || String(student.sy_term) === filterYear_Term;
 
-    return (
-      matchesSearchFilter &&
-      matchesProgramFilter &&
-      matchesYearFilter &&
-      matchesSectionFilter
-    );
+    return matchesSearchFilter && matchesProgramFilter && matchesYearFilter;
   }).length;
 
   return (
     <div className="flex flex-col gap-1">
-      <h2 className="mb-8 text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
-        DELETE STUDENTS
-      </h2>
       <div className="flex items-end justify-between gap-3">
         <SearchInput
           filterValue={filterValue}
@@ -86,18 +71,10 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
           />
           {/* Dropdown for Year */}
           <Dropdown
-            label="Year"
-            options={getUniqueValues(students, 'year')}
-            onSelect={(selectedYear) => {
-              setFilterYear(selectedYear);
-            }}
-          />
-          {/* Dropdown for Section */}
-          <Dropdown
-            label="Section"
-            options={getUniqueValues(students, 'section')}
-            onSelect={(selectedSection) => {
-              setFilterSection(selectedSection);
+            label="Sy/Term"
+            options={getUniqueValues(students, 'sy_term')}
+            onSelect={(selectedYear_Term) => {
+              setFilterYear_Term(selectedYear_Term);
             }}
           />
         </div>

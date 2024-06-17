@@ -4,8 +4,7 @@ export interface StudentDetailsProgramHead {
   studentno: string;
   name: string;
   program: string;
-  year: string;
-  section: string;
+  sy_term: string;
   is_programhead_cleared: boolean;
   programhead_remarks: string;
 }
@@ -13,7 +12,7 @@ export interface StudentDetailsProgramHead {
 export const updateProgramHeadStatus = async (
   studentDetails: StudentDetailsProgramHead,
 ) => {
-  const { studentno, name, program, year, section, is_programhead_cleared } =
+  const { studentno, name, program, sy_term, is_programhead_cleared } =
     studentDetails;
 
   let updateData: Partial<StudentDetailsProgramHead> = {
@@ -38,8 +37,8 @@ export const updateProgramHeadStatus = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
+
     ProgramHead Cleared: ${is_programhead_cleared ? 'Yes' : 'No'}`);
   }
 };
@@ -51,8 +50,8 @@ export const updateProgramHeadRemarks = async (
     studentno,
     name,
     program,
-    year,
-    section,
+    sy_term,
+
     is_programhead_cleared,
     programhead_remarks,
   } = studentDetails;
@@ -70,8 +69,8 @@ export const updateProgramHeadRemarks = async (
     alert(`Student No: ${studentno}
     Name: ${name}
     Program: ${program}
-    Year: ${year}
-    Section: ${section}
+    Year_Term: ${sy_term}
+
     ProgramHead Cleared: ${is_programhead_cleared ? 'Yes' : 'No'}
     Remarks: ${programhead_remarks}`);
   }
