@@ -33,11 +33,13 @@ const ActionCell = ({
   };
 
   const handleRemarksSubmit = (remarks: string) => {
-    const updatedDetails = {
-      ...studentDetails,
-      cashier_remarks: remarks,
-    };
-    updateCashierRemarks(updatedDetails);
+    alert('Not allowed to modify');
+
+    // const updatedDetails = {
+    //   ...studentDetails,
+    //   cashier_remarks: remarks,
+    // };
+    // updateCashierRemarks(updatedDetails);
   };
 
   const getBackgroundColor = () => {
@@ -55,6 +57,8 @@ const ActionCell = ({
       <RadioGroup
         value={selectedValue}
         orientation="horizontal"
+        isDisabled={true} // Disable the entire RadioGroup
+        className="cursor-not-allowed" // Add cursor-not-allowed class
         onValueChange={handleRadioChange}
       >
         <Radio value="Cleared" color="success">

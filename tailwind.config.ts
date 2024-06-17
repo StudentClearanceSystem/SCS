@@ -10,11 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      gridTemplateColumns: {
-        '13': 'repeat(13, minmax(0, 1fr))',
-      },
       colors: {
         blue: {
+          300: '#93c5fd',
           400: '#2589FE',
           500: '#0070F3',
           600: '#2F6FEB',

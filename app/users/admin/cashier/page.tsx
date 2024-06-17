@@ -88,14 +88,10 @@ export default async function Page() {
     .subscribe();
 
   return (
-    <main
-      className="no-scrollbar relative flex min-h-screen flex-col"
-      style={{ backgroundColor: '#7DA4AE' }}
-    >
+    <main className="no-scrollbar relative flex min-h-screen flex-col bg-blue-300">
       <div className=" z-50">
         <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
       </div>
-      <ViewEditToggle />
 
       <div className="flex-grow p-8">
         <header>
