@@ -63,6 +63,8 @@ const ActionCell = ({
         value={selectedValue}
         orientation="horizontal"
         onValueChange={handleRadioChange}
+        isDisabled={true} // Disable the entire RadioGroup
+        className="cursor-not-allowed" // Add cursor-not-allowed class
       >
         <Radio value="Cleared" color="success">
           Cleared
