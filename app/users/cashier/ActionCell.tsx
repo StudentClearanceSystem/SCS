@@ -9,7 +9,6 @@ import {
 
 const ActionCell = ({
   isCashierCleared,
-  studentNo,
   cashierRemarks,
   studentDetails,
 }: {
@@ -21,6 +20,8 @@ const ActionCell = ({
   const [selectedValue, setSelectedValue] = useState(
     isCashierCleared ? 'Cleared' : 'Uncleared',
   );
+  const [remarks, setRemarks] = useState(cashierRemarks); // Added state for remarks
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown open state
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
@@ -29,6 +30,11 @@ const ActionCell = ({
       is_cashier_cleared: value === 'Cleared',
     };
     updateCashierStatus(updatedDetails);
+    if (value === 'Uncleared') {
+      setIsDropdownOpen(true); // Open the dropdown if "Uncleared" is selected
+    } else {
+      setIsDropdownOpen(false); // Close the dropdown if "Cleared" is selected
+    }
   };
 
   const handleRemarksSubmit = (remarks: string) => {
@@ -37,6 +43,7 @@ const ActionCell = ({
       cashier_remarks: remarks,
     };
     updateCashierRemarks(updatedDetails);
+    setIsDropdownOpen(false); // Close the dropdown after submitting remarks
   };
 
   const getBackgroundColor = () => {
@@ -46,6 +53,10 @@ const ActionCell = ({
   useEffect(() => {
     setSelectedValue(isCashierCleared ? 'Cleared' : 'Uncleared');
   }, [isCashierCleared]);
+
+  useEffect(() => {
+    setRemarks(cashierRemarks); // Update remarks state when programheadRemarks prop changes
+  }, [cashierRemarks]);
 
   return (
     <div
@@ -65,7 +76,9 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        initialInputValue={cashierRemarks}
+        isOpen={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        initialInputValue={remarks} // Use remarks state
         placeholder="Remarks..."
         buttonLabel="Submit"
         bgColor={'#6CCEE8'} // Pass the bgColor prop

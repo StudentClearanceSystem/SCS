@@ -10,7 +10,6 @@ import React from 'react';
 
 const ActionCell = ({
   isDisciplineCleared,
-  studentNo,
   disciplineRemarks,
   studentDetails, // Add studentDetails prop
 }: {
@@ -22,6 +21,8 @@ const ActionCell = ({
   const [selectedValue, setSelectedValue] = useState(
     isDisciplineCleared ? 'Cleared' : 'Uncleared',
   );
+  const [remarks, setRemarks] = useState(disciplineRemarks); // Added state for remarks
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown open state
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
@@ -30,6 +31,11 @@ const ActionCell = ({
       is_discipline_cleared: value === 'Cleared',
     };
     updateDisciplineStatus(updatedDetails);
+    if (value === 'Uncleared') {
+      setIsDropdownOpen(true); // Open the dropdown if "Uncleared" is selected
+    } else {
+      setIsDropdownOpen(false); // Close the dropdown if "Cleared" is selected
+    }
   };
 
   const handleRemarksSubmit = (remarks: string) => {
@@ -37,7 +43,8 @@ const ActionCell = ({
 
     // const updatedDetails = {
     //   ...studentDetails,
-    //   cashier_remarks: remarks,
+    //         discipline_remarks: remarks,
+
     // };
     // updateDisciplineRemarks(updatedDetails);
   };
@@ -49,6 +56,10 @@ const ActionCell = ({
   useEffect(() => {
     setSelectedValue(isDisciplineCleared ? 'Cleared' : 'Uncleared');
   }, [isDisciplineCleared]);
+
+  useEffect(() => {
+    setRemarks(disciplineRemarks); // Update remarks state when disciplineRemarks prop changes
+  }, [disciplineRemarks]);
 
   return (
     <div
@@ -70,7 +81,9 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        initialInputValue={disciplineRemarks}
+        isOpen={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        initialInputValue={remarks} // Use remarks state
         placeholder="Remarks..."
         buttonLabel="Submit"
         bgColor={'#BF88FF'} // Pass the bgColor prop

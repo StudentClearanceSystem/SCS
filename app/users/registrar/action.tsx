@@ -6,7 +6,7 @@ export interface StudentDetailsRegistrar {
   program: string;
   sy_term: string;
   is_registrar_cleared: boolean;
-  registrar_remarks: string;
+  registrar_remarks: string | null;
 }
 
 export const updateRegistrarStatus = async (
@@ -19,7 +19,7 @@ export const updateRegistrarStatus = async (
 
   // If the registrar is cleared, set registrar_remarks to an empty string
   if (is_registrar_cleared) {
-    updateData.registrar_remarks = '';
+    updateData.registrar_remarks = null;
   }
 
   // Update the database

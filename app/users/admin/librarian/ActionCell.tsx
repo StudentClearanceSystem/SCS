@@ -6,11 +6,9 @@ import {
   StudentDetailsLibrarian,
   updateLibrarianRemarks,
 } from './action'; // Import the function and interface
-import React from 'react';
 
 const ActionCell = ({
   isLibrarianCleared,
-  studentNo,
   librarianRemarks,
   studentDetails, // Add studentDetails prop
 }: {
@@ -22,6 +20,8 @@ const ActionCell = ({
   const [selectedValue, setSelectedValue] = useState(
     isLibrarianCleared ? 'Cleared' : 'Uncleared',
   );
+  const [remarks, setRemarks] = useState(librarianRemarks); // Added state for remarks
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown open state
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
@@ -30,6 +30,11 @@ const ActionCell = ({
       is_librarian_cleared: value === 'Cleared',
     };
     updateLibrarianStatus(updatedDetails);
+    if (value === 'Uncleared') {
+      setIsDropdownOpen(true); // Open the dropdown if "Uncleared" is selected
+    } else {
+      setIsDropdownOpen(false); // Close the dropdown if "Cleared" is selected
+    }
   };
 
   const handleRemarksSubmit = (remarks: string) => {
@@ -37,7 +42,7 @@ const ActionCell = ({
 
     // const updatedDetails = {
     //   ...studentDetails,
-    //   cashier_remarks: remarks,
+    //         librarian_remarks: remarks,
     // };
     // updateLibrarianRemarks(updatedDetails);
   };
@@ -49,6 +54,10 @@ const ActionCell = ({
   useEffect(() => {
     setSelectedValue(isLibrarianCleared ? 'Cleared' : 'Uncleared');
   }, [isLibrarianCleared]);
+
+  useEffect(() => {
+    setRemarks(librarianRemarks); // Update remarks state when librarianRemarks prop changes
+  }, [librarianRemarks]);
 
   return (
     <div
@@ -70,7 +79,9 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        initialInputValue={librarianRemarks}
+        isOpen={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        initialInputValue={remarks} // Use remarks state
         placeholder="Remarks..."
         buttonLabel="Submit"
         bgColor={'#C7E484'} // Pass the bgColor prop

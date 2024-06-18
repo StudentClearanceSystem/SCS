@@ -6,7 +6,7 @@ export interface StudentDetailsGuidance {
   program: string;
   sy_term: string;
   is_guidance_cleared: boolean;
-  guidance_remarks: string;
+  guidance_remarks: string | null;
 }
 
 export const updateGuidanceStatus = async (
@@ -19,7 +19,7 @@ export const updateGuidanceStatus = async (
 
   // If the guidance is cleared, set guidance_remarks to an empty string
   if (is_guidance_cleared) {
-    updateData.guidance_remarks = '';
+    updateData.guidance_remarks = null;
   }
 
   // Update the database

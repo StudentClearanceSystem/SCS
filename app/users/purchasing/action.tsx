@@ -6,7 +6,7 @@ export interface StudentDetailsPurchasing {
   program: string;
   sy_term: string;
   is_purchasing_cleared: boolean;
-  purchasing_remarks: string;
+  purchasing_remarks: string | null;
 }
 
 export const updatePurchasingStatus = async (
@@ -19,7 +19,7 @@ export const updatePurchasingStatus = async (
 
   // If the purchasing is cleared, set purchasing_remarks to an empty string
   if (is_purchasing_cleared) {
-    updateData.purchasing_remarks = '';
+    updateData.purchasing_remarks = null;
   }
 
   // Update the database

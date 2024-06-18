@@ -9,7 +9,6 @@ import {
 
 const ActionCell = ({
   isPurchasingCleared,
-  studentNo,
   purchasingRemarks,
   studentDetails, // Add studentDetails prop
 }: {
@@ -21,6 +20,8 @@ const ActionCell = ({
   const [selectedValue, setSelectedValue] = useState(
     isPurchasingCleared ? 'Cleared' : 'Uncleared',
   );
+  const [remarks, setRemarks] = useState(purchasingRemarks); // Added state for remarks
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown open state
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
@@ -29,14 +30,20 @@ const ActionCell = ({
       is_purchasing_cleared: value === 'Cleared',
     };
     updatePurchasingStatus(updatedDetails);
+    if (value === 'Uncleared') {
+      setIsDropdownOpen(true); // Open the dropdown if "Uncleared" is selected
+    } else {
+      setIsDropdownOpen(false); // Close the dropdown if "Cleared" is selected
+    }
   };
 
   const handleRemarksSubmit = (remarks: string) => {
     const updatedDetails = {
       ...studentDetails,
-      cashier_remarks: remarks,
+      purchasing_remarks: remarks, // Changed from cashier_remarks to purchasing_remarks
     };
     updatePurchasingRemarks(updatedDetails);
+    setIsDropdownOpen(false); // Close the dropdown after submitting remarks
   };
 
   const getBackgroundColor = () => {
@@ -46,6 +53,10 @@ const ActionCell = ({
   useEffect(() => {
     setSelectedValue(isPurchasingCleared ? 'Cleared' : 'Uncleared');
   }, [isPurchasingCleared]);
+
+  useEffect(() => {
+    setRemarks(purchasingRemarks); // Update remarks state when purchasingRemarks prop changes
+  }, [purchasingRemarks]);
 
   return (
     <div
@@ -65,7 +76,9 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        initialInputValue={purchasingRemarks}
+        isOpen={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        initialInputValue={remarks} // Use remarks state
         placeholder="Remarks..."
         buttonLabel="Submit"
         bgColor={'#FFB980'} // Pass the bgColor prop

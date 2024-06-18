@@ -5,7 +5,6 @@ import { updateMISStatus, StudentDetailsMIS, updateMISRemarks } from './action';
 
 const ActionCell = ({
   isMISCleared,
-  studentNo,
   misRemarks,
   studentDetails, // Add studentDetails prop
 }: {
@@ -17,6 +16,8 @@ const ActionCell = ({
   const [selectedValue, setSelectedValue] = useState(
     isMISCleared ? 'Cleared' : 'Uncleared',
   );
+  const [remarks, setRemarks] = useState(misRemarks); // Added state for remarks
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown open state
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
@@ -25,14 +26,20 @@ const ActionCell = ({
       is_mis_cleared: value === 'Cleared',
     };
     updateMISStatus(updatedDetails);
+    if (value === 'Uncleared') {
+      setIsDropdownOpen(true); // Open the dropdown if "Uncleared" is selected
+    } else {
+      setIsDropdownOpen(false); // Close the dropdown if "Cleared" is selected
+    }
   };
 
   const handleRemarksSubmit = (remarks: string) => {
     const updatedDetails = {
       ...studentDetails,
-      cashier_remarks: remarks,
+      mis_remarks: remarks, // Changed from cashier_remarks to mis_remarks
     };
     updateMISRemarks(updatedDetails);
+    setIsDropdownOpen(false); // Close the dropdown after submitting remarks
   };
 
   const getBackgroundColor = () => {
@@ -42,6 +49,10 @@ const ActionCell = ({
   useEffect(() => {
     setSelectedValue(isMISCleared ? 'Cleared' : 'Uncleared');
   }, [isMISCleared]);
+
+  useEffect(() => {
+    setRemarks(misRemarks); // Update remarks state when misRemarks prop changes
+  }, [misRemarks]);
 
   return (
     <div
@@ -61,7 +72,9 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        initialInputValue={misRemarks}
+        isOpen={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        initialInputValue={remarks} // Use remarks state
         placeholder="Remarks..."
         buttonLabel="Submit"
         bgColor={'#5f9bd0'} // Pass the bgColor prop

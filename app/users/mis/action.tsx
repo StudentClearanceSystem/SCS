@@ -7,7 +7,7 @@ export interface StudentDetailsMIS {
   sy_term: string;
 
   is_mis_cleared: boolean;
-  mis_remarks: string;
+  mis_remarks: string | null;
 }
 
 export const updateMISStatus = async (studentDetails: StudentDetailsMIS) => {
@@ -17,7 +17,7 @@ export const updateMISStatus = async (studentDetails: StudentDetailsMIS) => {
 
   // If the mis is cleared, set mis_remarks to an empty string
   if (is_mis_cleared) {
-    updateData.mis_remarks = '';
+    updateData.mis_remarks = null;
   }
 
   // Update the database

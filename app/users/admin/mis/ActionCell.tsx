@@ -2,11 +2,9 @@ import { useState, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import DropdownWithInput from '../../../components/DropdownWithInput';
 import { updateMISStatus, StudentDetailsMIS, updateMISRemarks } from './action'; // Import the function and interface
-import React from 'react';
 
 const ActionCell = ({
   isMISCleared,
-  studentNo,
   misRemarks,
   studentDetails, // Add studentDetails prop
 }: {
@@ -18,6 +16,8 @@ const ActionCell = ({
   const [selectedValue, setSelectedValue] = useState(
     isMISCleared ? 'Cleared' : 'Uncleared',
   );
+  const [remarks, setRemarks] = useState(misRemarks); // Added state for remarks
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown open state
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
@@ -26,6 +26,11 @@ const ActionCell = ({
       is_mis_cleared: value === 'Cleared',
     };
     updateMISStatus(updatedDetails);
+    if (value === 'Uncleared') {
+      setIsDropdownOpen(true); // Open the dropdown if "Uncleared" is selected
+    } else {
+      setIsDropdownOpen(false); // Close the dropdown if "Cleared" is selected
+    }
   };
 
   const handleRemarksSubmit = (remarks: string) => {
@@ -33,7 +38,7 @@ const ActionCell = ({
 
     // const updatedDetails = {
     //   ...studentDetails,
-    //   cashier_remarks: remarks,
+    //         mis_remarks: remarks, // Changed from cashier_remarks to mis_remarks
     // };
     // updateMISRemarks(updatedDetails);
   };
@@ -46,6 +51,10 @@ const ActionCell = ({
     setSelectedValue(isMISCleared ? 'Cleared' : 'Uncleared');
   }, [isMISCleared]);
 
+  useEffect(() => {
+    setRemarks(misRemarks); // Update remarks state when misRemarks prop changes
+  }, [misRemarks]);
+
   return (
     <div
       className={`flex min-w-[300px] max-w-[350px] items-center justify-center ${getBackgroundColor()}`}
@@ -54,8 +63,6 @@ const ActionCell = ({
         value={selectedValue}
         orientation="horizontal"
         onValueChange={handleRadioChange}
-        isDisabled={true} // Disable the entire RadioGroup
-        className="cursor-not-allowed" // Add cursor-not-allowed class
       >
         <Radio value="Cleared" color="success">
           Cleared
@@ -66,7 +73,9 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        initialInputValue={misRemarks}
+        isOpen={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        initialInputValue={remarks} // Use remarks state
         placeholder="Remarks..."
         buttonLabel="Submit"
         bgColor={'#5f9bd0'} // Pass the bgColor prop

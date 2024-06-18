@@ -7,7 +7,7 @@ export interface StudentDetailsRegistrar {
   program: string;
   sy_term: number;
   is_registrar_cleared: boolean;
-  registrar_remarks: string;
+  registrar_remarks: string | null;
 }
 
 export const insertStudentData = async (
@@ -30,14 +30,14 @@ export const insertStudentData = async (
       is_programhead_cleared: false,
       is_purchasing_cleared: false,
       is_registrar_cleared: false,
-      cashier_remarks: '',
-      discipline_remarks: '',
-      guidance_remarks: '',
-      librarian_remarks: '',
-      mis_remarks: '',
-      programhead_remarks: '',
-      purchasing_remarks: '',
-      registrar_remarks: '',
+      cashier_remarks: null,
+      discipline_remarks: null,
+      guidance_remarks: null,
+      librarian_remarks: null,
+      mis_remarks: null,
+      programhead_remarks: null,
+      purchasing_remarks: null,
+      registrar_remarks: null,
     });
 
     if (error) {

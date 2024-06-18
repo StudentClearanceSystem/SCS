@@ -7,7 +7,7 @@ export interface StudentDetailsLibrarian {
   sy_term: string;
 
   is_librarian_cleared: boolean;
-  librarian_remarks: string;
+  librarian_remarks: string | null;
 }
 
 export const updateLibrarianStatus = async (
@@ -20,7 +20,7 @@ export const updateLibrarianStatus = async (
 
   // If the librarian is cleared, set librarian_remarks to an empty string
   if (is_librarian_cleared) {
-    updateData.librarian_remarks = '';
+    updateData.librarian_remarks = null;
   }
 
   // Update the database

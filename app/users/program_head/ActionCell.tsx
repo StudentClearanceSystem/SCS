@@ -9,7 +9,6 @@ import {
 
 const ActionCell = ({
   isProgramHeadCleared,
-  studentNo,
   programheadRemarks,
   studentDetails, // Add studentDetails prop
 }: {
@@ -21,6 +20,8 @@ const ActionCell = ({
   const [selectedValue, setSelectedValue] = useState(
     isProgramHeadCleared ? 'Cleared' : 'Uncleared',
   );
+  const [remarks, setRemarks] = useState(programheadRemarks); // Added state for remarks
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown open state
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
@@ -29,14 +30,20 @@ const ActionCell = ({
       is_programhead_cleared: value === 'Cleared',
     };
     updateProgramHeadStatus(updatedDetails);
+    if (value === 'Uncleared') {
+      setIsDropdownOpen(true); // Open the dropdown if "Uncleared" is selected
+    } else {
+      setIsDropdownOpen(false); // Close the dropdown if "Cleared" is selected
+    }
   };
 
   const handleRemarksSubmit = (remarks: string) => {
     const updatedDetails = {
       ...studentDetails,
-      cashier_remarks: remarks,
+      programhead_remarks: remarks, // Changed from cashier_remarks to programhead_remarks
     };
     updateProgramHeadRemarks(updatedDetails);
+    setIsDropdownOpen(false); // Close the dropdown after submitting remarks
   };
 
   const getBackgroundColor = () => {
@@ -46,6 +53,10 @@ const ActionCell = ({
   useEffect(() => {
     setSelectedValue(isProgramHeadCleared ? 'Cleared' : 'Uncleared');
   }, [isProgramHeadCleared]);
+
+  useEffect(() => {
+    setRemarks(programheadRemarks); // Update remarks state when programheadRemarks prop changes
+  }, [programheadRemarks]);
 
   return (
     <div
@@ -65,10 +76,12 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        initialInputValue={programheadRemarks}
+        isOpen={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        initialInputValue={remarks} // Use remarks state
         placeholder="Remarks..."
         buttonLabel="Submit"
-        bgColor={'#85BDEE'} // Pass the bgColor prop
+        bgColor={'#85BDEE'}
         onSubmit={handleRemarksSubmit}
       />
     </div>

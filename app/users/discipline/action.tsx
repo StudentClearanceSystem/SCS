@@ -6,7 +6,7 @@ export interface StudentDetailsDiscipline {
   program: string;
   sy_term: string;
   is_discipline_cleared: boolean;
-  discipline_remarks: string;
+  discipline_remarks: string | null;
 }
 
 export const updateDisciplineStatus = async (
@@ -19,7 +19,7 @@ export const updateDisciplineStatus = async (
 
   // If the discipline is cleared, set discipline_remarks to an empty string
   if (is_discipline_cleared) {
-    updateData.discipline_remarks = '';
+    updateData.discipline_remarks = null;
   }
 
   // Update the database

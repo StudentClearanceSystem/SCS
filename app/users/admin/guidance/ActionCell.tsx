@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
 import { RadioGroup, Radio } from '@nextui-org/radio';
-import DropdownWithInput from '../../../components/DropdownWithInput';
 import {
   updateGuidanceStatus,
   StudentDetailsGuidance,
   updateGuidanceRemarks,
 } from './action'; // Import the function and interface
-import React from 'react';
+import DropdownWithInput from '@/app/components/DropdownWithInput';
 
 const ActionCell = ({
   isGuidanceCleared,
-  studentNo,
   guidanceRemarks,
   studentDetails, // Add studentDetails prop
 }: {
@@ -22,6 +20,8 @@ const ActionCell = ({
   const [selectedValue, setSelectedValue] = useState(
     isGuidanceCleared ? 'Cleared' : 'Uncleared',
   );
+  const [remarks, setRemarks] = useState(guidanceRemarks); // Added state for remarks
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown open state
 
   const handleRadioChange = (value: string) => {
     setSelectedValue(value);
@@ -30,6 +30,11 @@ const ActionCell = ({
       is_guidance_cleared: value === 'Cleared',
     };
     updateGuidanceStatus(updatedDetails);
+    if (value === 'Uncleared') {
+      setIsDropdownOpen(true); // Open the dropdown if "Uncleared" is selected
+    } else {
+      setIsDropdownOpen(false); // Close the dropdown if "Cleared" is selected
+    }
   };
 
   const handleRemarksSubmit = (remarks: string) => {
@@ -49,6 +54,10 @@ const ActionCell = ({
   useEffect(() => {
     setSelectedValue(isGuidanceCleared ? 'Cleared' : 'Uncleared');
   }, [isGuidanceCleared]);
+
+  useEffect(() => {
+    setRemarks(guidanceRemarks); // Update remarks state when guidanceRemarks prop changes
+  }, [guidanceRemarks]);
 
   return (
     <div
@@ -70,7 +79,9 @@ const ActionCell = ({
       </RadioGroup>
       <DropdownWithInput
         disabled={selectedValue === 'Cleared'}
-        initialInputValue={guidanceRemarks}
+        isOpen={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        initialInputValue={remarks} // Use remarks state
         placeholder="Remarks..."
         buttonLabel="Submit"
         bgColor={'#E18B89'} // Pass the bgColor prop
