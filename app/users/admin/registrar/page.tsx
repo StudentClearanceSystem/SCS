@@ -13,6 +13,7 @@ import SideNav from '@/app/components/SideNav';
 interface Button {
   label: string;
   href: string;
+  subItems?: Button[];
 }
 
 const assignTaskBtns: Button[] = [
@@ -45,7 +46,7 @@ const assignTaskBtns: Button[] = [
     href: '/users/admin/mis',
   },
   {
-    label: 'PROGRAMHEAD',
+    label: 'PROGRAM HEAD',
     href: '/users/admin/program_head',
   },
   {
@@ -55,14 +56,16 @@ const assignTaskBtns: Button[] = [
   {
     label: 'REGISTRAR',
     href: '/users/admin/registrar',
-  },
-  {
-    label: 'Clearance',
-    href: '/users/admin/registrar',
-  },
-  {
-    label: 'Modify Students',
-    href: '/users/admin/registrar/modify_student',
+    subItems: [
+      {
+        label: 'Clearance',
+        href: '/users/admin/registrar',
+      },
+      {
+        label: 'Modify Students',
+        href: '/users/admin/registrar/modify_student',
+      },
+    ],
   },
 ];
 
@@ -97,7 +100,7 @@ export default async function Page() {
 
   return (
     <main className="no-scrollbar relative flex min-h-screen flex-col bg-blue-bg">
-      <div className=" z-50">
+      <div className="z-50">
         <SideNav title={'ADMIN'} assignTaskBtns={assignTaskBtns} />
       </div>
 
@@ -109,10 +112,7 @@ export default async function Page() {
           </h1>
         </header>
       </div>
-      {/* Content area with scrolling */}
       <div className="flex-grow px-4 sm:px-6 lg:px-8">
-        {/* Flex item with horizontal padding */}
-        {/* Container covering the entire space */}
         <TableRegistrar students={students} />
       </div>
     </main>

@@ -12,7 +12,8 @@ import { redirect } from 'next/navigation';
 
 interface Button {
   label: string;
-  href: string; // Adjust the type to accept a string for href
+  href: string;
+  subItems?: Button[];
 }
 
 const assignTaskBtns: Button[] = [
@@ -37,15 +38,11 @@ const assignTaskBtns: Button[] = [
     href: '/users/admin/librarian',
   },
   {
-    label: 'DISCIPLINE',
-    href: '/users/admin/discipline',
-  },
-  {
     label: 'MIS',
     href: '/users/admin/mis',
   },
   {
-    label: 'PROGRAMHEAD',
+    label: 'PROGRAM HEAD',
     href: '/users/admin/program_head',
   },
   {
@@ -55,9 +52,18 @@ const assignTaskBtns: Button[] = [
   {
     label: 'REGISTRAR',
     href: '/users/admin/registrar',
+    subItems: [
+      {
+        label: 'Clearance',
+        href: '/users/admin/registrar',
+      },
+      {
+        label: 'Modify Students',
+        href: '/users/admin/registrar/modify_student',
+      },
+    ],
   },
 ];
-
 export default async function Page() {
   const supabase = createClient();
 

@@ -1,22 +1,24 @@
 'use client';
 import { useState } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link'; // Import Link component
+import Link from 'next/link';
 import LogOutBtn from './LogOutBtn';
 import { ScrollShadow } from '@nextui-org/react';
 
 interface Button {
   label: string;
-  href: string; // Adjust the type to accept a string for href
+  href: string;
+  subItems?: Button[];
 }
 
 interface SideNavProps {
   title: string;
-  assignTaskBtns: Button[]; // Modified to accept an array of button objects
+  assignTaskBtns: Button[];
 }
 
 export default function SideNav({ title, assignTaskBtns }: SideNavProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -56,24 +58,49 @@ export default function SideNav({ title, assignTaskBtns }: SideNavProps) {
         {isOpen && (
           <>
             <ScrollShadow hideScrollBar className="max-h-[470px]">
-              <div className="flex flex-col items-center  pb-1">
-                <div className="mt-5 flex  flex-col items-start">
-                  <p className="text-left text-xl text-black">Hello,</p>
+              <div className="flex flex-col items-center pb-10">
+                <div className="mt-5 flex flex-col">
+                  <div>
+                    <p className=" items-start text-xl text-black">Hello,</p>
+                  </div>
+
                   <h4 className="flex justify-center text-3xl font-bold text-black">
                     {title}
                   </h4>
                 </div>
-                {/* Render buttons dynamically */}
                 {assignTaskBtns.map((button, index) => (
-                  <Link
-                    href={button.href}
+                  <div
                     key={index}
-                    className="hover:bg-sky-150 mt-3 flex h-[40px] w-[70%] items-center justify-center gap-2 rounded-full bg-white p-3 text-sm font-bold hover:bg-opacity-75 hover:text-blue-500 md:flex-none md:justify-center md:p-2 md:px-3"
+                    onMouseEnter={() => setHoveredButton(button.label)}
+                    onMouseLeave={() => setHoveredButton(null)}
+                    className="relative flex w-full flex-col items-center"
                   >
-                    <div className="flex items-center md:block">
-                      {button.label}
-                    </div>
-                  </Link>
+                    <Link
+                      href={button.href}
+                      className="hover:bg-sky-150 mt-3 flex h-[45px] w-[70%] items-center justify-center gap-2 rounded-full bg-white p-3 text-sm font-bold hover:bg-opacity-75 hover:text-blue-500 md:flex-none md:justify-center md:p-2 md:px-3"
+                    >
+                      <div className="flex items-center md:block">
+                        {button.label}
+                      </div>
+                    </Link>
+                    {button.subItems && hoveredButton === button.label && (
+                      <div className="w-[70%]">
+                        <div className=" mt-2 flex  flex-col items-center rounded-lg bg-white shadow-lg">
+                          {button.subItems.map((subItem, subIndex) => (
+                            <Link
+                              key={subIndex}
+                              href={subItem.href}
+                              className="hover:bg-sky-150 mt-1 flex h-[40px] w-[90%] items-center justify-center gap-2 rounded-full bg-white p-2 text-sm font-bold hover:bg-opacity-75 hover:text-blue-500 md:flex-none md:justify-center"
+                            >
+                              <div className="flex items-center md:block">
+                                {subItem.label}
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </ScrollShadow>
