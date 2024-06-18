@@ -35,7 +35,6 @@ const RowsPerPageSelect: React.FC<RowsPerPageSelectProps> = ({
         <option value="45">45</option>
         <option value="50">50</option>
         <option value="100">100</option>
-        <option value="1000">1000</option>
       </select>
     </label>
   );
