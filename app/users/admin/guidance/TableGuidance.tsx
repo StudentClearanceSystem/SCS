@@ -17,7 +17,7 @@ const SetGuidanceTable: React.FC<SetGuidanceTableProps> = ({ students }) => {
 
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'program',
+    column: 'sy_term',
     direction: 'ascending',
   });
   const [page, setPage] = useState(1);

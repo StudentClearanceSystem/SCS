@@ -18,7 +18,7 @@ const SetPurchasingTable: React.FC<SetPurchasingTableProps> = ({
   const [filterYear_Term, setFilterYear_Term] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-    column: 'program',
+    column: 'sy_term',
     direction: 'ascending',
   });
   const [page, setPage] = useState(1);
