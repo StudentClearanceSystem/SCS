@@ -3,7 +3,7 @@
   width: 100%;
   height: 100%;
   align-items: flex-start;
-  background-color: #001c22;
+  background-color: #0089e2;
   user-select: none;
   overflow: hidden;
   font-family:
@@ -23,14 +23,14 @@
   height: 100vh;
   align-items: center;
   justify-content: center;
-  background-color: #001c22;
+  background-color: #0089e2;
   padding: 50px;
   overflow: hidden; /* Ensure overflow is hidden */
 }
 
 .studentClearance {
   width: 50%;
-  text-shadow: 2px 2px 3px #736f00;
+  text-shadow: 2px 2px 3px #1c1b00;
   flex-direction: column;
 }
 
@@ -53,7 +53,7 @@
   width: 440px;
   height: 520px;
   border-radius: 50px;
-  background-color: #007177;
+  background-color: #0a467b;
   filter: drop-shadow(2px 3px 5px #272700);
   overflow: hidden;
 }
@@ -62,7 +62,7 @@
   width: 70%;
   height: 55px;
   border-radius: 50px;
-  background-color: #046267;
+  background-color: #0b658f;
   display: flex;
   justify-content: center;
   align-items: center; /* Center vertically */
@@ -73,7 +73,7 @@
 
 /* Hover state */
 .buttonLogin:hover {
-  background-color: #0b658f;
+  background-color: #046267;
 }
 
 /* Active state */
@@ -103,7 +103,7 @@
 
 .passwordInput,
 .emailInput {
-  width: 15rem;
+  width: 100%;
 }
 
 .passwordInput,
@@ -118,6 +118,7 @@
 .password,
 .email {
   margin-top: 16px;
+  margin-left: 16px;
   color: #efefef;
   font-size: 1.5rem;
   font-weight: bold;
@@ -125,6 +126,8 @@
 
 .inputField {
   width: 100%;
+  margin: 0px 20px;
+  padding: 8px 20px;
   border-radius: 8px;
   background-color: transparent;
   color: #efefef;
@@ -136,6 +139,10 @@
 .emailInput {
   margin-bottom: 8px;
   text-align: left;
+}
+
+.placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .loginWithOffice365 {
