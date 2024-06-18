@@ -14,7 +14,7 @@ interface DropdownWithInputProps {
 const DropdownWithInput: React.FC<DropdownWithInputProps> = ({
   disabled,
   initialInputValue,
-  placeholder = 'Enter text...',
+  placeholder = 'Enter remarks...',
   buttonLabel = 'Submit',
   bgColor = '#6CCEE8', // Default value for bgColor
   onSubmit,

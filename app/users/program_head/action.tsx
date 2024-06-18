@@ -6,7 +6,7 @@ export interface StudentDetailsProgramHead {
   program: string;
   sy_term: string;
   is_programhead_cleared: boolean;
-  programhead_remarks: string;
+  programhead_remarks: string | null;
 }
 
 export const updateProgramHeadStatus = async (
@@ -21,7 +21,7 @@ export const updateProgramHeadStatus = async (
 
   // If the programhead is cleared, set programhead_remarks to an empty string
   if (is_programhead_cleared) {
-    updateData.programhead_remarks = '';
+    updateData.programhead_remarks = null;
   }
 
   // Update the database

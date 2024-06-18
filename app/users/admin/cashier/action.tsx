@@ -9,7 +9,7 @@ export interface StudentDetailsCashier {
   program: string;
   sy_term: string;
   is_cashier_cleared: boolean;
-  cashier_remarks: string;
+  cashier_remarks: string | null;
 }
 
 /**
@@ -30,7 +30,7 @@ export const updateCashierStatus = async (
 
   // If the cashier is cleared, set cashier_remarks to an empty string
   if (is_cashier_cleared) {
-    updateData.cashier_remarks = '';
+    updateData.cashier_remarks = null;
   }
 
   // Update the database
