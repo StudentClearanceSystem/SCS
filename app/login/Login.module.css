@@ -219,7 +219,12 @@
 
   .inputField {
     width: 90%;
-    font: 14px sans-serif;
+    font: 10px sans-serif;
+  }
+
+  .passwordInput,
+  .emailInput {
+    width: 10rem;
   }
 
   .password,
