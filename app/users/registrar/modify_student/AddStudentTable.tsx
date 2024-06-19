@@ -95,8 +95,8 @@ export default function AddStudentTable() {
 
     // Validate ID length and dropdown selections
     for (const row of rows) {
-      if (row.id.length !== 11) {
-        setErrorMessage('ID must be exactly 11 digits long for all rows');
+      if (row.id.length !== 10) {
+        setErrorMessage('ID must be exactly 10 digits long for all rows');
         return;
       }
 
@@ -166,7 +166,7 @@ export default function AddStudentTable() {
   };
 
   const columns = [
-    { key: 'id', label: 'ID (11 digits)' },
+    { key: 'id', label: 'ID (10 digits)' },
     { key: 'lastName', label: 'Last Name' },
     { key: 'firstName', label: 'First Name' },
     { key: 'middleName', label: 'Middle Name' },
@@ -254,8 +254,8 @@ export default function AddStudentTable() {
                           isRequired
                           style={inputStyle}
                           size="sm"
-                          minLength={columnKey === 'id' ? 11 : undefined}
-                          maxLength={columnKey === 'id' ? 11 : undefined}
+                          minLength={columnKey === 'id' ? 10 : undefined}
+                          maxLength={columnKey === 'id' ? 10 : undefined}
                         />
                       </TableCell>
                     );
