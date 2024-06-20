@@ -240,13 +240,6 @@ export default function AddStudentTable() {
           </div>
         )}
         <form onSubmit={handleSubmit}>
-          <h3>Upload excel file here:</h3>
-          <input
-            type="file"
-            accept=".xlsx, .xls"
-            onChange={handleFileUpload}
-            className="mb-4"
-          />
           <Table aria-label="Add student table">
             <TableHeader>
               {columns.map((column) => (
@@ -317,38 +310,51 @@ export default function AddStudentTable() {
               ))}
             </TableBody>
           </Table>
-          <div className="mt-4 flex justify-end space-x-3">
-            <Button
-              size="sm"
-              type="button"
-              className="bg-primary text-background"
-              onClick={handleAddRow}
-            >
-              Add Row
-            </Button>
-            <Button
-              size="sm"
-              type="button"
-              className="bg-danger text-background"
-              onClick={handleDeleteRow}
-            >
-              Delete Row
-            </Button>
-            <Button
-              size="sm"
-              type="submit"
-              className="bg-primary text-background"
-            >
-              Submit
-            </Button>
-            <Button
-              size="sm"
-              type="button"
-              className="btn-secondary text-black"
-              onClick={handleCancel}
-            >
-              Cancel
-            </Button>
+
+          <div className="mt-4 flex items-center justify-between">
+            <div className="flex items-center">
+              <h3 className="mr-2">Upload excel file here:</h3>
+              <input
+                type="file"
+                accept=".xlsx, .xls"
+                onChange={handleFileUpload}
+                className="m-4"
+              />
+            </div>
+
+            <div className="space-x-3">
+              <Button
+                size="sm"
+                type="button"
+                className="bg-primary text-background"
+                onClick={handleAddRow}
+              >
+                Add Row
+              </Button>
+              <Button
+                size="sm"
+                type="button"
+                className="bg-danger text-background"
+                onClick={handleDeleteRow}
+              >
+                Delete Row
+              </Button>
+              <Button
+                size="sm"
+                type="submit"
+                className="bg-primary text-background"
+              >
+                Submit
+              </Button>
+              <Button
+                size="sm"
+                type="button"
+                className="btn-secondary text-black"
+                onClick={handleCancel}
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
         </form>
       </div>
