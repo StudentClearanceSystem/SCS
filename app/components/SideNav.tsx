@@ -45,7 +45,7 @@ export default function SideNav({ title, assignTaskBtns }: SideNavProps) {
           style={{ marginLeft: '4px' }}
         >
           <div
-            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-md bg-white hover:bg-opacity-75"
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-md bg-white bg-opacity-50 hover:bg-opacity-100"
             onClick={toggleMenu}
           >
             {isOpen ? (
