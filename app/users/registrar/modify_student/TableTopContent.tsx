@@ -3,6 +3,8 @@ import { student } from './columns';
 import RowsPerPageSelect from '@/app/components/RowsPerPageSelect';
 import SearchInput from '@/app/components/SearchInput';
 import Dropdown from '@/app/components/Dropdown';
+import { deleteStudentsBySyTerm } from './action';
+import { Button } from '@nextui-org/react';
 
 interface TableTopContentProps {
   students: student[];
@@ -45,6 +47,31 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
     return matchesSearchFilter && matchesProgramFilter && matchesYearFilter;
   }).length;
 
+  const handleDeleteStudents = async () => {
+    if (!filterYear_Term) {
+      alert('Please select a Sy/Term to delete students');
+      return;
+    }
+
+    const confirmation = window.confirm(
+      `Are you sure you want to delete all students from Sy/Term ${filterYear_Term}?`,
+    );
+
+    if (!confirmation) {
+      return; // Exit the function if the user cancels the deletion
+    }
+
+    try {
+      await deleteStudentsBySyTerm(filterYear_Term);
+      alert(`Students from Sy/Term ${filterYear_Term} have been deleted.`);
+      setFilterYear_Term('');
+      // Optionally, you can update the students state or refetch the students data here
+    } catch (error) {
+      console.error('Failed to delete students:', error);
+      alert('Failed to delete students. Please try again.');
+    }
+  };
+
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-end justify-between gap-3">
@@ -69,7 +96,7 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
               setFilterProgram(selectedProgram);
             }}
           />
-          {/* Dropdown for Year */}
+          {/* Dropdown for Sy/Term */}
           <Dropdown
             label="Sy/Term"
             options={getUniqueValues(students, 'sy_term')}
@@ -77,6 +104,15 @@ const TableTopContent: React.FC<TableTopContentProps> = ({
               setFilterYear_Term(selectedYear_Term);
             }}
           />
+          {/* Delete Students Button */}
+          <Button
+            size="sm"
+            type="button"
+            className=" mt-1 bg-danger px-1.5 py-1 text-[11px] text-background"
+            onClick={handleDeleteStudents}
+          >
+            Delete per Sy/Term
+          </Button>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import * as XLSX from 'xlsx';
 import {
   Button,
   Input,
@@ -9,11 +10,22 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  getKeyValue,
 } from '@nextui-org/react';
-import StringDropdownComponent from './StringDropdownComponent';
-import NumberDropdownComponent from './NumberDropdownComponent';
 import { insertStudentData } from './action';
+
+// Define the type for row data
+type RowData = {
+  key: string;
+  id: string;
+  name: string;
+  program: string;
+  sy_term: string;
+  // Define optional properties for Excel headers
+  'Student ID'?: string;
+  'Student Name'?: string;
+  'Program/s'?: string;
+  'Sy & Term'?: string;
+};
 
 export default function AddStudentTable() {
   // Style
@@ -23,16 +35,16 @@ export default function AddStudentTable() {
   };
 
   // State for form data and rows
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RowData>({
+    key: 'initial',
     id: '',
-    firstName: '',
-    lastName: '',
-    middleName: '',
-    program: 'Select',
-    sy_term: 0,
+    name: '',
+    program: '',
+    sy_term: '',
   });
 
-  const [rows, setRows] = useState([{ key: 'initial', ...formData }]);
+  const [rows, setRows] = useState<RowData[]>([formData]);
+  const [excelData, setExcelData] = useState<RowData[]>([]); // State to store the data from the Excel file
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (
@@ -42,44 +54,22 @@ export default function AddStudentTable() {
     const { name, value } = e.target;
     setRows((prevRows) => {
       const updatedRows = [...prevRows];
-      updatedRows[index] = { ...updatedRows[index], [name]: value };
+      updatedRows[index] = { ...updatedRows[index], [name]: value } as RowData;
       return updatedRows;
     });
-  };
-
-  const handleDropdownChange = (
-    index: number,
-    field: string,
-    value: string | number,
-  ) => {
-    setRows((prevRows) => {
-      const updatedRows = [...prevRows];
-      updatedRows[index] = { ...updatedRows[index], [field]: value };
-      return updatedRows;
-    });
-
-    // Save the changed value for future new rows
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [field]: value,
-    }));
   };
 
   const handleAddRow = () => {
-    setRows((prevRows) => {
-      return [
-        ...prevRows,
-        {
-          key: `row-${prevRows.length}`,
-          id: '',
-          firstName: '',
-          lastName: '',
-          middleName: '',
-          program: formData.program,
-          sy_term: formData.sy_term,
-        },
-      ];
-    });
+    setRows((prevRows) => [
+      ...prevRows,
+      {
+        key: `row-${prevRows.length}`,
+        id: '',
+        name: '',
+        program: formData.program,
+        sy_term: formData.sy_term,
+      },
+    ]);
   };
 
   const handleDeleteRow = () => {
@@ -87,6 +77,49 @@ export default function AddStudentTable() {
       if (prevRows.length === 1) return prevRows; // Prevent deleting the last row
       return prevRows.slice(0, -1);
     });
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const data = new Uint8Array(event.target?.result as ArrayBuffer);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const firstSheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheetName];
+
+        // Define the expected headers in the Excel file
+        const expectedHeaders = [
+          'Student ID', // Column to be mapped to 'id'
+          'Student Name', // Column to be mapped to 'name'
+          'Program/s', // Column to be mapped to 'program'
+          'Sy & Term', // Column to be mapped to 'sy_term'
+        ];
+
+        // Read the Excel data and convert to JSON
+        const jsonData: RowData[] = XLSX.utils.sheet_to_json<RowData>(
+          worksheet,
+          {
+            header: expectedHeaders, // Use the expected headers
+            range: 9, // Skip the first row if it contains headers
+          },
+        );
+
+        // Map the JSON data to your desired format
+        const formattedData = jsonData.map((row, index) => ({
+          key: `row-${index}`, // Unique key for each row
+          id: row['Student ID'] || '', // Map 'Student ID' to 'id'
+          name: row['Student Name'] || '', // Map 'Student Name' to 'name'
+          program: row['Program/s'] || '', // Map 'Program/s' to 'program'
+          sy_term: row['Sy & Term'] || '', // Map 'Sy & Term' to 'sy_term'
+        }));
+
+        console.log(formattedData); // For debugging purposes
+        setExcelData(formattedData); // Update state with formatted data
+      };
+      reader.readAsArrayBuffer(file);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -100,31 +133,29 @@ export default function AddStudentTable() {
         return;
       }
 
-      switch (true) {
-        case row.program === 'Select':
-          setErrorMessage('Program is not selected.');
-          return;
-        case row.sy_term === 0:
-          setErrorMessage('Year is not selected.');
-          return;
-        default:
-          break;
+      if (row.program === 'Select') {
+        setErrorMessage('Program is not selected.');
+        return;
+      }
+
+      if (row.sy_term === '0') {
+        setErrorMessage('Year is not selected.');
+        return;
       }
     }
 
     try {
       for (const row of rows) {
-        const name = `${row.lastName} ${row.firstName} ${row.middleName}`;
         await insertStudentData({
-          studentno: row.id,
-          name: name.trim(),
+          studentno: row.id.trim(),
+          name: row.name,
           program: row.program,
           sy_term: row.sy_term,
         });
 
         // Alert for successful submission with details
         alert(
-          `User added successfully!\nID: ${row.id}\nName: ${name}\nProgram: ${row.program}\nsy_term: ${row.sy_term}`,
+          `User added successfully!\nID: ${row.id}\nName: ${row.name}\nProgram: ${row.program}\nsy_term: ${row.sy_term}`,
         );
       }
 
@@ -133,13 +164,39 @@ export default function AddStudentTable() {
         {
           key: 'initial',
           id: '',
-          firstName: '',
-          lastName: '',
-          middleName: '',
+          name: '',
           program: formData.program,
           sy_term: formData.sy_term,
         },
       ]);
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Failed to submit data. Please try again.');
+      }
+    }
+  };
+
+  const handleExcelSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage('');
+
+    try {
+      for (const row of excelData) {
+        await insertStudentData({
+          studentno: row.id,
+          name: row.name,
+          program: row.program,
+          sy_term: row.sy_term,
+        });
+      }
+      // Display alert after successful submission of all data
+      alert(
+        'All students from the scanned Excel data have been successfully uploaded.',
+      );
+      // Reset Excel data after successful submission
+      setExcelData([]);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -155,21 +212,18 @@ export default function AddStudentTable() {
       {
         key: 'initial',
         id: '',
-        firstName: '',
-        lastName: '',
-        middleName: '',
-        program: 'Select',
-        sy_term: 0,
+        name: '',
+        program: '',
+        sy_term: '',
       },
     ]);
+    setExcelData([]); // Clear the scanned Excel data on cancel
     setErrorMessage('');
   };
 
   const columns = [
     { key: 'id', label: 'ID (10 digits)' },
-    { key: 'lastName', label: 'Last Name' },
-    { key: 'firstName', label: 'First Name' },
-    { key: 'middleName', label: 'Middle Name' },
+    { key: 'name', label: 'NAME' },
     { key: 'program', label: 'Program' },
     { key: 'sy_term', label: 'sy_term' },
   ];
@@ -186,7 +240,14 @@ export default function AddStudentTable() {
           </div>
         )}
         <form onSubmit={handleSubmit}>
-          <Table aria-label="Example table with dynamic content">
+          <h3>Upload excel file here:</h3>
+          <input
+            type="file"
+            accept=".xlsx, .xls"
+            onChange={handleFileUpload}
+            className="mb-4"
+          />
+          <Table aria-label="Add student table">
             <TableHeader>
               {columns.map((column) => (
                 <TableColumn key={column.key}>{column.label}</TableColumn>
@@ -195,51 +256,43 @@ export default function AddStudentTable() {
             <TableBody>
               {rows.map((row, rowIndex) => (
                 <TableRow key={row.key}>
-                  {(columnKey) => {
+                  {columns.map((column) => {
+                    const columnKey = column.key as keyof RowData;
+
+                    // Replace StringDropdownComponent for 'program' with Input component
                     if (columnKey === 'program') {
-                      const items = [
-                        'Select',
-                        'ACT',
-                        'ART',
-                        'BACOMM',
-                        'BAPsych',
-                        'BSA',
-                        'BSAIS',
-                        'BSBA',
-                        'BSCpE',
-                        'BSCS',
-                        'BSTM',
-                        'BSRTCS',
-                        'BSIT',
-                      ];
                       return (
                         <TableCell key={columnKey}>
-                          <StringDropdownComponent
-                            items={items}
-                            label="Program"
-                            onSelectionChange={(value) =>
-                              handleDropdownChange(rowIndex, columnKey, value)
-                            }
-                            selectedValue={row.program}
-                          />
+                          <Input
+                            labelPlacement="outside"
+                            name={String(columnKey)}
+                            label={String(columnKey)}
+                            value={String(row[columnKey])}
+                            onChange={(e) => handleChange(e, rowIndex)}
+                            isRequired
+                            style={inputStyle}
+                            size="sm"
+                          />{' '}
+                          {/* Use Input component for 'program' */}
                         </TableCell>
                       );
-                    } else if (columnKey === 'sy_term') {
-                      const items =
-                        columnKey === 'sy_term' ? [2301, 2302, 2401, 2402] : [];
+                    }
+
+                    // Replace NumberDropdownComponent for 'sy_term' with Input component
+                    else if (columnKey === 'sy_term') {
                       return (
                         <TableCell key={columnKey}>
-                          <NumberDropdownComponent
-                            items={items}
-                            label={
-                              columnKey.charAt(0).toUpperCase() +
-                              columnKey.slice(1)
-                            }
-                            onSelectionChange={(value) =>
-                              handleDropdownChange(rowIndex, columnKey, value)
-                            }
-                            selectedValue={row[columnKey]}
-                          />
+                          <Input
+                            labelPlacement="outside"
+                            name={String(columnKey)}
+                            label={String(columnKey)}
+                            value={String(row[columnKey])}
+                            onChange={(e) => handleChange(e, rowIndex)}
+                            isRequired
+                            style={inputStyle}
+                            size="sm"
+                          />{' '}
+                          {/* Use Input component for 'sy_term' */}
                         </TableCell>
                       );
                     }
@@ -249,7 +302,7 @@ export default function AddStudentTable() {
                           labelPlacement="outside"
                           name={String(columnKey)}
                           label={String(columnKey)}
-                          value={String(getKeyValue(row, columnKey))}
+                          value={String(row[columnKey])}
                           onChange={(e) => handleChange(e, rowIndex)}
                           isRequired
                           style={inputStyle}
@@ -259,7 +312,7 @@ export default function AddStudentTable() {
                         />
                       </TableCell>
                     );
-                  }}
+                  })}
                 </TableRow>
               ))}
             </TableBody>
@@ -299,6 +352,46 @@ export default function AddStudentTable() {
           </div>
         </form>
       </div>
+
+      {/* Display the Excel data */}
+      {excelData.length > 0 && (
+        <div className="mt-10 w-full max-w-[100%] rounded-lg bg-gray-200 p-5 shadow-2xl">
+          <div>
+            <h2 className=" text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
+              Scanned Excel Data
+            </h2>
+            <div className="mb-4 flex justify-end">
+              <Button
+                size="sm"
+                type="button"
+                className="bg-primary text-background"
+                onClick={handleExcelSubmit}
+              >
+                Submit All
+              </Button>
+            </div>
+          </div>
+
+          <Table aria-label="Scanned Excel data table">
+            <TableHeader>
+              {columns.map((column) => (
+                <TableColumn key={column.key}>{column.label}</TableColumn>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {excelData.map((row, index) => (
+                <TableRow key={`excel-${index}`}>
+                  {columns.map((column) => (
+                    <TableCell key={`${column.key}-${index}`}>
+                      {row[column.key as keyof RowData]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
     </main>
   );
 }

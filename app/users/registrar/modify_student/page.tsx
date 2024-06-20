@@ -57,7 +57,7 @@ export default async function Page() {
     .subscribe();
 
   return (
-    <main className="no-scrollbar bg-blue-bg relative flex min-h-screen flex-col">
+    <main className="no-scrollbar relative flex min-h-screen flex-col bg-blue-bg">
       <SideNav title={'REGISTRAR'} assignTaskBtns={assignTaskBtns} />
       <div className="flex-grow p-8">
         <header>
@@ -68,11 +68,12 @@ export default async function Page() {
         </header>
       </div>
       {/* Content area with scrolling */}
-      <div className="flex-grow px-4 sm:px-6 lg:px-8">
+      <div className="flex-grow bg-blue-bg px-4 sm:px-6 lg:px-8">
         {/* Flex item with horizontal padding */}
         {/* Container covering the entire space */}
-        <AddStudentTable />
         <TableRegistrar students={students} />
+
+        <AddStudentTable />
       </div>
     </main>
   );
