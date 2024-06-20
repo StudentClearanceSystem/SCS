@@ -113,15 +113,33 @@ export const updateUserRole = async (userEmail: string, newRole: string) => {
 /*------------------------------------------------------------------ */
 /*------------------------------------------------------------------ */
 
-// Fetch the initial data from the table_students table
 export const getStudentsTable = async () => {
   try {
-    const { data, error } = await supabase.from('table_students').select();
-    if (error) {
-      console.error('Error fetching data:', error);
-      return []; // Return an empty array in case of error
+    let allData: any[] = [];
+    let from = 0;
+    const chunkSize = 1000;
+    let moreData = true;
+
+    while (moreData) {
+      const { data, error } = await supabase
+        .from('table_students')
+        .select()
+        .range(from, from + chunkSize - 1);
+
+      if (error) {
+        console.error('Error fetching data:', error);
+        break;
+      }
+
+      if (data.length === 0) {
+        moreData = false;
+      } else {
+        allData = allData.concat(data);
+        from += chunkSize;
+      }
     }
-    return data; // Return the fetched data
+
+    return allData;
   } catch (err) {
     console.error('Unexpected error:', err);
     return []; // Return an empty array in case of unexpected error
@@ -139,10 +157,10 @@ const handleRealtimeUpdates = (callback: () => Promise<void>) => {
         schema: 'public',
         table: 'table_students',
       },
-      (payload) => {
+      async (payload) => {
         console.log('Change received:', payload);
         // Re-fetch data or handle updates as necessary
-        callback();
+        await callback();
       },
     )
     .subscribe();
@@ -154,15 +172,15 @@ const handleRealtimeUpdates = (callback: () => Promise<void>) => {
 export const fetchDataAndListenForUpdates = async (
   setStudents: (students: any) => void,
 ) => {
-  const data = await getStudentsTable();
-  console.log('Initial data:', data);
-  setStudents(data);
+  const fetchData = async () => {
+    const data = await getStudentsTable();
+    console.log('Updated data:', data);
+    setStudents(data);
+  };
 
-  handleRealtimeUpdates(async () => {
-    const updatedData = await getStudentsTable();
-    console.log('Updated data:', updatedData);
-    setStudents(updatedData);
-  });
+  await fetchData();
+
+  handleRealtimeUpdates(fetchData);
 };
 
 /*------------------------------------------------------------------ */
