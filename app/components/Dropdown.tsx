@@ -10,7 +10,7 @@ interface DropdownProps {
 const tertiaryPrograms = [
   'BSIT',
   'BSCS',
-  'BSCpE',
+  'BSCPE',
   'ACT',
   'ASCT',
   'ART',
@@ -19,7 +19,7 @@ const tertiaryPrograms = [
   'BSA',
   'BSRTCS',
   'BACOMM',
-  'BAPsych',
+  'BAPSYCH',
   'BSTM',
 ];
 
