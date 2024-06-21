@@ -224,8 +224,8 @@ export default function AddStudentTable() {
   const columns = [
     { key: 'id', label: 'ID (10 digits)' },
     { key: 'name', label: 'NAME' },
-    { key: 'program', label: 'Program' },
-    { key: 'sy_term', label: 'sy_term' },
+    { key: 'program', label: 'PROGAM' },
+    { key: 'sy_term', label: 'Sy & Term' },
   ];
 
   return (
