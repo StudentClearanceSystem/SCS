@@ -229,8 +229,8 @@ export default function AddStudentTable() {
   ];
 
   return (
-    <main className="flex h-screen flex-col items-center">
-      <div className="w-full max-w-[100%] rounded-lg bg-gray-200 p-5 shadow-2xl">
+    <main className="flex h-full flex-col items-center bg-blue-bg pb-10">
+      <div className="w-full max-w-[100%] rounded-lg bg-gray-200 p-10 shadow-2xl">
         <h2 className="mb-8 text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
           ADD STUDENT
         </h2>
@@ -311,17 +311,7 @@ export default function AddStudentTable() {
             </TableBody>
           </Table>
 
-          <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center">
-              <h3 className="mr-2">Upload excel file here:</h3>
-              <input
-                type="file"
-                accept=".xlsx, .xls"
-                onChange={handleFileUpload}
-                className="m-4"
-              />
-            </div>
-
+          <div className="mt-4 flex justify-end">
             <div className="space-x-3">
               <Button
                 size="sm"
@@ -360,44 +350,63 @@ export default function AddStudentTable() {
       </div>
 
       {/* Display the Excel data */}
-      {excelData.length > 0 && (
-        <div className="mt-10 w-full max-w-[100%] rounded-lg bg-gray-200 p-5 shadow-2xl">
-          <div>
-            <h2 className=" text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
-              Scanned Excel Data
-            </h2>
-            <div className="mb-4 flex justify-end">
-              <Button
-                size="sm"
-                type="button"
-                className="bg-primary text-background"
-                onClick={handleExcelSubmit}
-              >
-                Submit All
-              </Button>
-            </div>
-          </div>
-
-          <Table aria-label="Scanned Excel data table">
-            <TableHeader>
-              {columns.map((column) => (
-                <TableColumn key={column.key}>{column.label}</TableColumn>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {excelData.map((row, index) => (
-                <TableRow key={`excel-${index}`}>
-                  {columns.map((column) => (
-                    <TableCell key={`${column.key}-${index}`}>
-                      {row[column.key as keyof RowData]}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+      <div className="p12 m-12 flex w-full flex-col items-center justify-center rounded-lg bg-gray-200 shadow-2xl">
+        <div className=" flex flex-row items-start">
+          <h3 className=" items-start pt-5">Upload excel file here:</h3>
+          <input
+            type="file"
+            accept=".xlsx, .xls"
+            onChange={handleFileUpload}
+            className="p-4 text-left"
+          />
         </div>
-      )}
+        {excelData.length > 0 && (
+          <div className="w-full max-w-[100%] rounded-lg p-5 ">
+            <div>
+              <h2 className=" text-lg font-bold sm:text-[8px] md:text-base lg:text-lg">
+                Scanned Excel Data
+              </h2>
+              <div className="mb-4 flex justify-end space-x-3">
+                <Button
+                  size="sm"
+                  type="button"
+                  className="bg-primary text-background"
+                  onClick={handleExcelSubmit}
+                >
+                  Submit All
+                </Button>
+                <Button
+                  size="sm"
+                  type="button"
+                  className="btn-secondary text-black"
+                  onClick={handleCancel}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+
+            <Table aria-label="Scanned Excel data table">
+              <TableHeader>
+                {columns.map((column) => (
+                  <TableColumn key={column.key}>{column.label}</TableColumn>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {excelData.map((row, index) => (
+                  <TableRow key={`excel-${index}`}>
+                    {columns.map((column) => (
+                      <TableCell key={`${column.key}-${index}`}>
+                        {row[column.key as keyof RowData]}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        )}
+      </div>
     </main>
   );
 }
