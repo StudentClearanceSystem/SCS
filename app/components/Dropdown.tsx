@@ -14,7 +14,7 @@ const tertiaryPrograms = [
   'ACT',
   'ASCT',
   'ART',
-  'BSBA',
+  'BSBAOM',
   'BSAIS',
   'BSA',
   'BSRTCS',
