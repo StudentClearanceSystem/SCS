@@ -225,7 +225,7 @@ export default function AddStudentTable() {
     { key: 'id', label: 'ID (10 digits)' },
     { key: 'name', label: 'NAME' },
     { key: 'program', label: 'PROGAM' },
-    { key: 'sy_term', label: 'Sy & Term' },
+    { key: 'sy_term', label: 'SY/TERM' },
   ];
 
   return (

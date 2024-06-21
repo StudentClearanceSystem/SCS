@@ -11,7 +11,7 @@ export const columns = [
   { name: 'STUDENT NO.', uid: 'studentno', sortable: true },
   { name: 'NAME', uid: 'name', sortable: true },
   { name: 'PROGRAM', uid: 'program', sortable: true },
-  { name: 'YEAR/TERM', uid: 'sy_term', sortable: true },
+  { name: 'SY/TERM', uid: 'sy_term', sortable: true },
   {
     name: 'ACTION',
     uid: 'edit_students',
