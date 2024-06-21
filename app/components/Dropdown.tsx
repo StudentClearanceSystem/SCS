@@ -7,6 +7,42 @@ interface DropdownProps {
   onSelect: (selectedOption: string) => void;
 }
 
+const tertiaryPrograms = [
+  'BSIT',
+  'BSCS',
+  'BSCpE',
+  'ACT',
+  'ASCT',
+  'ART',
+  'BSBA',
+  'BSAIS',
+  'BSA',
+  'BSRTCS',
+  'BACOMM',
+  'BAPsych',
+  'BSTM',
+];
+
+const shsPrograms = [
+  'ABM',
+  'STEM',
+  'HUMSS',
+  'GAS',
+  'MAWD',
+  'DIGAR',
+  'TOPER',
+  'RESCO',
+  'CUART',
+];
+
+const isTertiaryProgram = (program: string) => {
+  return tertiaryPrograms.includes(program);
+};
+
+const isShsProgram = (program: string) => {
+  return shsPrograms.includes(program);
+};
+
 const DropdownComponent: React.FC<DropdownProps> = ({
   label,
   options,
@@ -25,6 +61,12 @@ const DropdownComponent: React.FC<DropdownProps> = ({
     onSelect('');
   };
 
+  const tertiaryOptions = options.filter(isTertiaryProgram);
+  const shsOptions = options.filter(isShsProgram);
+  const otherOptions = options.filter(
+    (option) => !isTertiaryProgram(option) && !isShsProgram(option),
+  );
+
   return (
     <label className="flex items-center space-x-0.5 text-tiny text-default-400">
       {label}:
@@ -36,11 +78,31 @@ const DropdownComponent: React.FC<DropdownProps> = ({
         <option value="" disabled hidden>
           Select
         </option>
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
+        <optgroup label="Tertiary Programs">
+          {tertiaryOptions.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </optgroup>
+
+        <optgroup label="SHS Programs">
+          {shsOptions.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </optgroup>
+
+        {otherOptions.length > 0 && (
+          <optgroup label="Other Programs">
+            {otherOptions.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </optgroup>
+        )}
       </select>
       {selectedOption && (
         <button className="text-xs " onClick={handleClear}>
