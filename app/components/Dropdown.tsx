@@ -7,6 +7,7 @@ interface DropdownProps {
   onSelect: (selectedOption: string) => void;
 }
 
+// Tertiary programs array
 const tertiaryPrograms = [
   'BSIT',
   'BSCS',
@@ -23,6 +24,7 @@ const tertiaryPrograms = [
   'BSTM',
 ];
 
+// SHS programs array
 const shsPrograms = [
   'ABM',
   'STEM',
@@ -35,12 +37,14 @@ const shsPrograms = [
   'CUART',
 ];
 
+// Function to check if a program is a tertiary program
 const isTertiaryProgram = (program: string) => {
-  return tertiaryPrograms.includes(program);
+  return tertiaryPrograms.includes(program); // Checks if the program is in the tertiaryPrograms array
 };
 
+// Function to check if a program is an SHS program
 const isShsProgram = (program: string) => {
-  return shsPrograms.includes(program);
+  return shsPrograms.includes(program); // Checks if the program is in the shsPrograms array
 };
 
 const DropdownComponent: React.FC<DropdownProps> = ({
@@ -61,6 +65,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({
     onSelect('');
   };
 
+  // Filter options into categories
   const tertiaryOptions = options.filter(isTertiaryProgram);
   const shsOptions = options.filter(isShsProgram);
   const otherOptions = options.filter(
@@ -78,7 +83,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({
         <option value="" disabled hidden>
           Select
         </option>
-        <optgroup label="Tertiary Programs">
+        <optgroup>
           {tertiaryOptions.map((option, index) => (
             <option key={index} value={option}>
               {option}
@@ -86,7 +91,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({
           ))}
         </optgroup>
 
-        <optgroup label="SHS Programs">
+        <optgroup>
           {shsOptions.map((option, index) => (
             <option key={index} value={option}>
               {option}
@@ -95,7 +100,7 @@ const DropdownComponent: React.FC<DropdownProps> = ({
         </optgroup>
 
         {otherOptions.length > 0 && (
-          <optgroup label="Other Programs">
+          <optgroup>
             {otherOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
